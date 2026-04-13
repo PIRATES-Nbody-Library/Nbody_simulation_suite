@@ -1,0 +1,11 @@
+# MacOS specific file.
+.DS_Store
+
+# Created plots.
+*.pdf
+*.png
+*.eps
+*.jpg
+
+# Jupyter checkpoints.
+.ipynb_checkpoints
