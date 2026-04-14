@@ -8,14 +8,14 @@ c
 c                   parameter file like       param.in
 c		    planet file like          pl.in
 c
-c  NOTE:  No test particles in this code and the massive bodies 
+c  NOTE:  No test particles in this code and the massive bodies
 c         are dimensioned at NTPMAX
 c
 c Authors:  Hal Levison \& Martin Duncan
 c Date:    11/21/96
 c Last revision: 12/27/96
 
-     
+
       include 'swift.inc'
 
       real*8 mass(NTPMAX),j2rp2,j4rp4
@@ -28,14 +28,14 @@ c Last revision: 12/27/96
 
       integer nbod,i1st,i,nbodm,nbodo
       integer iflgchk,iub,iuj,iud,iue,ium
-      
+
       real*8 t0,tstop,dt,dtout,dtdump
       real*8 t,tout,tdump,tfrac,eoff
       real*8 rpl(NTPMAX),rhill(NTPMAX)
 
       real*8 rmin,rmax,rmaxu,qmin,mtiny
       real*8 ke,pot,energy,eltot(3)
-      logical*2 lclose 
+      logical*2 lclose
       integer isenc,ihills
       integer mergelst(2,NTPMAX),mergecnt
       integer*2 iecnt(NTPMAX)
@@ -43,7 +43,7 @@ c Last revision: 12/27/96
       character*80 outfile,inparfile,inplfile,fopenstat
 
 c-----
-c...  Executable code 
+c...  Executable code
 
       ntp = 0
 
@@ -137,8 +137,8 @@ c***************here's the big loop *************************************
          endif
 
 
-c if it is time, output orb. elements, 
-         if(t .ge. tout) then 
+c if it is time, output orb. elements,
+         if(t .ge. tout) then
 
             if(btest(iflgchk,0))  then ! bit 0 is set
                call  io_write_frame(t,nbod,ntp,mass,xh,yh,zh,vxh,
@@ -173,13 +173,13 @@ c If it is time, do a dump
                call anal_energy_write(t,nbod,mass,j2rp2,j4rp4,
      &              xh,yh,zh,vxh,vyh,vzh,iue,fopenstat,eoff)
             endif
-            
+
 	  endif
 
 	enddo
 c********** end of the big loop from time 't0' to time 'tstop'
 
-c Do a final dump for possible resumption later 
+c Do a final dump for possible resumption later
 
 	call io_dump_pl_symba('dump_pl.dat',nbod,mass,xh,yh,zh,
      &            vxh,vyh,vzh,lclose,iflgchk,rpl,rhill,j2rp2,j4rp4)

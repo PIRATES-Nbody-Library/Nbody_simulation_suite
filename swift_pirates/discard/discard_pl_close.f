@@ -19,7 +19,7 @@ c                                              =  1 yes
 c                 r2min       ==> square of smallest predicted distance
 c
 c Remarks: Based on rmvs_chk_ind.f
-c Authors:  Hal Levison 
+c Authors:  Hal Levison
 c Date:    2/21/94
 c Last revision: 7/14/94
 
@@ -29,7 +29,7 @@ c Last revision: 7/14/94
 
       include '../swift.inc'
 
-c...  Inputs: 
+c...  Inputs:
       real*8 xr,yr,zr,vxr,vyr,vzr,dt,r2crit
 
 c...  Outputs
@@ -40,7 +40,7 @@ c...  Internals
 	real*8 r2,v2,vdotr,tmin
 
 c-----
-c...  Executable code 
+c...  Executable code
 
 c...    First check if we're already in the encounter region. If so return
 c.             with flag set to one.
@@ -55,7 +55,7 @@ c...    If we're heading outward, then we are done
 	if (vdotr . gt. 0.d0) then
            iflg = 0
            return
-	endif	
+	endif
 
 c...    We're not yet inside and are converging so we need to calc. the
 c.           minimum separation attained in time dt.
@@ -72,11 +72,10 @@ c.           minimum separation attained in time dt.
 
         if (r2min.le.r2crit)then
 	   iflg = 1
-	else 
+	else
 	   iflg = 0
 	endif
 
 	return
 	end  ! discard_pl_close
 c--------------------------------------------------------------
-

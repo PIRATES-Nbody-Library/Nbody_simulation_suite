@@ -14,7 +14,7 @@ c               io_read_mass     ==>   =0 read ok
 c                                    !=0 read failed is set to iostat variable
 c
 c Remarks: Based on io_read_frame
-c Authors:  Hal Levison 
+c Authors:  Hal Levison
 c Date:    1/9/97
 c Last revision: 11/2/99
 
@@ -23,7 +23,7 @@ c Last revision: 11/2/99
       include '../swift.inc'
       include 'io.inc'
 
-c...  Inputs: 
+c...  Inputs:
       integer iu
 
 c...  Outputs
@@ -37,7 +37,7 @@ c...  Internals
       integer i,ierr
 
 c----
-c...  Executable code 
+c...  Executable code
 
       read(iu,iostat=ierr) ttmp,nbod2
       io_read_mass_r = ierr

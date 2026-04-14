@@ -8,15 +8,15 @@ c
 c             Input:
 c                 iu              ==>  unit number (integer scalar)
 c                 fname           ==>  file name (character*80)
-c                 fopenstat       ==>  The status flag for the open 
-c                                      statements of the output files.  
+c                 fopenstat       ==>  The status flag for the open
+c                                      statements of the output files.
 c                                          (character*80)
 c                 format          ==>  format string (character*80)
 c             Output:
 c                 ierr            ==>  output from iostat
 c
-c Remarks: 
-c Authors:  Hal Levison 
+c Remarks:
+c Authors:  Hal Levison
 c Date:    3/3/94
 c Last revision: 1/30/98
 
@@ -25,17 +25,17 @@ c Last revision: 1/30/98
       include '../swift.inc'
       include 'io.inc'
 
-c...  Inputs: 
+c...  Inputs:
       integer iu
       character*(*) fname,fopenstat,format
 
-c...  Outputs: 
+c...  Outputs:
       integer ierr
 
 c----
-c...  Executable code 
+c...  Executable code
 
-      if( (fopenstat(1:6).eq.'append') .or. 
+      if( (fopenstat(1:6).eq.'append') .or.
      &     (fopenstat(1:6).eq.'APPEND') ) then
          open(unit=iu, file=fname, status='old',
 #ifdef  _OPEN_POSITION

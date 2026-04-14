@@ -17,20 +17,20 @@ c       Returns:
 c      io_read_line_r    ==>   =0 read ok
 c                           !=0 read failed is set to iostat variable
 c
-c Remarks: 
-c Authors:  Hal Levison 
+c Remarks:
+c Authors:  Hal Levison
 c Date:    2/22/94
-c Last revision: 
+c Last revision:
 
-      integer function io_read_line_r(iu,id,a,e,inc,capom,omega,capm) 
+      integer function io_read_line_r(iu,id,a,e,inc,capom,omega,capm)
 
       include '../swift.inc'
       include 'io.inc'
 
-c...  Inputs: 
+c...  Inputs:
       integer iu
 
-c...  Output: 
+c...  Output:
       integer id
       real*8 a,e,inc,capom,omega,capm
 
@@ -40,7 +40,7 @@ c...  Internals
       integer ierr
 
 c----
-c...  Executable code 
+c...  Executable code
 
       read(iu,iostat=ierr) id2,a4,e4,inc4,capom4,omega4,capm4
       io_read_line_r = ierr
@@ -60,4 +60,3 @@ c...  Executable code
       return
       end      ! io_read_line_r
 c--------------------------------------------------------------------------
-

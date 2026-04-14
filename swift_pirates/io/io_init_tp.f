@@ -9,9 +9,9 @@ c
 c             Output:
 c                 ntp           ==>  number of massive bodies (int scalar)
 c                 mass          ==>  mass of bodies (real array)
-c              xht,yht,zht      ==>  initial position in Helio coord 
+c              xht,yht,zht      ==>  initial position in Helio coord
 c                                    (real arrays)
-c              vxht,vyht,vzht   ==>  initial position in Helio coord 
+c              vxht,vyht,vzht   ==>  initial position in Helio coord
 c                                    (real arrays)
 c               istat           ==>  status of the test paricles
 c                                      (2d  integer array)
@@ -22,9 +22,9 @@ c                                      (2d  real array)
 c
 c
 c
-c Remarks: 
+c Remarks:
 c Authors:  Martin Duncan
-c Date:    3/2/93 
+c Date:    3/2/93
 c Last revision:  12/22/95  HFL
 
 	subroutine io_init_tp(infile,ntp,xht,yht,zht,vxht,vyht,
@@ -47,7 +47,7 @@ c...   Internal
 	integer i,j,ierr,ns
 
 c-----
-c...  Executable code      
+c...  Executable code
 
 	write(*,*) 'Test particle file called ',infile
         call io_open(7,infile,'old','formatted',ierr)
@@ -74,7 +74,7 @@ c...   Determine the number of istat and rstat variables.  In what follows,
 c...   we assume that they are the same.
 
         call io_getns(7,ns)
-        
+
         if(ns.ne.NSTAT) then
            write(*,*) 'Warning:  The size of istat and rstat arrays is '
            write(*,*) '          not NSTAT=',NSTAT,', but is ',ns
@@ -82,7 +82,7 @@ c...   we assume that they are the same.
 
 c Start again:
         rewind(7)
-        read(7,*) ntp 
+        read(7,*) ntp
 
 c Read in the x's and v's and istat(*,*)
 	  write(*,*) ' '
@@ -105,4 +105,3 @@ c Read in the x's and v's and istat(*,*)
 	return
 	end    ! io_init_tp.f
 c-----------------------------------------------------------------
-

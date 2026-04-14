@@ -5,7 +5,7 @@ c Given an s, returns mikkola's c1,c2,c3,c4,c5
 c
 c             Input:
 c                 alpha         ==>  Twice the binding energy (real scalar)
-c                 s             ==>  Approx. root of f 
+c                 s             ==>  Approx. root of f
 c             Output:
 c                 c1,c2,c3      ==>  c's from p171-172
 c                                       (real scalors)
@@ -21,7 +21,7 @@ c Last revision:
 
       include '../swift.inc'
 
-c...  Inputs: 
+c...  Inputs:
       real*8 alpha,s
 
 c...  Outputs:
@@ -40,7 +40,7 @@ c...  Internals:
      &  cc120=1.d0/120.d0)
 
 c----
-c...  Executable code 
+c...  Executable code
 
       x=s*s*alpha
 

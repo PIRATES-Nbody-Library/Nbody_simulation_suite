@@ -19,13 +19,13 @@ c                                    = 1 if tp post peri
 c                                         (integer scalar)
 c                 peri           ==> set to pericenter dist. if isperi=0
 c                                         (real scalar)
-c                 tperi          ==> set to time to next or last perihelion, 
+c                 tperi          ==> set to time to next or last perihelion,
 c                                    which ever is less, if isperi=0
 c                                         (real scalar)
 c
 c
 c Remarks: Based on util_peri
-c Authors:  Hal Levison 
+c Authors:  Hal Levison
 c Date:    2/13/01
 c Last revision: 8/7/01
 
@@ -34,7 +34,7 @@ c Last revision: 8/7/01
 
       include '../swift.inc'
 
-c...  Inputs Only: 
+c...  Inputs Only:
       integer ntp,iflg
       real*8 xt,yt,zt,massc
       real*8 vxt,vyt,vzt
@@ -49,14 +49,14 @@ c...  Internals
       real*8 capm              ! Not used
 
 c----
-c...  Executable code 
+c...  Executable code
 
       if(iflg.eq.0) then    ! are we just setting thing up?
 
          vdotr = xt*vxt + yt*vyt + zt*vzt
          if (vdotr .gt. 0.d0) then
             isperi = 1
-         else 
+         else
             isperi =-1
          endif
 
@@ -64,7 +64,7 @@ c...  Executable code
 
          vdotr = xt*vxt + yt*vyt + zt*vzt
          if(isperi.eq.-1) then  ! was coming in
-            
+
             if (vdotr .lt. 0.d0) then ! still coming in
                isperi = -1
             else                ! turned around
@@ -72,21 +72,19 @@ c...  Executable code
                call orbel_xv2aqt(xt,yt,zt,vxt,vyt,
      &              vzt,massc,ialpha,a,peri,capm,tperi)
             endif
-            
+
          else
-            
+
             if (vdotr .lt. 0.d0) then ! coming in
                isperi = -1
             else
                isperi = 1       ! going out
             endif
-            
+
          endif
-      
+
       endif
 
       return
       end    ! util_peri1
 c------------------------------------------------------------------
-
-

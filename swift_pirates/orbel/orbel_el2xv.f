@@ -14,14 +14,14 @@ C            inc      ==> inclination  (real scalar)
 C            capom    ==> longitude of ascending node (real scalar)
 C	     omega    ==> argument of perihelion (real scalar)
 C	     capm     ==> mean anomoly(real scalar)
-*       
+*
 c       Output:
 c            x,y,z    ==>  position of object (real scalars)
 c            vx,vy,vz ==>  velocity of object (real scalars)
 c
 *     ALGORITHM:  See Fitzpatrick "Principles of Cel. Mech."
 *     REMARKS: All angles are in RADIANS
-*       
+*
 *     AUTHOR:  M. Duncan.
 *     DATE WRITTEN:  May 11, 1992.
 *     REVISIONS: May 26 - now use better Kepler solver for ellipses
@@ -33,7 +33,7 @@ c
 
       include '../swift.inc'
 
-c...  Inputs Only: 
+c...  Inputs Only:
 	integer ialpha
 	real*8 gm,a,e,inc,capom,omega,capm
 
@@ -49,7 +49,7 @@ c...  Internals:
         real*8 orbel_ehybrid,orbel_fhybrid,orbel_zget
 
 c----
-c...  Executable code 
+c...  Executable code
 
         if(e.lt.0.0) then
            write(*,*) ' ERROR in orbel_el2xv: e<0, setting e=0!!1'
@@ -113,7 +113,7 @@ C--
 	  xfac2 = 2.d0*a*zpara
 	  ri = 1.d0/(a*(1.d0 + zpara*zpara))
 	  vfac1 = -ri * sqgma * zpara
-	  vfac2 = ri * sqgma 
+	  vfac2 = ri * sqgma
 	endif
 C--
 	x =  d11*xfac1 + d21*xfac2
@@ -127,6 +127,3 @@ C--
 	end    ! orbel_el2xv
 
 c-----------------------------------------------------------------------
-
-
-

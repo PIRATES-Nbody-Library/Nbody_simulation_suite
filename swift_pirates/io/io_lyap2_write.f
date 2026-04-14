@@ -12,14 +12,14 @@ c
 c Remarks: Based on io_lyap_write.f
 c Authors:  Hal Levison
 c Date:    7/11/95
-c Last revision: 
+c Last revision:
 
       subroutine io_lyap2_write(iul,time,dist,ntp)
 
       include '../swift.inc'
       include 'io.inc'
 
-c...  Inputs: 
+c...  Inputs:
       integer iul,ntp
       real*8 dist(ntp),time
 
@@ -30,7 +30,7 @@ c...  Internals
       save iwrite
 
 c----
-c...  Executable code 
+c...  Executable code
 
 
       if(iwrite.eq.0) then

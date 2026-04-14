@@ -2,7 +2,7 @@ c*************************************************************************
 c                        SYMBA5_GETACCH.F
 c*************************************************************************
 c This subroutine calculates the acceleration on the massive particles
-c in the HELIOCENTRIC frame. 
+c in the HELIOCENTRIC frame.
 c             Input:
 c                 nbod        ==>  number of massive bodies (int scalor)
 c                 nbodm       ==>  Location of last massive body(int scalar)
@@ -18,7 +18,7 @@ c                 axh,ayh,azh ==>  acceleration in helio coord (real arrays)
 c
 c Remarks: Based on helio_getacch.f, but does not include the forces of
 c          an body B on body A, if body B and A are having an encounter.
-c Author:  Hal Levison  
+c Author:  Hal Levison
 c Date:    3/20/97
 c Last revision: 11/8/13
 
@@ -28,7 +28,7 @@ c Last revision: 11/8/13
       include '../swift.inc'
       include 'symba5.inc'
 
-c...  Inputs: 
+c...  Inputs:
       integer nbod,nbodm
       real*8 mass(nbod),j2rp2,j4rp4,mtiny
       real*8 xh(nbod),yh(nbod),zh(nbod)
@@ -36,15 +36,15 @@ c...  Inputs:
 
 c...  Outputs:
       real*8 axh(nbod),ayh(nbod),azh(nbod)
-                
+
 c...  Internals:
-      real*8 aoblx(NTPMAX),aobly(NTPMAX),aoblz(NTPMAX) 
-      real*8 ir3h(NTPMAX),irh(NTPMAX) 
+      real*8 aoblx(NTPMAX),aobly(NTPMAX),aoblz(NTPMAX)
+      real*8 ir3h(NTPMAX),irh(NTPMAX)
       integer i,j,ie
       real*8 dx,dy,dz,rji2,faci,facj,irij3
 
 c---
-c...  Executable code 
+c...  Executable code
 
 c...  Zero things
       do i=1,nbod
@@ -61,22 +61,22 @@ c...  now the third terms
             dy = yh(j) - yh(i)
             dz = zh(j) - zh(i)
             rji2 = dx*dx + dy*dy + dz*dz
-            
+
             irij3 = 1.0d0/(rji2*sqrt(rji2))
             faci = mass(i)*irij3
             facj = mass(j)*irij3
-            
+
             axh(j) = axh(j) - faci*dx
             ayh(j) = ayh(j) - faci*dy
             azh(j) = azh(j) - faci*dz
-            
+
             axh(i) = axh(i) + facj*dx
             ayh(i) = ayh(i) + facj*dy
             azh(i) = azh(i) + facj*dz
 
          enddo
       enddo
-      
+
 
 c...  Now subtract off anyone in an encounter
       do ie=1,ielc
@@ -87,15 +87,15 @@ c...  Now subtract off anyone in an encounter
          dy = yh(j) - yh(i)
          dz = zh(j) - zh(i)
          rji2 = dx*dx + dy*dy + dz*dz
-         
+
          irij3 = 1.0d0/(rji2*sqrt(rji2))
          faci = mass(i)*irij3
          facj = mass(j)*irij3
-            
+
          axh(j) = axh(j) + faci*dx
          ayh(j) = ayh(j) + faci*dy
          azh(j) = azh(j) + faci*dz
-            
+
          axh(i) = axh(i) - facj*dx
          ayh(i) = ayh(i) - facj*dy
          azh(i) = azh(i) - facj*dz
@@ -121,7 +121,3 @@ c...  Now do j2 and j4 stuff
       end      ! symba5_getacch
 
 c---------------------------------------------------------------------
-
-
-
-

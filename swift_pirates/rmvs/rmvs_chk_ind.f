@@ -2,8 +2,8 @@ c*************************************************************************
 c                            RMVS_CHK_IND.F
 c*************************************************************************
 c  Subroutine to check if a test particle and planet
-c  are having or **will** have an encounter 
-c  in the next timestep. 
+c  are having or **will** have an encounter
+c  in the next timestep.
 c
 c             Input:
 c                 xr,yr,zr     ==>  relative position of tp wrt planet
@@ -22,9 +22,9 @@ c                                              = -1 yes, in inner region
 c
 c
 c Remarks: Based on Hal's wiscl_fk.f' but origonaly written by Martin Duncan
-c Authors:  Hal Levison 
+c Authors:  Hal Levison
 c Date:    2/19/93
-c Last revision: 
+c Last revision:
 
       subroutine rmvs_chk_ind(xr,yr,zr,vxr,vyr,vzr,dt,
      &                         r2crit,r2critp,iflag)
@@ -33,7 +33,7 @@ c Last revision:
       include '../swift.inc'
       include 'rmvs.inc'
 
-c...  Inputs: 
+c...  Inputs:
       real*8 xr,yr,zr,vxr,vyr,vzr,dt,r2crit,r2critp
 
 c...  Outputs
@@ -43,7 +43,7 @@ c...  Internals
 	real*8 r2,v2,vdotr,tmin,r2min
 
 c-----
-c...  Executable code 
+c...  Executable code
 
 c...    First check if we're already in the encounter region. If so return
 c.             with flag set to one.
@@ -62,7 +62,7 @@ c...    If we're heading outward, use r2 to calc iflag
 	      iflag = 1
            endif
 	   return
-	endif	
+	endif
 
 c...    We're not yet inside and are converging so we need to calc. the
 c.           minimum separation attained in time dt.
@@ -81,12 +81,10 @@ c.           minimum separation attained in time dt.
 	   iflag = -1
 	else if(r2min.le.r2crit)then
 	   iflag = 1
-	else 
+	else
 	   iflag = 0
 	endif
 
 	return
 	end  ! rmvs_chk_ind
 c--------------------------------------------------------------
-
-

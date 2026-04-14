@@ -2,7 +2,7 @@ c***********************************************************************
 c	                    COORD_B2J.F
 c***********************************************************************
 *     PURPOSE: Converts from Barycentric to Jacobi coords.
-*     ARGUMENTS:  Input is 
+*     ARGUMENTS:  Input is
 *                    nbod ==> number of bodies (must be less than NBMAX)
 *                             (integer)
 *	             mass(*) ==>  masses (real array)
@@ -15,8 +15,8 @@ c***********************************************************************
 *                                          (real array)
 *                    vxj(*),vyj(*),vzj(*) ==> jacobi particle velocities
 *                                            (real array)
-*       
-*     ALGORITHM:  See e.g. Wisdom and Holman 
+*
+*     ALGORITHM:  See e.g. Wisdom and Holman
 *     Authors:  Martin Duncan
 *     WRITTEN:  Jan 29/93
 *     REVISIONS: 2/17/95  HFL
@@ -27,7 +27,7 @@ c***********************************************************************
 
       include '../swift.inc'
 
-c...  Inputs: 
+c...  Inputs:
 	integer nbod
 	real*8 mass(NPLMAX)
 	real*8 xb(NPLMAX),yb(NPLMAX),zb(NPLMAX)
@@ -39,12 +39,12 @@ c...  Outputs:
 
 c...  Internals:
 	real*8 eta(NPLMAX)
-	real*8 sumx,sumy,sumz,sumvx,sumvy,sumvz	
+	real*8 sumx,sumy,sumz,sumvx,sumvy,sumvz
 	real*8 capx,capy,capz,capvx,capvy,capvz
 	integer n
 
 c----
-c...  Executable code 
+c...  Executable code
 
 
 c First calc. the array eta(*) then convert to jacobi coords
@@ -110,4 +110,3 @@ c First calc. the array eta(*) then convert to jacobi coords
 	end   ! coord_b2j
 
 c--------------------------------------------------------------------------
-

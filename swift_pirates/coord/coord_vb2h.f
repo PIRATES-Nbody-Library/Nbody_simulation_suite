@@ -3,7 +3,7 @@ c	                    COORD_VB2H.F
 c***********************************************************************
 *     PURPOSE: Converts from Barycentric to Helio coords.
 *               Velocity only
-*     ARGUMENTS:  Input is 
+*     ARGUMENTS:  Input is
 *                    nbod ==> number of bodies (must be less than NBMAX)
 *                             (integer)
 *	             mass(*) ==>  masses (real array)
@@ -14,8 +14,8 @@ c***********************************************************************
 *                 Returned are
 *                    vxh(*),vyh(*),vzh(*) ==> Helio particle velocities
 *                                            (real array)
-*       
-*     ALGORITHM: Obvious 
+*
+*     ALGORITHM: Obvious
 *     Authors:  Hal Levison
 *     WRITTEN:  11/14/96
 *     REVISIONS: 11/21/96
@@ -24,7 +24,7 @@ c***********************************************************************
 
       include '../swift.inc'
 
-c...  Inputs: 
+c...  Inputs:
       integer nbod
       real*8 mass(nbod)
       real*8 vxb(nbod),vyb(nbod),vzb(nbod)
@@ -36,7 +36,7 @@ c...  Internals:
       integer i
 
 c----
-c...  Executable code 
+c...  Executable code
 
 	vxb(1) = - mass(2)*vxb(2)
 	vyb(1) = - mass(2)*vyb(2)
@@ -53,13 +53,12 @@ c...  Executable code
 	vzb(1) = vzb(1)/mass(1)
 
 	do i=2,nbod
-	   vxh(i) = vxb(i)  - vxb(1)  
-	   vyh(i) = vyb(i)  - vyb(1)  
-	   vzh(i) = vzb(i)  - vzb(1)  
+	   vxh(i) = vxb(i)  - vxb(1)
+	   vyh(i) = vyb(i)  - vyb(1)
+	   vzh(i) = vzb(i)  - vzb(1)
 	enddo
 
 	return
 	end     ! coord_vb2h
 
 c--------------------------------------------------------------------------
-

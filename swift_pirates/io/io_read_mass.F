@@ -17,16 +17,16 @@ c               io_read_mass     ==>   =0 read ok
 c                                    !=0 read failed is set to iostat variable
 c
 c Remarks: Based on io_read_frame
-c Authors:  Hal Levison 
+c Authors:  Hal Levison
 c Date:    11/2/99
-c Last revision: 
+c Last revision:
 
       integer function io_read_mass(time,nbod,mass,iu)
 
       include '../swift.inc'
       include 'io.inc'
 
-c...  Inputs: 
+c...  Inputs:
       integer iu
 
 c...  Outputs
@@ -40,7 +40,7 @@ c...  Internals
       integer ixdrrmat
 
 c----
-c...  Executable code 
+c...  Executable code
 
 #ifdef  _FXDR_AVAIL
 
@@ -78,4 +78,3 @@ c...  Executable code
       return
       end      ! io_read_mass
 c----------------------------------------------------------------------
-

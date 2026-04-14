@@ -23,8 +23,8 @@ c                lperi           ==> set to .true. if isperi=0
 c                                         (logical*2 array)
 c
 c
-c Remarks: 
-c Authors:  Hal Levison 
+c Remarks:
+c Authors:  Hal Levison
 c Date:    2/25/94
 c Last revision: 7/14/94
 
@@ -33,7 +33,7 @@ c Last revision: 7/14/94
 
       include '../swift.inc'
 
-c...  Inputs Only: 
+c...  Inputs Only:
       integer ntp,iflg
       real*8 xt(ntp),yt(ntp),zt(ntp),massc
       real*8 vxt(ntp),vyt(ntp),vzt(ntp)
@@ -48,7 +48,7 @@ c...  Internals
       real*8 vdotr,a,e
 
 c----
-c...  Executable code 
+c...  Executable code
 
       if(iflg.eq.0) then    ! are we just setting thing up?
 
@@ -56,7 +56,7 @@ c...  Executable code
             vdotr = xt(i)*vxt(i) + yt(i)*vyt(i) + zt(i)*vzt(i)
             if (vdotr .gt. 0.d0) then
                isperi(i) = 1
-            else 
+            else
                isperi(i) =-1
             endif
          enddo
@@ -92,5 +92,3 @@ c...  Executable code
       return
       end    ! util_peri
 c------------------------------------------------------------------
-
-

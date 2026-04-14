@@ -3,9 +3,9 @@ c                        RMVS.INC
 c*************************************************************************
 C Include file for the encounter subroutines
 c
-c Author:  Hal Levison  
+c Author:  Hal Levison
 c Date:    3/7/93
-c Last revision: 
+c Last revision:
 
 c...	scale factor for hill's sphere to take shorter time step
        real*8 RHSCALE
@@ -17,19 +17,19 @@ c...	scale factor for hill's sphere to go to planet centric coord
        parameter (RHPSCALE=1.0)
 c       parameter (RHPSCALE=1.5)
 
-c..    ratio of the number of time steps in the 
+c..    ratio of the number of time steps in the
 c...        encounter (helocentric) vs normal
        integer NTENC
 c       parameter (NTENC=100)
        parameter (NTENC=10)
 
-c..    ratio of the number of time steps in the 
-c...        planetcentric encounter  vs heliocentric 
+c..    ratio of the number of time steps in the
+c...        planetcentric encounter  vs heliocentric
        integer NTPHENC
 c       parameter (NTPHENC=5)
        parameter (NTPHENC=3)
 
-c..    ratio of the number of time steps in the 
+c..    ratio of the number of time steps in the
 c...        encounter (planetcentric) vs normal
        integer NTPENC
        parameter (NTPENC=NTENC*NTPHENC)

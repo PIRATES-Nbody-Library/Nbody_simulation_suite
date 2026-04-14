@@ -11,17 +11,17 @@ c                                     (real scalar)
 c                 mu            ==>  Reduced mass of system (real scalar)
 c                 alpha         ==>  Twice the binding energy (real scalar)
 c                 u             ==>  Vel. dot radial vector (real scalar)
-c                 s             ==>  Approx. root of f 
+c                 s             ==>  Approx. root of f
 c             Output:
 c                 f             ==>  function value ( = 0 if O.K.) (integer)
 c
-c Author:  Martin Duncan  
+c Author:  Martin Duncan
 c Date:    March 12/93
 c Last revision: March 12/93
 
       subroutine drift_kepu_fchk(dt,r0,mu,alpha,u,s,f)
 
-c...  Inputs: 
+c...  Inputs:
       real*8 dt,r0,mu,alpha,u,s
 
 c...  Outputs:
@@ -31,7 +31,7 @@ c...  Internals:
       real*8  x,c0,c1,c2,c3
 
 c----
-c...  Executable code 
+c...  Executable code
 
         x=s*s*alpha
         call drift_kepu_stumpff(x,c0,c1,c2,c3)

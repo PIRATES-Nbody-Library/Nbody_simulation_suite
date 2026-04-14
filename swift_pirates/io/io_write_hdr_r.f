@@ -10,17 +10,17 @@ c                 nbod          ==>  number of massive bodies (int scalar)
 c                 ntp            ==>  number of massive bodies (int scalar)
 c                 istat           ==>  status of the test paricles
 c
-c Remarks: 
-c Authors:  Hal Levison 
+c Remarks:
+c Authors:  Hal Levison
 c Date:    2/22/94
-c Last revision: 
+c Last revision:
 
-      subroutine io_write_hdr_r(iu,time,nbod,ntp,istat) 
+      subroutine io_write_hdr_r(iu,time,nbod,ntp,istat)
 
       include '../swift.inc'
       include 'io.inc'
 
-c...  Inputs: 
+c...  Inputs:
       integer nbod,ntp,istat(NTPMAX,NSTAT),iu
       real*8 time
 
@@ -30,7 +30,7 @@ c...  Internals
       integer*2 nleft,nbod2
 
 c----
-c...  Executable code 
+c...  Executable code
 
 
 c...  calculate number of remaining test particles
@@ -44,10 +44,9 @@ c...  calculate number of remaining test particles
       nbod2 = nbod
 
       ttmp = time
- 
+
       write(iu) ttmp,nbod2,nleft
 
       return
       end     ! io_write_hdr_r.f
 c---------------------------------------------------------------------------
-

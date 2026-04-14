@@ -2,14 +2,14 @@ c***************************************************************************
 c			OBL_ACC.F
 c*************************************************************************
 c OBL_ACC returns the BARYCENTRIC x,y,z components of the acc. on NBOD
-c particles due to the oblateness of mass(1) using  
+c particles due to the oblateness of mass(1) using
 c the values of J2RP2 and J4RP4 passed into the routine.
-c (J2RP2 for example is the product of 
+c (J2RP2 for example is the product of
 c J_2 times the square of the central body's radius)
 c Here we return the net acc. produced
 c only by the J2 and J4 terms (i.e. including
 c neither the monopole nor higher order terms).
-c	
+c
 c
 c             Input:
 c                 nbod     ==>  number of massive bodies (incl. central one)
@@ -21,14 +21,14 @@ c                 xh(*),yh(*),zh(*)   ==>  HELIO. positions of particles
 c                 irh(*)   ==> 1./ magnitude of radius vector (real*8 vector)
 c                                (passed in to save calcs.)
 c             Output:
-c               aoblx(*),aobly(*),aoblz(*)  ==>  BARY. components of accel 
-c                                        (real*8 vectors) 
+c               aoblx(*),aobly(*),aoblz(*)  ==>  BARY. components of accel
+c                                        (real*8 vectors)
 c
 c Remarks:  aoblx(1) (for example) contains x-component of
 c           bary. acc. of central body
-c Authors:  Martin Duncan 
+c Authors:  Martin Duncan
 c Date:    3/4/94
-c Last revision: 
+c Last revision:
 
       subroutine obl_acc(nbod,mass,j2rp2,j4rp4,xh,yh,zh,irh,
      &     aoblx,aobly,aoblz)
@@ -36,7 +36,7 @@ c Last revision:
 
       include '../swift.inc'
 
-c...  Inputs Only: 
+c...  Inputs Only:
       integer nbod
       real*8 j2rp2,j4rp4
       real*8 mass(NPLMAX)
@@ -67,7 +67,7 @@ c from (x,y,z) to save the sqrt.
 
 	  fac1 = t0*(t1 - t3 - (5.d0*t1 - (14.d0 - 21.d0*t2)*t3)*t2)
 	  fac2 = 2.d0*t0*(t1 - (2.d0 - (14.d0*t2/3.d0))*t3)
-      
+
           aoblx(n) = fac1*xh(n)
           aobly(n) = fac1*yh(n)
           aoblz(n) = (fac1 + fac2)*zh(n)
@@ -85,6 +85,6 @@ c Now compute the bary. acc. of Sun due to all the planets
 	   aoblz(1) = aoblz(1) - mass(n)*aoblz(n)/mass(1)
 	enddo
 
-        return	
+        return
         end                       !  obl_acc.f
 c____________________________________________________________________________

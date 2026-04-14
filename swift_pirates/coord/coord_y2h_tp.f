@@ -2,14 +2,14 @@ c***********************************************************************
 c	                    COORD_Y2H_TP.F
 c***********************************************************************
 *     PURPOSE: Converts test part from Yosemite to Heliocentric coords.
-*     ARGUMENTS:  Input is 
+*     ARGUMENTS:  Input is
 *                              ntp ==> number of test part (<= NTPMAX)
 *                                              (integer)
 *		        xyt,yyt,zyt ==> yose particle coords
 *                                          (real array)
 *		     vxyt,vyyt,vzyt ==> yose particle velocities
 *                                             (real array)
-*		        xyo,yyo,zyo ==> offset yose coords 
+*		        xyo,yyo,zyo ==> offset yose coords
 *                                          (real scalar)
 *		     vxyo,vyyo,vzyo ==> bary vel of the Sun
 *                                          (real scalar)
@@ -18,9 +18,9 @@ c***********************************************************************
 *                                            (real array)
 *                    vxht,vyht,vzht ==> helio. particle velocities
 *                                            (real array)
-*       
+*
 *     Authors:  Hal Levison
-*     ALGORITHM: Obvious 
+*     ALGORITHM: Obvious
 *     WRITTEN:  9/13/02
 *     REVISIONS:
 
@@ -30,7 +30,7 @@ c***********************************************************************
 
       include '../swift.inc'
 
-c...  Inputs: 
+c...  Inputs:
       integer ntp
       real*8 xyt(NTPMAX),yyt(NTPMAX),zyt(NTPMAX)
       real*8 vxyt(NTPMAX),vyyt(NTPMAX),vzyt(NTPMAX)
@@ -43,8 +43,8 @@ c...  Outputs:
 c...  Internals:
       integer i
 
-c---- 
-c...  Executable code 
+c----
+c...  Executable code
       do i=1,ntp
          xht(i) = xyt(i) + xyo
          yht(i) = yyt(i) + yyo
@@ -57,4 +57,3 @@ c...  Executable code
       return
       end                       ! coord_y2h_tp
 c--------------------------------------------------------------------------
-

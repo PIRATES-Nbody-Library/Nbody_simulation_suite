@@ -5,22 +5,22 @@ c Write out information about a discarded massive body.
 c
 c             Input:
 c                 init          ==>  initiize flag if = 0 initialize and return
-c                                                     = 1 run through 
+c                                                     = 1 run through
 c                 id            ==> particle number (int scalar)
 c                 time          ==>  current time (real scalar)
 c                 m1            ==>  Mass of pl (real scalar)
 c                 r1            ==>  Radius of pl 2 (real scalar)
-c                 x1,y1,z1      ==>  current position of pl 1 in helio coord 
+c                 x1,y1,z1      ==>  current position of pl 1 in helio coord
 c                                    (real scalar)
-c                 vx1,vy1,vz1   ==>  current velocity of pl 1 in helio coord 
+c                 vx1,vy1,vz1   ==>  current velocity of pl 1 in helio coord
 c                                    (real scalar)
 c                 iu            ==> IO unit (int scalar)
 c                 iwhy          ==> reason for discard (int scalar)
-c                 fopenstat     ==>  The status flag for the open 
-c                                      statements of the output files.  
+c                 fopenstat     ==>  The status flag for the open
+c                                      statements of the output files.
 c                                          (character*80)
-c Remarks: 
-c Authors:  Hal Levison 
+c Remarks:
+c Authors:  Hal Levison
 c Date:    12/30/96
 c Last revision: 9/11/09
 
@@ -30,7 +30,7 @@ c Last revision: 9/11/09
       include '../swift.inc'
       include 'io.inc'
 
-c...  Inputs: 
+c...  Inputs:
       integer iwhy,iu,init,id
       real*8 time
       real*8 m1,r1
@@ -42,7 +42,7 @@ c...  Internals
       integer ierr
 
 c----
-c...  Executable code 
+c...  Executable code
 
       if(init.eq.0) then
 
@@ -51,8 +51,8 @@ c...  Executable code
 
 c...     if there was an error and fopenstat='append' then
 c...     try to open as new
-         if(ierr.ne.0) then  
-            if( (fopenstat(1:6).eq.'append') .or. 
+         if(ierr.ne.0) then
+            if( (fopenstat(1:6).eq.'append') .or.
      &           (fopenstat(1:6).eq.'APPEND') ) then
                call io_open(iu,'discard_mass.out','new','FORMATTED',
      &              ierr)
@@ -84,4 +84,3 @@ c...     try to open as new
       return
       end                       ! io_discard_mass.f
 c--------------------------------------------------------------------------
-

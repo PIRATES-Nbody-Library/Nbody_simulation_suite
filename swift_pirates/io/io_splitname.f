@@ -5,24 +5,24 @@ c splits the directory from the filename in a string
 c
 c             Input:
 c                 oname        ==> string with the full path (character*80)
-c   
+c
 c             Output:
 c                 dirname     ==> string with the path (character*80)
 c                 ldir        ==> length of dirname (integer scalar)
 c                 filename     ==> string with the file name (character*80)
 c                 lfile        ==> length of filename (integer scalar)
 c
-c Remarks: 
-c Authors:  Hal Levison 
-c Date:   3/19/97 
-c Last revision: 
+c Remarks:
+c Authors:  Hal Levison
+c Date:   3/19/97
+c Last revision:
 
       subroutine io_splitname(oname,dirname,ldir,filename,lfile)
 
       include '../swift.inc'
       include 'io.inc'
 
-c...  Inputs: 
+c...  Inputs:
       character*80 oname
 
 c...  Outputs:
@@ -33,7 +33,7 @@ c...  Internals
       integer i,il,is
 
 c----
-c...  Executable code 
+c...  Executable code
 
 c... Find the last character
       il = 0
@@ -79,4 +79,3 @@ c... Find the last /
       return
       end            ! io_splitname
 c---------------------------------------------------------
-

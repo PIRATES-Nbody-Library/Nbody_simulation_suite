@@ -10,7 +10,7 @@ c             Output:
 c                 ns            ==>  number of istat variable (int scalar)
 c
 c
-c Remarks: 
+c Remarks:
 c Authors:  Hal Levison
 c Date:    10/1/96
 c Last revision:  3/18/97
@@ -25,18 +25,18 @@ c...  Input
 
 c...  Output
       integer ns
-      
+
 c...  Internal
       character*1024 line
       integer i,i1,ib
-      real*8 xht,yht,zht    
+      real*8 xht,yht,zht
       real*8 vxht,vyht,vzht
 
 c-----
-c...  Executable code      
+c...  Executable code
 
 c...  get the irrelavant stuff
-      read(7,*) xht,yht,zht    
+      read(7,*) xht,yht,zht
       read(7,*) vxht,vyht,vzht
 
       ns = 0
@@ -77,5 +77,3 @@ c...     Find the first non-blank character
       return
       end     ! io_getns
 c----------------------------------------------------
-
-

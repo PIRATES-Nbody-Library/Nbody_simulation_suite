@@ -13,10 +13,10 @@ c              istat         ==>  status of the test paricles
 c                                       (2d integer array)
 c                                   istat(i,1) = 0 ==> active:  = 1 not
 c                                   istat(i,2) = -1 ==> Danby did not work
-c               x            ==> initial value independent variable 
+c               x            ==> initial value independent variable
 c                                        (real scalar)
 c 	        h0           ==> stepsize  (real scalar)
-c 	        y            ==> initial value dependent variables  
+c 	        y            ==> initial value dependent variables
 c                                     (real array)
 c               eps          ==> local truncation error tolerance
 c
@@ -25,7 +25,7 @@ c 	          y  ==> final value dependent variables  (real array)
 c                 x  ==> final value independent variable (real scalar)
 c 	          h0 ==> recommended stepsize for the next call (real scalar)
 c
-c Remarks:  Based on Renu's code: mass,j2rp2,j4rp4 and istat are 
+c Remarks:  Based on Renu's code: mass,j2rp2,j4rp4 and istat are
 c           just passed on to bs_der
 c Authors:  Hal Levison
 c Date:    5/17/93
@@ -36,7 +36,7 @@ c Last revision: 2/24/94
       include '../swift.inc'
       include 'bs.inc'
 
-c...  Inputs Only: 
+c...  Inputs Only:
       integer nbod,ntp
       real*8 mass(nbod),h0,eps,j2rp2,j4rp4
 
@@ -57,7 +57,7 @@ c...  Internals
       save lt,alt
 
 c----
-c...  Executable code 
+c...  Executable code
 
       n = 6*(nbod+ntp)
 
@@ -107,12 +107,12 @@ c           integration
 c
             do i=1,n
                ii=12*i
-               tp(ii-3)=tp(ii) 
+               tp(ii-3)=tp(ii)
                y(i)=tp(ii)+hd*tp(ii-4) !    equation (3b)
             enddo
             i1max=2*l-1
             x=xa
-         
+
             do i1=1,i1max
                x=x+hd
                call bs_der(ntp,nbod,mass,j2rp2,j4rp4,istat,y,dy)
@@ -122,15 +122,15 @@ c
                   eta2=tp(ii-3)+h*dy(i)
                   tp(ii-3)=y(i)
                   y(i)=eta2
-               enddo 
+               enddo
             enddo
-         
+
             call bs_der(ntp,nbod,mass,j2rp2,j4rp4,istat,y,dy)
             do i=1,n
                ii=12*i
                dta=tp(ii-11)
                yb=(tp(ii-3)+y(i)+hd*dy(i))/2.d0 !    equation (3d)
-c     
+c
 c              extrapolated values
 c
                c=yb             ! equation (6b)
@@ -156,7 +156,7 @@ c
                endif
                tp(ii-2)=yb
             enddo
-            
+
             if(m.gt.3) then
                if(varm.le.eps) then       !   return results to calling program
                   x=xb
@@ -185,7 +185,3 @@ c                                        start again with half the step size
 c
       end      !  bs_int
 c-----------------------------------------------------------------------------
-
-
-
-

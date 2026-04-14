@@ -5,33 +5,33 @@ c This subroutine interpolates between two kepler orbits.
 c For outer region only
 c
 c             Input:
-c                 nbod                ==>  number of massive bodies 
+c                 nbod                ==>  number of massive bodies
 c                                          (int scalar)
-c                 xbeg,ybeg,zbeg      ==>  initial planet position in helio 
+c                 xbeg,ybeg,zbeg      ==>  initial planet position in helio
 c                                            (real arrays)
-c                 vxbeg,vybeg,vzbeg   ==>  initial planet vel in helio 
+c                 vxbeg,vybeg,vzbeg   ==>  initial planet vel in helio
 c                                            (real arrays)
-c                 xend,yend,zend      ==>  final planet position in helio 
+c                 xend,yend,zend      ==>  final planet position in helio
 c                                            (real arrays)
-c                 vxend,vyend,vzend   ==>  final planet position in helio 
+c                 vxend,vyend,vzend   ==>  final planet position in helio
 c                                            (real arrays)
 c                 dt                   ==>  time step (real sclar)
 c                 msun                 ==>  mass of sun (real sclar)
 c                 nt                   ==>  the number of intermediate steps
 c                                           (integer scalar)
 c             Output:
-c                 xtmp,ytmp,ztmp      ==>  position of planet wrt time 
+c                 xtmp,ytmp,ztmp      ==>  position of planet wrt time
 c                                          for outer region
 c                                            (2d real arrays)
-c                 vxtmp,vytmp,vztmp   ==>  velocoty of planet wrt time 
+c                 vxtmp,vytmp,vztmp   ==>  velocoty of planet wrt time
 c                                          for outer region
 c                                            (2d real arrays)
 c
 c
-c Remarks: Based on rmvs2_interp_o 
-c Authors:  Hal Levison 
+c Remarks: Based on rmvs2_interp_o
+c Authors:  Hal Levison
 c Date:    7/10/96
-c Last revision: 
+c Last revision:
 
       subroutine rmvs3_interp(nbod,xbeg,ybeg,zbeg,vxbeg,vybeg,
      &     vzbeg,xend,yend,zend,vxend,vyend,vzend,dt,msun,nt,
@@ -40,7 +40,7 @@ c Last revision:
       include '../swift.inc'
       include '../rmvs/rmvs.inc'
 
-c...  Inputs Only: 
+c...  Inputs Only:
       integer nbod,nt
       real*8 dt,msun
       real*8 xbeg(NPLMAX),ybeg(NPLMAX),zbeg(NPLMAX)
@@ -63,7 +63,7 @@ c...  Internals
       real*8 dti,dtb,frac,onemf
 
 c----
-c...  Executable code 
+c...  Executable code
 
       dti = dt/float(nt)
       dtb = -1.0d0*dt
@@ -100,7 +100,7 @@ c...  move the end positions to beginning
       do i=2,nbod
 
          do ib = 1,nt
-            
+
             call drift_one(msun,xc1(i),yc1(i),zc1(i),
      &           vxc1(i),vyc1(i),vzc1(i),dti,iflg)
             if(iflg.ne.0) then
@@ -149,4 +149,3 @@ c...  put zeros in position 1
       return
       end      ! rmvs3_interp.f
 c-----------------------------------------------------------------------
-

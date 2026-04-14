@@ -1,8 +1,8 @@
 c*************************************************************************
 c                        GETACCH_AH1.F
 c*************************************************************************
-c This subroutine calculates the 1st term of acceleration 
-c on the massive particles in the HELIOCENTRIC frame. 
+c This subroutine calculates the 1st term of acceleration
+c on the massive particles in the HELIOCENTRIC frame.
 c             Input:
 c                 nbod        ==>  number of massive bodies (int scalor)
 c                 mass        ==>  mass of bodies (real array)
@@ -11,10 +11,10 @@ c                 xj,yj,zj    ==>  position in jacobi coord (real array)
 c                 ir3h        ==> inv radii in heliocentric coord (real array)
 c                 ir3j        ==> inv radii in jacobi coord (real array)
 c             Output:
-c                 axh1,ayh1,azh1 ==>  1st term acceleration in helio coord 
+c                 axh1,ayh1,azh1 ==>  1st term acceleration in helio coord
 c                                    (real array)
 c
-c Author:  Hal Levison  
+c Author:  Hal Levison
 c Date:    2/2/93
 c Last revision: 2/2/93
 
@@ -23,7 +23,7 @@ c Last revision: 2/2/93
 
       include '../../swift.inc'
 
-c...  Inputs: 
+c...  Inputs:
       integer nbod
       real*8 mass(nbod),ir3h(nbod),ir3j(nbod)
       real*8 xj(nbod),yj(nbod),zj(nbod)
@@ -32,13 +32,13 @@ c...  Inputs:
 c...  Outputs:
       real*8 axh1(nbod),ayh1(nbod),azh1(nbod)
 
-                
+
 c...  Internals:
       integer i
       real*8 ah1h,ah1j
 
 c----
-c...  Executable code 
+c...  Executable code
 
       axh1(1) = 0.0
       ayh1(1) = 0.0
@@ -68,5 +68,3 @@ c...  Executable code
       end   ! getacch_ah1
 
 c---------------------------------------------------------------------
-
-

@@ -7,9 +7,9 @@ c             Input:
 c                 dtpfile       ==>  Name of file to write to (character*80)
 c                 ntp           ==>  number of massive bodies (int scalar)
 c                 mass          ==>  mass of bodies (real array)
-c              xht,yht,zht      ==>  initial position in Helio coord 
+c              xht,yht,zht      ==>  initial position in Helio coord
 c                                    (real arrays)
-c              vxht,vyht,vzht   ==>  initial position in Helio coord 
+c              vxht,vyht,vzht   ==>  initial position in Helio coord
 c                                    (real arrays)
 c               istat           ==>  status of the test paricles
 c                                      (2d  integer array)
@@ -20,9 +20,9 @@ c                                      (2d  real array)
 c
 c
 c
-c Remarks: 
+c Remarks:
 c Authors:  Martin Duncan
-c Date:    3/2/93 
+c Date:    3/2/93
 c Last revision: 2/25/94 HFL
 
 	subroutine io_dump_tp(dtpfile,ntp,xht,yht,zht,vxht,vyht,
@@ -43,7 +43,7 @@ c...   Internal
 	integer i,j,ierr
 
 c-----
-c...  Executable code      
+c...  Executable code
 
         call io_open(7,dtpfile,'unknown','formatted',ierr)
 
@@ -61,4 +61,3 @@ c...  Executable code
 	return
 	end    ! io_dump_tp
 c-----------------------------------------------------------------
-

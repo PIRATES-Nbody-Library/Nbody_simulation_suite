@@ -5,7 +5,7 @@ c Do a skeel kick
 c
 c             Input:
 c                 mpl           ==>  mass of planet (real Scalar)
-c                 xpl,ypl,zpl   ==>  Heliocentric position of planet 
+c                 xpl,ypl,zpl   ==>  Heliocentric position of planet
 c                                     (real Scalars)
 c                 xtp,ytp,ztp   ==>  Heliocentric position of TP
 c                                     (real Scalars)
@@ -19,7 +19,7 @@ c                 xtp,ytp,ztp   ==>  Heliocentric position of TP
 c                                     (real Scalars)
 c
 c Remarks: Uses Man Hoi Lee's force
-c Authors:  Hal Levison 
+c Authors:  Hal Levison
 c Date:   9/23/96
 c Last revision: 1/23/97
 
@@ -29,24 +29,24 @@ c Last revision: 1/23/97
       include '../swift.inc'
       include 'skeel.inc'
 
-c...  Inputs Only: 
+c...  Inputs Only:
       real*8 mpl,dt,ri,sgn
       real*8 xpl,ypl,zpl
       real*8 xtp,ytp,ztp
 
-c...  Inputs & Outputs Only: 
+c...  Inputs & Outputs Only:
       real*8 vxtp,vytp,vztp
 
-c...  Internals: 
+c...  Internals:
       real*8 ax,ay,az,r2,fac,rr,rim1,ris,r
 
 c----
-c...  Executable code 
+c...  Executable code
 
 
 c...  calculate the accelerations
 
-      r2 = (xtp-xpl)**2 +  (ytp-ypl)**2 +  (ztp-zpl)**2 
+      r2 = (xtp-xpl)**2 +  (ytp-ypl)**2 +  (ztp-zpl)**2
 
       rim1 = ri*RSHELL*RSHELL
 
@@ -56,7 +56,7 @@ c...  calculate the accelerations
          ris = sqrt(ri)
          r = sqrt(r2)
          rr = (ris-r)/(ris*(1.0-RSHELL))
-         fac = mpl * (r2**(-1.5d0)) * 
+         fac = mpl * (r2**(-1.5d0)) *
      &        ( 1.0d0 - 3.0d0*rr*rr + 2.0d0*(rr**3))
       else
          fac = mpl * (r2**(-1.5d0))

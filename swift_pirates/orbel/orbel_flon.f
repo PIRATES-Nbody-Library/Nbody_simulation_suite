@@ -1,7 +1,7 @@
 ***********************************************************************
 c                    ORBEL_FLON.F
 ***********************************************************************
-*     PURPOSE:  Solves Kepler's eqn. for hyperbola using hybrid approach.  
+*     PURPOSE:  Solves Kepler's eqn. for hyperbola using hybrid approach.
 *
 *             Input:
 *                           e ==> eccentricity anomaly. (real scalar)
@@ -11,16 +11,16 @@ c                    ORBEL_FLON.F
 *
 *     ALGORITHM: Uses power series for N in terms of F and Newton,s method
 *     REMARKS: ONLY GOOD FOR LOW VALUES OF N (N < 0.636*e -0.6)
-*     AUTHOR: M. Duncan 
+*     AUTHOR: M. Duncan
 *     DATE WRITTEN: May 26, 1992.
-*     REVISIONS: 
+*     REVISIONS:
 ***********************************************************************
 
 	real*8 function orbel_flon(e,capn)
 
       include '../swift.inc'
 
-c...  Inputs Only: 
+c...  Inputs Only:
 	real*8 e,capn
 
 c...  Internals:
@@ -38,11 +38,11 @@ c...  Internals:
 	PARAMETER (b5 = 5.d0*a5, b3 = 3.d0*a3)
 
 c----
-c...  Executable code 
+c...  Executable code
 
 
 c Function to solve "Kepler's eqn" for F (here called
-c x) for given e and CAPN. Only good for smallish CAPN 
+c x) for given e and CAPN. Only good for smallish CAPN
 
 	iflag = 0
 	if( capn .lt. 0.d0) then
@@ -56,7 +56,7 @@ c x) for given e and CAPN. Only good for smallish CAPN
 
 c  Set iflag nonzero if capn < 0., in which case solve for -capn
 c  and change the sign of the final answer for F.
-c  Begin with a reasonable guess based on solving the cubic for small F	
+c  Begin with a reasonable guess based on solving the cubic for small F
 
 
 	a = 6.d0*(e-1.d0)/e
@@ -74,7 +74,7 @@ c e =1.
 	do i = 1,IMAX
 	  x2 = x*x
 	  f = a0 +x*(a1+x2*(a3+x2*(a5+x2*(a7+x2*(a9+x2*(a11+x2))))))
-	  fp = b1 +x2*(b3+x2*(b5+x2*(b7+x2*(b9+x2*(b11 + 13.d0*x2)))))   
+	  fp = b1 +x2*(b3+x2*(b5+x2*(b7+x2*(b9+x2*(b11 + 13.d0*x2)))))
 	  dx = -f/fp
 c	  write(6,*) 'i,dx,x,f : '
 c	  write(6,432) i,dx,x,f
@@ -83,15 +83,15 @@ c	  write(6,432) i,dx,x,f
 c   If we have converged here there's no point in going on
 	  if(abs(dx) .le. TINY) go to 100
 	  x = orbel_flon
-	enddo	
+	enddo
 
-c Abnormal return here - we've gone thru the loop 
+c Abnormal return here - we've gone thru the loop
 c IMAX times without convergence
 	if(iflag .eq. 1) then
 	   orbel_flon = -orbel_flon
 	   capn = -capn
 	endif
-	write(6,*) 'FLON : RETURNING WITHOUT COMPLETE CONVERGENCE' 
+	write(6,*) 'FLON : RETURNING WITHOUT COMPLETE CONVERGENCE'
 	  diff = e*sinh(orbel_flon) - orbel_flon - capn
 	  write(6,*) 'N, F, ecc*sinh(F) - F - N : '
 	  write(6,*) capn,orbel_flon,diff

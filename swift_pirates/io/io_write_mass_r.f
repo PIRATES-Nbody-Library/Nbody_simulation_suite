@@ -7,15 +7,15 @@ c             Input:
 c                 time          ==>  current time (real scalar)
 c                 nbod          ==>  number of massive bodies (int scalar)
 c                 mass          ==>  mass of bodies (real array)
-c                 oname           ==> output file name (character string) 
+c                 oname           ==> output file name (character string)
 c                 iu              ==> unit number to write to
-c                 fopenstat       ==>  The status flag for the open 
-c                                      statements of the output files.  
+c                 fopenstat       ==>  The status flag for the open
+c                                      statements of the output files.
 c                                          (character*80)
 c
 c
 c Remarks: Based on io_write_frame
-c Authors:  Hal Levison 
+c Authors:  Hal Levison
 c Date:    1/9/97
 c Last revision: 11/2/99
 
@@ -24,7 +24,7 @@ c Last revision: 11/2/99
       include '../swift.inc'
       include 'io.inc'
 
-c...  Inputs: 
+c...  Inputs:
       integer nbod,iu
       real*8 mass(nbod),time
       character*80 oname,fopenstat
@@ -41,7 +41,7 @@ c...  Internals
       save i1st,dirname,filename,ldir,lfile
 
 c----
-c...  Executable code 
+c...  Executable code
 
 c...  if first time through open file
       if(i1st.eq.0) then

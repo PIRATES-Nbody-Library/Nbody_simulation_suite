@@ -4,36 +4,36 @@ c*************************************************************************
 c                  THIS FILE MUST BE PRECOMPILED
 c*************************************************************************
 c NEW VERSION OF THIS, USES FXDR
-c 
+c
 c
 c             Input:
 c                 time          ==>  current time (real scalar)
 c                 nbod          ==>  number of massive bodies (int scalar)
 c                 ntp            ==>  number of massive bodies (int scalar)
 c                 mass          ==>  mass of bodies (real array)
-c                 xh,yh,zh      ==>  current position in helio coord 
+c                 xh,yh,zh      ==>  current position in helio coord
 c                                    (real arrays)
-c                 vxh,vyh,vzh   ==>  current velocity in helio coord 
+c                 vxh,vyh,vzh   ==>  current velocity in helio coord
 c                                    (real arrays)
-c                 xht,yht,zht    ==>  current part position in helio coord 
+c                 xht,yht,zht    ==>  current part position in helio coord
 c                                      (real arrays)
-c                 vxht,vyht,vzht ==>  current velocity in helio coord 
+c                 vxht,vyht,vzht ==>  current velocity in helio coord
 c                                        (real arrays)
 c                 istat           ==>  status of the test paricles
-c                 oname           ==> output file name (character string) 
+c                 oname           ==> output file name (character string)
 c                 iu              ==> unit number to write to
-c                 fopenstat       ==>  The status flag for the open 
-c                                      statements of the output files.  
+c                 fopenstat       ==>  The status flag for the open
+c                                      statements of the output files.
 c                                          (character*80)
 c
 c             Output
-c                 iu              ==> unit number to write to.  
+c                 iu              ==> unit number to write to.
 c                                     FXDR changes this
 c
-c Remarks: 
-c Authors:  Hal Levison 
+c Remarks:
+c Authors:  Hal Levison
 c Date:    11/2/99
-c Last revision: 
+c Last revision:
 
       subroutine io_write_frame(time,nbod,ntp,mass,xh,yh,zh,vxh,
      &           vyh,vzh,xht,yht,zht,vxht,vyht,vzht,istat,oname,
@@ -42,7 +42,7 @@ c Last revision:
       include '../swift.inc'
       include 'io.inc'
 
-c...  Inputs: 
+c...  Inputs:
       integer nbod,ntp,iu
       real*8 mass(nbod),time
       integer istat(ntp)
@@ -62,17 +62,17 @@ c...  Internals
       save i1st
 
 c----
-c...  Executable code 
+c...  Executable code
 
 #ifdef  _FXDR_AVAIL
 
 c...  if first time through open file
       if(i1st.eq.0) then
-         if( (fopenstat(1:6).eq.'append') .or. 
+         if( (fopenstat(1:6).eq.'append') .or.
      &        (fopenstat(1:6).eq.'APPEND') ) then
             call io_open_fxdr(oname, 'a', .true., iu, ierr)
          else
-            if( (fopenstat(1:3).eq.'new') .or. 
+            if( (fopenstat(1:3).eq.'new') .or.
      &           (fopenstat(1:3).eq.'NEW') ) then
                call io_open_fxdr(oname, 'r', .true., iu, ierr)
                if(iu.ge.0) then
@@ -100,7 +100,7 @@ c...  if first time through open file
       endif
 
       call io_write_hdr(iu,time,nbod,ntp,istat)
-      
+
 c...  write out planets
       do i=2,nbod
          gm = mass(1)+mass(i)

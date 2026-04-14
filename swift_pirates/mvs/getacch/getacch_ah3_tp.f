@@ -7,29 +7,29 @@ c             Input:
 c                 nbod          ==>  number of massive bodies (int scalor)
 c                 ntp           ==>  number of test particles (int scalor)
 c                 mass          ==>  mass of massive bodies (real array)
-c                 xh,yh,zh      ==>  massive position in heliocentric coord 
+c                 xh,yh,zh      ==>  massive position in heliocentric coord
 c                                   (real arrays)
-c                 xht,yht,zht   ==>  tp position in heliocentric coord 
+c                 xht,yht,zht   ==>  tp position in heliocentric coord
 c                                   (real arrays)
 c                  istat       ==>  status of the test paricles
 c                                      (integer array)
 c                                      istat(i) = 0 ==> active:  = 1 not
-c                                    NOTE: it is really a 2d array but 
+c                                    NOTE: it is really a 2d array but
 c                                          we only use the 1st row
 c             Output:
-c                 axh3,ayh3,azh3 ==>  3rd term of acceleration in helio coord 
+c                 axh3,ayh3,azh3 ==>  3rd term of acceleration in helio coord
 c                                     (real arrays)
 c
-c Author:  Hal Levison  
+c Author:  Hal Levison
 c Date:    2/18/93
-c Last revision: 
+c Last revision:
 
       subroutine getacch_ah3_tp(nbod,ntp,mass,xh,yh,zh,xht,yht,zht,
      &                     istat,axh3,ayh3,azh3)
 
       include '../../swift.inc'
 
-c...  Inputs: 
+c...  Inputs:
       integer nbod,ntp,istat(NTPMAX)
       real*8 mass(NPLMAX),xh(NPLMAX),yh(NPLMAX),zh(NPLMAX)
       real*8 xht(NTPMAX),yht(NTPMAX),zht(NTPMAX)
@@ -73,4 +73,3 @@ c...  Executable code
       return
       end     ! getacch_ah3_tp
 c--------------------------------------------------------------------------
-

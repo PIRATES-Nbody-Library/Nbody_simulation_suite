@@ -9,32 +9,32 @@ c                  ntp         ==>  number of tp bodies (int scalor)
 c                  mass        ==>  mass of bodies (real array)
 c                  j2rp2,j4rp4 ==>  J2*radii_pl^2 and  J4*radii_pl^4
 c                                     (real scalars)
-c                  xh,yh,zh    ==>  massive part position in helio coord 
+c                  xh,yh,zh    ==>  massive part position in helio coord
 c                                     (real arrays)
-c                  xht,yht,zht ==>  test part position in heliocentric coord 
+c                  xht,yht,zht ==>  test part position in heliocentric coord
 c                                     (real arrays)
 c             dxht,dyht,dzht    ==>  separation in position
 c                                     (real arrays)
 c                  istat       ==>  status of the test paricles
 c                                      (integer array)
 c                                      istat(i) = 0 ==> active:  = 1 not
-c                                    NOTE: it is really a 2d array but 
+c                                    NOTE: it is really a 2d array but
 c                                          we only use the 1st row
 c             Output:
-c               daxht,dayht,dazht ==>  tp delta acceleration in helio coord 
+c               daxht,dayht,dazht ==>  tp delta acceleration in helio coord
 c                                   (real arrays)
 c
 c Comments: Based on getacch_tp
-c Author:  Hal Levison  
+c Author:  Hal Levison
 c Date:    7/11/95
-c Last revision: 
+c Last revision:
 
       subroutine lyap2_acc_tp(nbod,ntp,mass,j2rp2,j4rp4,xh,yh,zh,
      &     xht,yht,zht,dxht,dyht,dzht,istat,daxht,dayht,dazht)
 
       include '../swift.inc'
 
-c...  Inputs: 
+c...  Inputs:
       integer nbod,ntp,istat(NTPMAX)
       real*8 mass(NPLMAX),xh(NPLMAX),yh(NPLMAX),zh(NPLMAX)
       real*8 xht(NTPMAX),yht(NTPMAX),zht(NTPMAX),j2rp2,j4rp4
@@ -42,14 +42,14 @@ c...  Inputs:
 
 c...  Outputs:
       real*8 daxht(NTPMAX),dayht(NTPMAX),dazht(NTPMAX)
-                
+
 c...  Internals:
       integer i,j
       real*8 rx,ry,rz,rji2,irij3,irij5
       real*8 t1,t2,t3
 
 c----
-c...  Executable code 
+c...  Executable code
 
 c...  the 0th term is zero
 
@@ -76,7 +76,7 @@ c...  now the third terms
                irij3 = 1.0d0/(rji2*sqrt(rji2))
                irij5 = irij3/(rji2)
 
-c...           x 
+c...           x
                t1 = dxht(j)*(-irij3 + 3.0*rx*rx*irij5)
                t2 = 3.0*rx*ry*irij5*dyht(j)
                t3 = 3.0*rx*rz*irij5*dzht(j)
@@ -107,7 +107,3 @@ c...    Not included in this version !!!!!!
       end      ! lyap2_acc_tp
 
 c---------------------------------------------------------------------
-
-
-
-

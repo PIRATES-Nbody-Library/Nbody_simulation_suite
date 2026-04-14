@@ -1,6 +1,6 @@
 c   Gererate initial position and velocity for test particles
-c   All of them have the same e and i.  The user supplies a range in a. 
-c   The tp are equally spaced in a.  The rest of the angles are chosen 
+c   All of them have the same e and i.  The user supplies a range in a.
+c   The tp are equally spaced in a.  The rest of the angles are chosen
 c   at random.
 
       include 'swift.inc'
@@ -33,7 +33,7 @@ c   at random.
          gm = 1.0d0
       else if(iuflg.eq.1) then
          gm = SMASSYR
-      else 
+      else
          write(*,*) 'Input mass of the Sun'
          read(*,*) gm
       endif
@@ -97,7 +97,7 @@ c      read(*,*) iseed
       open(2,file='/home/hal/iseed.dat',status='old')
       write(2,*) iseed
       close(2)
-      
+
       stop
       end    !  gen_a
 

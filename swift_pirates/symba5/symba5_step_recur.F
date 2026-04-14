@@ -10,22 +10,22 @@ c                 nbod          ==>  number of massive bodies (int scalar)
 c                 nbodm         ==>  Location of last massive body(int scalar)
 c                 mass          ==>  mass of bodies (real array)
 c                 ireci         ==>  Input recursion level  (integer scalar)
-c                 ilevl         ==>  largest recursion level used 
+c                 ilevl         ==>  largest recursion level used
 c                                    (integer array)
-c                 iecnt         ==>  The number of objects that each planet 
+c                 iecnt         ==>  The number of objects that each planet
 c                                    is encountering (int*2 array)
 c                 ielev         ==>  The level that this particle should go
 c                                             (int*2 array)
 c                 j2rp2,j4rp4   ==>  J2*radii_pl^2 and  J4*radii_pl^4
 c                                     (real scalars)
 c                 rhill         ==>  Hill sphere of planet (real Scalar)
-c                 xh,yh,zh      ==>  initial position in helio coord 
+c                 xh,yh,zh      ==>  initial position in helio coord
 c                                    (real arrays)
-c                 vxb,vyb,vzb   ==>  initial velocity in bari coord 
+c                 vxb,vyb,vzb   ==>  initial velocity in bari coord
 c                                    (real arrays)
 c                dt0            ==>  Global timestep  (real scalar)
 c                lclose         ==> .true. --> marge particles if they
-c                                    get too close. Read in that 
+c                                    get too close. Read in that
 c                                    distance in io_init_pl
 c                                      (logical*2 scalar)
 c                rpl            ==>  physical size of a planet.
@@ -34,15 +34,15 @@ c                eoff           ==>  Energy offset (real scalar)
 c                ielc           ==>  number of encounters (integer*2 scalar)
 c                ielst          ==>  list of ecnounters (2D integer*2 array)
 c             Output:
-c                 xh,yh,zh      ==>  final position in helio coord 
+c                 xh,yh,zh      ==>  final position in helio coord
 c                                       (real arrays)
-c                 vxb,vyb,vzb   ==>  final velocity in bari coord 
+c                 vxb,vyb,vzb   ==>  final velocity in bari coord
 c                                       (real arrays)
 c             mergelst          ==>  list of mergers (int array)
 c             mergecnt          ==>  count of mergers (int array)
 c                 rpl           ==>  Recalculated physical size of a planet.
 c                                    if merger happened (real array)
-c                 mass          ==>  Recalculated mass of bodies 
+c                 mass          ==>  Recalculated mass of bodies
 c                                    if merger happened (real array)
 c                eoff           ==>  Energy offset (real scalar)
 c                svdotr         ==> vdotr relative flag
@@ -53,7 +53,7 @@ c                                   Used internally, but only need 1 copy.
 c
 c Remarks: If marger occurs, does not change nbod and puts the mass
 c          of one of the particles to zero.
-c Authors:  Hal Levison 
+c Authors:  Hal Levison
 c Date:    3/20/97
 c Last revision: 12/16/09
 
@@ -69,11 +69,11 @@ c Last revision: 12/16/09
       include '../swift.inc'
       include 'symba5.inc'
 
-c...  Inputs Only: 
+c...  Inputs Only:
       integer nbod,ireci,nbodm
       real*8 mass(nbod),dt0,rhill(nbod),t
       integer*2 iecnt(NTPMAX),ielev(nbod)
-      logical*2 lclose 
+      logical*2 lclose
       integer*2 ielst(2,NENMAX),ielc
 
 c...  Inputs and Outputs:
@@ -89,7 +89,7 @@ c...  Internals:
       real*8 dtl,dth,sgn
 
 c----
-c...  Executable code 
+c...  Executable code
 
       dtl = dt0/(float(NTENC)**(ireci))
       dth = dtl/2.0d0
@@ -219,7 +219,7 @@ c...        Do we need to go deeper?
                   endif
                enddo
             endif
-            
+
             do i=2,nbod
                if(ielev(i).eq.irecp) then
                   ielev(i) = ireci
@@ -227,11 +227,9 @@ c...        Do we need to go deeper?
             enddo
 
          enddo
-         
+
       endif
 
       return
       end     ! symba5_step_recur.f
 c--------------------------------------------------------------
-
-

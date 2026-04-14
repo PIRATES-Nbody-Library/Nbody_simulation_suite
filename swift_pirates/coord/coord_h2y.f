@@ -2,7 +2,7 @@ c***********************************************************************
 c	                    COORD_H2Y.F
 c***********************************************************************
 *     PURPOSE: Converts from Helio to Yosemite coords.
-*     ARGUMENTS:  Input is 
+*     ARGUMENTS:  Input is
 *                    nbod ==> number of bodies (must be less than NBMAX)
 *                             (integer)
 *	             mass(*) ==>  masses (real array)
@@ -15,22 +15,22 @@ c***********************************************************************
 *                                          (real array)
 *                    vxy(*),vyy(*),vzy(*) ==> Yose particle velocities
 *                                            (real array)
-*                    xyo,yyo,zyo,vxyo,vyyo,vzyo ==>  Yose Offset vectors 
+*                    xyo,yyo,zyo,vxyo,vyyo,vzyo ==>  Yose Offset vectors
 *                                                    (real scalors)
 *                    mu        ==>  `reduced' Yose mass (real scalor)
-*       
-*     ALGORITHM: Obvious 
-*     REMARKS:  
+*
+*     ALGORITHM: Obvious
+*     REMARKS:
 *
 *     Authors:  Hal Levison
 *     WRITTEN:  9/13/02
 
       subroutine coord_h2y(nbod,mass,xh,yh,zh,vxh,vyh,vzh,
      &     xy,yy,zy,vxy,vyy,vzy,xyo,yyo,zyo,vxyo,vyyo,vzyo,mu)
-      
+
       include '../swift.inc'
 
-c...  Inputs: 
+c...  Inputs:
       integer nbod
       real*8 mass(NPLMAX)
       real*8 xh(NPLMAX),yh(NPLMAX),zh(NPLMAX)
@@ -45,8 +45,8 @@ c...  Internals:
       integer i
       real*8 const,p1
 
-c---- 
-c...  Executable code 
+c----
+c...  Executable code
 
       mu = 0.0d0
       xyo = 0.0d0
@@ -95,4 +95,3 @@ c...  Executable code
       end                       ! coord_h2y
 
 c--------------------------------------------------------------------------
-

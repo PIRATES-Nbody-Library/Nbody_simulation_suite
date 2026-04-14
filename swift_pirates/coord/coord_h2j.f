@@ -2,7 +2,7 @@
 *	                    COORD_H2J.F
 ***********************************************************************
 *     PURPOSE: Converts from Heliocentric to Jacobi coords.
-*     ARGUMENTS:  Input is 
+*     ARGUMENTS:  Input is
 *                    nbod ==> number of  objects (must be less than NBMAX)
 *                             (integer)
 *	             mass(*) ==> planetary masses (real array)
@@ -15,13 +15,13 @@
 *                                             (real array)
 *                    vxj(*),vyj(*),vzj(*) ==> jacobi. particle velocities
 *                                              (real array)
-*       
-*     ALGORITHM: See my notes Nov 21/92 
+*
+*     ALGORITHM: See my notes Nov 21/92
 *     REMARKS:  Note that we set the Jacobi coord of the Sun = 0
 *               This is not in accord with the definition, but
 *               since we never use the Sun's Jacobi coord, it was the
 *               fastest thing to do.
-*       
+*
 *     AUTHOR:  M. Duncan.
 *     DATE WRITTEN:  Jan 27, 1993.
 *     REVISIONS:  2/20/2K HFL
@@ -31,7 +31,7 @@
 
       include '../swift.inc'
 
-c...  Inputs: 
+c...  Inputs:
 	integer nbod
 	real*8 mass(nbod)
 	real*8 xh(nbod),yh(nbod),zh(nbod)
@@ -43,12 +43,12 @@ c...  Outputs:
 
 c...  Internals:
 	real*8 eta(NTPMAX)
-	real*8 sumx,sumy,sumz,sumvx,sumvy,sumvz	
+	real*8 sumx,sumy,sumz,sumvx,sumvy,sumvz
 	real*8 capx,capy,capz,capvx,capvy,capvz
 	integer n
 
 c----
-c...  Executable code 
+c...  Executable code
 
 c First calc. the array eta(*) then convert to jacobi coords
 

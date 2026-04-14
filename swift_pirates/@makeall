@@ -12,20 +12,20 @@ rm @make
 ln -s ../@make .
 csh -f  @make
 
-echo DIRECTORY: coord  
-cd ../coord  
+echo DIRECTORY: coord
+cd ../coord
 rm @make
 ln -s ../@make .
 csh -f  @make
 
-echo DIRECTORY: discard  
-cd ../discard  
+echo DIRECTORY: discard
+cd ../discard
 rm @make
 ln -s ../@make .
 csh -f  @make
 
-echo DIRECTORY: io  
-cd ../io  
+echo DIRECTORY: io
+cd ../io
 rm @make
 ln -s ../@make .
 csh -f  @make
@@ -50,8 +50,8 @@ csh -f  @make
 
 cd ../mvs
 
-echo DIRECTORY: mvs/drift 
-cd drift 
+echo DIRECTORY: mvs/drift
+cd drift
 rm @make
 ln -s ../../@make .
 csh -f  @make
@@ -76,8 +76,8 @@ csh -f  @make
 
 cd ..
 
-echo DIRECTORY: orbel  
-cd ../orbel  
+echo DIRECTORY: orbel
+cd ../orbel
 rm @make
 ln -s ../@make .
 csh -f  @make

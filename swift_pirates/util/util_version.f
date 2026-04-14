@@ -5,19 +5,19 @@ c Prints version of Swift
 c
 c             NO IO!!!!!!
 c
-c Remarks: 
-c Authors:  Hal Levison 
+c Remarks:
+c Authors:  Hal Levison
 c Date:    2/21/94
-c Last revision: 
+c Last revision:
 
       subroutine util_version
 
       include '../swift.inc'
 
 c-----
-c...  Executable code 
+c...  Executable code
 
-      
+
       write(*,1000) VER_NUM
  1000 format('************* SWIFT: Version ',f3.1,' *************')
 

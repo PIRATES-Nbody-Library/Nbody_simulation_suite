@@ -3,7 +3,7 @@ c                            RMVS_STEP_OUT.F
 c*************************************************************************
 c This subroutine takes a full dt step in helio coord for particles
 c in the outer region of an encounter.  It will also remember
-c where the planets are for the planocentric integration if necessary.  
+c where the planets are for the planocentric integration if necessary.
 c
 c             Input:
 c                 i1st          ==>  = 0 if first step; = 1 not (int scalar)
@@ -12,13 +12,13 @@ c                 ntp            ==>  number of massive bodies (int scalar)
 c                 mass          ==>  mass of bodies (real array)
 c                 j2rp2,j4rp4   ==>  J2*radii_pl^2 and  J4*radii_pl^4
 c                                     (real scalars)
-c                 xh,yh,zh      ==>  initial planet position in helio coord 
+c                 xh,yh,zh      ==>  initial planet position in helio coord
 c                                    (real arrays)
-c                 vxh,vyh,vzh   ==>  initial planet velocity in helio coord 
+c                 vxh,vyh,vzh   ==>  initial planet velocity in helio coord
 c                                    (real arrays)
-c                 xht,yht,zht    ==>  initial tp position in helio coord 
+c                 xht,yht,zht    ==>  initial tp position in helio coord
 c                                      (real arrays)
-c                 vxht,vyht,vzht ==>  initial tp velocity in helio coord 
+c                 vxht,vyht,vzht ==>  initial tp velocity in helio coord
 c                                        (real arrays)
 c                 istat           ==>  status of the test paricles
 c                                      (2d integer array)
@@ -26,28 +26,28 @@ c                                      istat(i,1) = 0 ==> active:  = 1 not
 c                                      istat(i,2) = -1 ==> Danby did not work
 c                 icflg         ==> ecounters? = 1 Yes, in outer region only
 c                                              = -1 in inner region
-c                 ienco         ==> ienco(j) = 0 if tp j not involved in enc 
-c                                   in outer region: = planet# if it is. 
+c                 ienco         ==> ienco(j) = 0 if tp j not involved in enc
+c                                   in outer region: = planet# if it is.
 c                                     (integer array)
-c                                              =  0 No (integer scalar)  
+c                                              =  0 No (integer scalar)
 c                 dt            ==>  time step (real sclar)
 c             Output:
-c                 xh,yh,zh      ==>  final planet position in helio coord 
+c                 xh,yh,zh      ==>  final planet position in helio coord
 c                                       (real arrays)
-c                 vxh,vyh,vzh   ==>  final planet velocity in helio coord 
+c                 vxh,vyh,vzh   ==>  final planet velocity in helio coord
 c                                       (real arrays)
-c                 xht,yht,zht    ==>  final tp position in helio coord 
+c                 xht,yht,zht    ==>  final tp position in helio coord
 c                                       (real arrays)
-c                 vxht,vyht,vzht ==>  final tp position in helio coord 
+c                 vxht,vyht,vzht ==>  final tp position in helio coord
 c                                       (real arrays)
 c                                      NOTE: only the tp in the outer region
-c                                            will have their x and v's changed 
+c                                            will have their x and v's changed
 c                 xtmp,ytmp,ztmp  ==>  position of planet wrt time
 c                                       (2d real arrays)
 c
 c
 c Remarks: Adopted from martin's nbwh.f program
-c Authors:  Hal Levison 
+c Authors:  Hal Levison
 c Date:    2/19/93
 c Last revision: 2/24/94
 
@@ -58,7 +58,7 @@ c Last revision: 2/24/94
       include '../swift.inc'
       include 'rmvs.inc'
 
-c...  Inputs Only: 
+c...  Inputs Only:
       integer nbod,ntp,i1st
       real*8 mass(nbod),dt,j2rp2,j4rp4
 
@@ -81,7 +81,7 @@ c...  Internals
       real*8 xend(NPLMAX),yend(NPLMAX),zend(NPLMAX)
 
 c----
-c...  Executable code 
+c...  Executable code
 
       i1sttp = i1st
 
@@ -120,8 +120,8 @@ c...      remember the current position of the planets
 
           do j=1,nstep
             call step_kdk_pl(i1st,nbod,mass,j2rp2,j4rp4,xh,yh,zh,
-     &            vxh,vyh,vzh,dti)	
-            if(icflg.le.-1) then 
+     &            vxh,vyh,vzh,dti)
+            if(icflg.le.-1) then
                ic = ic + 1
                do k=1,nbod
                   xtmp(k,ic) = xh(k)
@@ -140,7 +140,7 @@ c...      remember these positions
 
           call step_kdk_tp(i1sttp,nbod,ntp,mass,j2rp2,j4rp4,
      &              xbeg,ybeg,zbeg,xend,yend,zend,
-     &              xht,yht,zht,vxht,vyht,vzht,istattmp,dto)	
+     &              xht,yht,zht,vxht,vyht,vzht,istattmp,dto)
 
        enddo
 
@@ -153,7 +153,7 @@ c...   Have to update istat just in case damby had problems
             enddo
          endif
        enddo
-      
+
        return
        end     ! rmvs_step_out
 c----------------------------------------------------------------

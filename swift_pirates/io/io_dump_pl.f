@@ -1,19 +1,19 @@
 c************************************************************************
 c                         IO_DUMP_PL.F
 c************************************************************************
-c Dumps the data for the Sun and planets 
+c Dumps the data for the Sun and planets
 
 c
 c             Input:
 c                 dplfile       ==>  Name of file to write to (character*80)
 c                 nbod          ==>  number of massive bodies (int scalar)
 c                 mass          ==>  mass of bodies (real array)
-c                 xh,yh,zh      ==>  initial position in Helio coord 
+c                 xh,yh,zh      ==>  initial position in Helio coord
 c                                    (real arrays)
-c                 vxh,vyh,vzh   ==>  initial position in Helio coord 
+c                 vxh,vyh,vzh   ==>  initial position in Helio coord
 c                                    (real arrays)
-c                 lclose        ==> .true. --> discard particle if it gets 
-c                                    too close to a planet. Read in that 
+c                 lclose        ==> .true. --> discard particle if it gets
+c                                    too close to a planet. Read in that
 c                                    distance in io_init_pl
 c                                      (logical*2 scalar)
 c                 iflgchk       ==>  bit 5 set ==>  include J2 and J4 terms
@@ -23,9 +23,9 @@ c                 j2rp2,j4rp4   ==>  J2*radii_pl^2 and  J4*radii_pl^4
 c                                     (real scalars)
 c
 c
-c Remarks: 
+c Remarks:
 c Authors:  Martin Duncan
-c Date:    3/2/93 
+c Date:    3/2/93
 c Last revision:  2/22/94 HFL
 
 	subroutine io_dump_pl(dplfile,nbod,mass,xh,yh,zh,
@@ -47,7 +47,7 @@ c...   Internal
         real*8 rpl
 
 c-----
-c...  Executable code      
+c...  Executable code
 
         call io_open(7,dplfile,'unknown','formatted',ierr)
 
@@ -77,4 +77,3 @@ c...  Executable code
 	return
 	end    ! io_dump_pl.f
 c--------------------------------------------------------------------------
-

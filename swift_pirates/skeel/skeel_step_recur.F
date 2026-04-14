@@ -3,19 +3,19 @@ c                             SKEEL_STEP_RECUR.F
 c*************************************************************************
 c                      THIS FILE MUST BE PRECOMPILED
 c*************************************************************************
-c 
+c
 c
 c             Input:
 c                 msun          ==>  mass of Sun (real Scalar)
 c                 mpl           ==>  mass of planet (real Scalar)
 c                 rhill2        ==>  Hill sphere of planet (real Scalar)
-c              xbeg,ybeg,zbeg   ==>  Initial Heliocentric position of planet 
+c              xbeg,ybeg,zbeg   ==>  Initial Heliocentric position of planet
 c                                     (real Scalars)
-c           vxbeg,vybeg,vzbeg   ==>  Initial Berycentric velocity of planet 
+c           vxbeg,vybeg,vzbeg   ==>  Initial Berycentric velocity of planet
 c                                     (real Scalars)
-c              xend,yend,zend   ==>  Final Heliocentric position of planet 
+c              xend,yend,zend   ==>  Final Heliocentric position of planet
 c                                     (real Scalars)
-c           vxend,vyend,vzend   ==>  Final Berycentric velocity of planet 
+c           vxend,vyend,vzend   ==>  Final Berycentric velocity of planet
 c                                     (real Scalars)
 c                 xtp,ytp,ztp   ==>  Heliocentric position of TP
 c                                     (real Scalars)
@@ -43,15 +43,15 @@ c                                    the hills sphere of planet.
 c                                         (real scalar)
 c
 c
-c Remarks: 
-c Authors:  Hal Levison 
+c Remarks:
+c Authors:  Hal Levison
 c Date:   9/23/96
 c Last revision: 2/13/01
 
 #ifdef  _RECUR_SUB
-      recursive subroutine 
+      recursive subroutine
 #else
-      subroutine 
+      subroutine
 #endif
      &     skeel_step_recur(msun,mpl,rhill2,xbeg,ybeg,zbeg,
      &         vxbeg,vybeg,vzbeg,xend,yend,zend,
@@ -61,21 +61,21 @@ c Last revision: 2/13/01
       include '../swift.inc'
       include 'skeel.inc'
 
-c...  Inputs Only: 
+c...  Inputs Only:
       real*8 msun,mpl,dt0,rhill2
       real*8 xbeg,ybeg,zbeg
       real*8 vxbeg,vybeg,vzbeg
       real*8 xend,yend,zend
       real*8 vxend,vyend,vzend
 
-c...  Inputs & Outputs Only: 
+c...  Inputs & Outputs Only:
       real*8 xtp,ytp,ztp
       real*8 vxtp,vytp,vztp
       real*8 peri
       integer ireci,istat1,istat2,irecl
       integer isperi
 
-c...  Internals: 
+c...  Internals:
       integer it,itm1,irecp
       real*8 dtl,dth,rim1,sgn,ri
       integer icflg,iflg
@@ -84,7 +84,7 @@ c...  Internals:
       real*8 xrel,yrel,zrel,vxrel,vyrel,vzrel,tperi,rrel2
 
 c----
-c...  Executable code 
+c...  Executable code
 
       ri = rhill2*(RHSCALE*(RSHELL**ireci))**2
 
@@ -121,7 +121,7 @@ c...  Executable code
             call util_peri1(1,xrel,yrel,zrel,vxrel,vyrel,
      &          vzrel,mpl,isperi,peri,tperi)
             if(isperi.eq.0) then
-               if( (abs(tperi).gt.(FACQDT*dtl)) .or. 
+               if( (abs(tperi).gt.(FACQDT*dtl)) .or.
      &              (rrel2.gt.rhill2) ) then
 c                  peri=QFLG
                   peri=sqrt(rrel2)
@@ -145,7 +145,7 @@ c                  peri=QFLG
      &        vxend,vyend,vzend,xpl,ypl,zpl,vxpl,vypl,vzpl,dtl)
 
          rim1 = rhill2*(RHSCALE*(RSHELL**(ireci-1)))**2
-         
+
          irecp = ireci + 1
          do it=1,NTENC
 
@@ -160,7 +160,7 @@ c                  peri=QFLG
             sgn = -1.0d0
             call skeel_kick(mpl,xpl(itm1),ypl(itm1),zpl(itm1),xtp,
      &           ytp,ztp,vxtp,vytp,vztp,rim1,dth,sgn)
-            
+
             if(icflg.eq.0) then
                call drift_one(msun,xtp,ytp,ztp,vxtp,vytp,vztp,dtl,iflg)
                if(iflg.ne.0) then
@@ -178,7 +178,7 @@ c                  peri=QFLG
                   call util_peri1(1,xrel,yrel,zrel,vxrel,vyrel,
      &                 vzrel,mpl,isperi,peri,tperi)
                   if(isperi.eq.0) then
-                     if( (abs(tperi).gt.(FACQDT*dtl)) .or. 
+                     if( (abs(tperi).gt.(FACQDT*dtl)) .or.
      &                    (rrel2.gt.rhill2) ) then
 c                        peri=QFLG
                         peri=sqrt(rrel2)

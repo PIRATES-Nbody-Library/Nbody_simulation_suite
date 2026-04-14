@@ -4,7 +4,7 @@ c*************************************************************************
 c                  THIS FILE MUST BE PRECOMPILED
 c*************************************************************************
 c NEW VERSION OF THIS, USES FXDR
-c 
+c
 c
 c             Input:
 c                 iu              ==> unit number to write to
@@ -13,17 +13,17 @@ c                 nbod          ==>  number of massive bodies (int scalar)
 c                 ntp            ==>  number of massive bodies (int scalar)
 c                 istat           ==>  status of the test paricles
 c
-c Remarks: 
-c Authors:  Hal Levison 
+c Remarks:
+c Authors:  Hal Levison
 c Date:    11/2/99
-c Last revision: 
+c Last revision:
 
-      subroutine io_write_hdr(iu,time,nbod,ntp,istat) 
+      subroutine io_write_hdr(iu,time,nbod,ntp,istat)
 
       include '../swift.inc'
       include 'io.inc'
 
-c...  Inputs: 
+c...  Inputs:
       integer nbod,ntp,istat(NTPMAX,NSTAT),iu
       real*8 time
 
@@ -33,7 +33,7 @@ c...  Internals
       integer nleft,nn(2)
 
 c----
-c...  Executable code 
+c...  Executable code
 
 #ifdef  _FXDR_AVAIL
 
@@ -53,7 +53,7 @@ c...  calculate number of remaining test particles
          write(*,*) '     Could not write time'
          call util_exit(1)
       endif
- 
+
       nn(1) = nbod
       nn(2) = nleft
       ierr = ixdrimat( iu, 2, nn )
@@ -74,7 +74,3 @@ c...  calculate number of remaining test particles
       return
       end     ! io_write_hdr.f
 c---------------------------------------------------------------------------
-
-
-
-

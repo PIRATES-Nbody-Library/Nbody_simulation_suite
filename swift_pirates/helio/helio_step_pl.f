@@ -1,7 +1,7 @@
 c*************************************************************************
 c                            HELIO_STEP_PL.F
 c*************************************************************************
-c This subroutine takes a step in helio coord.  
+c This subroutine takes a step in helio coord.
 c Does a KICK than a DRIFT than a KICK.
 c ONLY DOES MASSIVE PARTICLES
 c
@@ -11,15 +11,15 @@ c                 nbod          ==>  number of massive bodies (int scalar)
 c                 mass          ==>  mass of bodies (real array)
 c                 j2rp2,j4rp4   ==>  J2*radii_pl^2 and  J4*radii_pl^4
 c                                     (real scalars)
-c                 xh,yh,zh      ==>  initial position in helio coord 
+c                 xh,yh,zh      ==>  initial position in helio coord
 c                                    (real arrays)
-c                 vxh,vyh,vzh   ==>  initial velocity in helio coord 
+c                 vxh,vyh,vzh   ==>  initial velocity in helio coord
 c                                    (real arrays)
 c                 dt            ==>  time step
 c             Output:
-c                 xh,yh,zh      ==>  final position in helio coord 
+c                 xh,yh,zh      ==>  final position in helio coord
 c                                       (real arrays)
-c                 vxh,vyh,vzh   ==>  final velocity in helio coord 
+c                 vxh,vyh,vzh   ==>  final velocity in helio coord
 c                                       (real arrays)
 c                 xbeg,ybeg,zbeg ==>  position at beginning of drift
 c                                       (real arrays)
@@ -29,29 +29,29 @@ c              vxbeg,vybeg,vzbeg ==>  velocity at beginning of drift
 c                                       (real arrays)
 c              vxend,vyend,vzend ==>  velocity at end of drift
 c                                       (real arrays)
-c               ptxb,ptyb,ptzb  ==> beg momentum of sun: tp's need this   
+c               ptxb,ptyb,ptzb  ==> beg momentum of sun: tp's need this
 c                                       (real scalars)
-c               ptxe,ptye,ptze  ==> end momentum of sun: tp's need this   
+c               ptxe,ptye,ptze  ==> end momentum of sun: tp's need this
 c                                       (real scalars)
 c              vxsb,vxsb,vxsb  ==> Initial vel of the Sun: tp's need this
 c                                       (real scalars)
 c              vxse,vxse,vxse  ==> final vel of the Sun: tp's need this
 c                                       (real scalars)
 c
-c Remarks: Based on step_kdk_pl.f 
-c Authors:  Hal Levison 
+c Remarks: Based on step_kdk_pl.f
+c Authors:  Hal Levison
 c Date:    10/14/96
-c Last revision: 
+c Last revision:
 
       subroutine helio_step_pl(i1st,nbod,mass,j2rp2,j4rp4,
-     &     xh,yh,zh,vxh,vyh,vzh,dt,xbeg,ybeg,zbeg,     
-     &     xend,yend,zend,vxbeg,vybeg,vzbeg,     
+     &     xh,yh,zh,vxh,vyh,vzh,dt,xbeg,ybeg,zbeg,
+     &     xend,yend,zend,vxbeg,vybeg,vzbeg,
      &     vxend,vyend,vzend,ptxb,ptyb,ptzb,ptxe,ptye,
-     &     ptze,vxsb,vysb,vzsb,vxse,vyse,vzse)	
+     &     ptze,vxsb,vysb,vzsb,vxse,vyse,vzse)
 
       include '../swift.inc'
 
-c...  Inputs Only: 
+c...  Inputs Only:
       integer nbod,i1st
       real*8 mass(nbod),dt,j2rp2,j4rp4
 
@@ -59,7 +59,7 @@ c...  Inputs and Outputs:
       real*8 xh(nbod),yh(nbod),zh(nbod)
       real*8 vxh(nbod),vyh(nbod),vzh(nbod)
 
-c...  Outputs Only: 
+c...  Outputs Only:
       real*8 ptxb,ptyb,ptzb
       real*8 ptxe,ptye,ptze
       real*8 vxsb,vysb,vzsb,vxse,vyse,vzse
@@ -70,7 +70,7 @@ c...  Outputs Only:
 
 c...  Internals:
       integer i
-      real*8 dth 
+      real*8 dth
       real*8 axh(NPLMAX),ayh(NPLMAX),azh(NPLMAX)
       real*8 vxb(NPLMAX),vyb(NPLMAX),vzb(NPLMAX),msys
 
@@ -78,7 +78,7 @@ c...  Internals:
       save vxb,vyb,vzb     ! Note this !!
 
 c----
-c...  Executable code 
+c...  Executable code
 
       dth = 0.5d0*dt
 
@@ -99,7 +99,7 @@ c...  Do the linear drift due to momentum of the Sun
 c...  Get the accelerations in helio frame. if frist time step
       call helio_getacch(nbod,mass,j2rp2,j4rp4,xh,yh,zh,axh,ayh,azh)
 
-c...  Apply a heliocentric kick for a half dt 
+c...  Apply a heliocentric kick for a half dt
       call kickvh(nbod,vxb,vyb,vzb,axh,ayh,azh,dth)
 
 c...  remember the current position of the planets
@@ -112,7 +112,7 @@ c...  remember the current position of the planets
          vzbeg(i) = vzb(i)
       enddo
 
-c..   Drift in Jacobi coords for the full step 
+c..   Drift in Jacobi coords for the full step
       call helio_drift(nbod,mass,xh,yh,zh,vxb,vyb,vzb,dt)
 
 c...  now remember these positions
@@ -128,7 +128,7 @@ c...  now remember these positions
 c...  Get the accelerations in helio frame. if frist time step
       call helio_getacch(nbod,mass,j2rp2,j4rp4,xh,yh,zh,axh,ayh,azh)
 
-c...  Apply a heliocentric kick for a half dt 
+c...  Apply a heliocentric kick for a half dt
       call kickvh(nbod,vxb,vyb,vzb,axh,ayh,azh,dth)
 
 c...  Do the linear drift due to momentum of the Sun
@@ -145,4 +145,3 @@ c...  convert back to helio velocities
       return
       end   ! helio_step_pl
 c---------------------------------------------------------------------
-

@@ -14,16 +14,16 @@ c                 xbeg,ybeg,zbeg ==>  massive part position at beginning of dt
 c                                       (real arrays)
 c                 xend,yend,zend ==>  massive part position at end of dt
 c                                       (real arrays)
-c                 xht,yht,zht    ==>  initial part position in helio coord 
+c                 xht,yht,zht    ==>  initial part position in helio coord
 c                                      (real arrays)
-c                 vxht,vyht,vzht ==>  initial velocity in helio coord 
+c                 vxht,vyht,vzht ==>  initial velocity in helio coord
 c                                        (real arrays)
 c                 istat           ==>  status of the test paricles
 c                                      (2d integer array)
 c                                      istat(i,1) = 0 ==> active:  = 1 not
 c                                      istat(i,2) = -1 ==> Danby did not work
 c                 dt             ==>  time step
-c                 ipl            ==>  the planet that is currently in the 
+c                 ipl            ==>  the planet that is currently in the
 c                                      center (integer scalar)
 c           aoblxb,aoblyb,aoblzb ==> acceleration of the Sun on the central pl
 c                                    at beginning of dt due to J2 and J4
@@ -32,15 +32,15 @@ c           aoblxe,aoblye,aoblze ==> acceleration of the Sun on the central pl
 c                                    at end of dt  due to J2 and J4
 c                                         (real scalars)
 c             Output:
-c                 xht,yht,zht    ==>  final position in helio coord 
+c                 xht,yht,zht    ==>  final position in helio coord
 c                                       (real arrays)
-c                 vxht,vyht,vzht ==>  final position in helio coord 
+c                 vxht,vyht,vzht ==>  final position in helio coord
 c                                       (real arrays)
 c
 c Remarks: Taken from step_kdk_tp.f
-c Authors:  Hal Levison 
+c Authors:  Hal Levison
 c Date:    2/24/94
-c Last revision: 
+c Last revision:
 
       subroutine rmvs_step_in_tp(i1st,nbod,ntp,mass,j2rp2,j4rp4,
      &              xbeg,ybeg,zbeg,xend,yend,zend,
@@ -50,9 +50,9 @@ c Last revision:
       include '../swift.inc'
       include 'rmvs.inc'
 
-c...  Inputs Only: 
+c...  Inputs Only:
       integer nbod,ntp,i1st,ipl
-      real*8 mass(nbod),dt,j2rp2,j4rp4  
+      real*8 mass(nbod),dt,j2rp2,j4rp4
       real*8 xbeg(NPLMAX),ybeg(NPLMAX),zbeg(NPLMAX)
       real*8 xend(NPLMAX),yend(NPLMAX),zend(NPLMAX)
       real*8 aoblxb,aoblyb,aoblzb,aoblxe,aoblye,aoblze
@@ -69,7 +69,7 @@ c...  Internals:
       save axht,ayht,azht     ! Note this !!
 
 c----
-c...  Executable code 
+c...  Executable code
 
       dth = 0.5d0*dt
 
@@ -77,7 +77,7 @@ c...  disable J2 and J4 terms in the getacch_tp calls
       j2rp2i = 0.0d0
       j4rp4i = 0.0d0
 
-      if(i1st.eq.0) then 
+      if(i1st.eq.0) then
 c...      Get the accelerations in helio frame.
           call getacch_tp(nbod,ntp,mass,j2rp2i,j4rp4i,xbeg,ybeg,zbeg,
      &                  xht,yht,zht,istat,axht,ayht,azht)
@@ -87,11 +87,11 @@ c...      Get the accelerations in helio frame.
           i1st = 1    ! turn this off
       endif
 
-c...  Apply a heliocentric kick for a half dt 
-      call kickvh_tp(ntp,vxht,vyht,vzht,axht,ayht,azht,istat,dth) 
+c...  Apply a heliocentric kick for a half dt
+      call kickvh_tp(ntp,vxht,vyht,vzht,axht,ayht,azht,istat,dth)
 
 c...  Take a drift forward full step
-      call drift_tp(ntp,mass(1),xht,yht,zht,vxht,vyht,vzht,dt,istat)	
+      call drift_tp(ntp,mass(1),xht,yht,zht,vxht,vyht,vzht,dt,istat)
 
 c...  Get the accelerations in helio frame.
       call getacch_tp(nbod,ntp,mass,j2rp2i,j4rp4i,xend,yend,zend,
@@ -100,10 +100,9 @@ c...  Get the accelerations in helio frame.
      &     zend,aoblxe,aoblye,aoblze,xht,yht,zht,istat,
      &     axht,ayht,azht)
 
-c...  Apply a heliocentric kick for a half dt 
-      call kickvh_tp(ntp,vxht,vyht,vzht,axht,ayht,azht,istat,dth) 
+c...  Apply a heliocentric kick for a half dt
+      call kickvh_tp(ntp,vxht,vyht,vzht,axht,ayht,azht,istat,dth)
 
       return
       end   ! rmvs_step_in_tp
 c---------------------------------------------------------------------
-

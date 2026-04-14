@@ -6,25 +6,25 @@ c
 c             Input:
 c                 nbod          ==>  number of massive bodies (int scalar)
 c                 mass          ==>  mass of bodies (real array)
-c                 xh,yh,zh      ==>  initial position in helio coord 
+c                 xh,yh,zh      ==>  initial position in helio coord
 c                                    (real arrays)
-c                 vxh,vyh,vzh   ==>  initial velocity in helio coord 
+c                 vxh,vyh,vzh   ==>  initial velocity in helio coord
 c                                    (real arrays)
 c             Output:
-c                  r2hill       ==>  the SQUARE of the planet's hill's sphere 
+c                  r2hill       ==>  the SQUARE of the planet's hill's sphere
 c                                    (real array)
 c
 c
-c Remarks: 
-c Authors:  Hal Levison 
+c Remarks:
+c Authors:  Hal Levison
 c Date:    2/19/93
 c Last revision: 1/6/97
 
-      subroutine util_hills(nbod,mass,xh,yh,zh,vxh,vyh,vzh,r2hill) 
+      subroutine util_hills(nbod,mass,xh,yh,zh,vxh,vyh,vzh,r2hill)
 
       include '../swift.inc'
 
-c...  Inputs: 
+c...  Inputs:
       integer nbod
       real*8 mass(nbod),xh(nbod),yh(nbod),zh(nbod)
       real*8 vxh(nbod),vyh(nbod),vzh(nbod)
@@ -37,7 +37,7 @@ c...  Internals
       real*8 mu,energy,ap,rhil,r,v2
 
 c-----
-c...  Executable code 
+c...  Executable code
 
       do i=2,nbod
          if(mass(i).ne.0.0d0) then
@@ -52,9 +52,9 @@ c...  Executable code
             r2hill(i) = 0.0d0
          endif
       enddo
-      
+
       r2hill(1) = 0.0
-      
+
       return
       end                       ! util_hills
 

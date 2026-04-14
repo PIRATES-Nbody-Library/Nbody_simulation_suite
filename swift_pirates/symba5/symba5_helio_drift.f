@@ -8,29 +8,29 @@ c                 nbod          ==>  number of massive bodies (int scalar)
 c                 ielev         ==>  Level of particles (int array)
 c                 irec          ==>  current level of the code
 c                 mass          ==>  mass of bodies (real array)
-c                 xh,yh,zh      ==>  initial position in helio coord 
+c                 xh,yh,zh      ==>  initial position in helio coord
 c                                    (real arrays)
-c                 vxb,vyb,vzb   ==>  initial position in bary coord 
+c                 vxb,vyb,vzb   ==>  initial position in bary coord
 c                                    (real arrays)
 c                 dt            ==>  time step
 c             Output:
-c                 xh,yh,zh      ==>  final position in helio coord 
+c                 xh,yh,zh      ==>  final position in helio coord
 c                                       (real arrays)
-c                 vxb,vyb,vzb   ==>  final position in bary coord 
+c                 vxb,vyb,vzb   ==>  final position in bary coord
 c                                       (real arrays)
 c
 c Remarks:  Based on helio_drift.f
-c Authors:  Hal Levison 
+c Authors:  Hal Levison
 c Date:    1/20.97
-c Last revision: 
+c Last revision:
 
       subroutine symba5_helio_drift(nbod,ielev,irec,mass,xh,yh,zh,
-     &     vxb,vyb,vzb,dt)	
+     &     vxb,vyb,vzb,dt)
 
       include '../swift.inc'
       include 'symba5.inc'
 
-c...  Inputs Only: 
+c...  Inputs Only:
       integer nbod,irec
       real*8 mass(nbod),dt
       integer*2 ielev(NTPMAX)
@@ -43,7 +43,7 @@ c...  Internals:
       integer j,iflg
 
 c----
-c...  Executable code 
+c...  Executable code
 
 c Take a drift forward dth
 

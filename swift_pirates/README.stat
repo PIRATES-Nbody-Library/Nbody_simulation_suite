@@ -25,9 +25,9 @@ The flag's have the follow definition:
 
    In the RMVS routines, independent of other istat flags:
 	            istat(i,3) the pl# of last encounter
-	            istat(i,m>3) = the number of times tp # i encountered 
+	            istat(i,m>3) = the number of times tp # i encountered
                                  planet k (m=k+2; k>1).  By encounter we mean
-                                 within a Hill sphere.  
+                                 within a Hill sphere.
                                  This is only used in RMVS.
 
 -------------------------------------
@@ -36,42 +36,41 @@ It has the following values:
 
    if istat(i,1) = 0       particle is active
 	    ==>     rstat(i,1)  not used
-	    ==>     rstat(i,2)  perihelion distance IF checking 
+	    ==>     rstat(i,2)  perihelion distance IF checking
 
    if istat(i,1) = 1       particle is NOT active
 	    ==>     rstat(i,1)  time the particle was discarded
-        if istat(i,2) = 1       particles pertihelion distance was 
+        if istat(i,2) = 1       particles pertihelion distance was
                                 too close to the Sun
-                 ==>     rstat(i,2)  = 0  if physically too close to Sun 
+                 ==>     rstat(i,2)  = 0  if physically too close to Sun
                                           (r<r_min)
 				     = perihelion distance; if q<q_min
 
    In the RMVS routines, independent of other istat flags:
-	            rstat(i,3) = pericenter distance of a particle with 
-                                 respect to a planet if that particle is in 
-                                 the inner encounter region and went through 
+	            rstat(i,3) = pericenter distance of a particle with
+                                 respect to a planet if that particle is in
+                                 the inner encounter region and went through
                                  peri during last timestep.
 
 	            rstat(i,m>3) = the smallest pericenter distance that
-                                 tp # i  had to planet k (m=k+2; k!=1).  
+                                 tp # i  had to planet k (m=k+2; k!=1).
                                  It is used if and only if q<r_hill.
-        if istat(i,1) = 1 
-            ==>     rstat(i,2) = 
+        if istat(i,1) = 1
+            ==>     rstat(i,2) =
                                  if > 0
-                                    closest approach distance tp #i to 
+                                    closest approach distance tp #i to
                                     planet # istat(i,2), as predicted
-                                    by our extrapolation routines, if  
-                                    discarded due to a predicted close 
+                                    by our extrapolation routines, if
+                                    discarded due to a predicted close
                                     approach to that planet.
                                  if < 0
-                                    pericenter distance of tp #i to 
-                                    planet # istat(i,2), if the tp was 
-                                    discarded due to a close approach to 
+                                    pericenter distance of tp #i to
+                                    planet # istat(i,2), if the tp was
+                                    discarded due to a close approach to
                                     that planet.
 
    In the LYAP2 routines, independent of other istat flags:
-	rstat(i,3), rstat(i,3), rstat(i,5) = the dx(1)-dx(3) from the 
+	rstat(i,3), rstat(i,3), rstat(i,5) = the dx(1)-dx(3) from the
                                              difference equations
-	rstat(i,6), rstat(i,7), rstat(i,8) = the dv(1)-dv(3) from the 
+	rstat(i,6), rstat(i,7), rstat(i,8) = the dv(1)-dv(3) from the
                                              difference equations
-

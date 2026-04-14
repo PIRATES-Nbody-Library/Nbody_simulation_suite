@@ -6,21 +6,21 @@ c
 c             Input:
 c                 nbod          ==>  number of massive bodies (int scalar)
 c                 mass          ==>  mass of bodies (real array)
-c                 x0,y0,z0         ==>  initial position in jacobi coord 
+c                 x0,y0,z0         ==>  initial position in jacobi coord
 c                                    (real scalar)
-c                 vx0,vy0,vz0      ==>  initial position in jacobi coord 
+c                 vx0,vy0,vz0      ==>  initial position in jacobi coord
 c                                    (real scalar)
-c                 dx0,dy0,dz0      ==>  initial difference in position 
+c                 dx0,dy0,dz0      ==>  initial difference in position
 c                                    (real scalar)
 c              dvx0,dvy0,dvz0      ==>  initial difference in velocity
 c                                    (real scalar)
 c                 dt0            ==>  time step
 c             Output:
-c                 x0,y0,z0         ==>  final position in jacobi coord 
+c                 x0,y0,z0         ==>  final position in jacobi coord
 c                                       (real scalars)
-c                 vx0,vy0,vz0      ==>  final position in jacobi coord 
+c                 vx0,vy0,vz0      ==>  final position in jacobi coord
 c                                       (real scalars)
-c                 dx0,dy0,dz0      ==>  final difference in position 
+c                 dx0,dy0,dz0      ==>  final difference in position
 c                                    (real scalar)
 c              dvx0,dvy0,dvz0      ==>  final difference in velocity
 c                                    (real scalar)
@@ -28,16 +28,16 @@ c                 iflg             ==>  integer flag (zero if satisfactory)
 c					      (non-zero if nonconvergence)
 c
 c Comments: Based on drift_dan.f
-c Authors:  Hal Levison 
+c Authors:  Hal Levison
 c Date:    7/11/95
-c Last revision: 
+c Last revision:
 
       subroutine lyap2_drift_dan(mu,x0,y0,z0,vx0,vy0,vz0,dx0,
      &     dy0,dz0,dvx0,dvy0,dvz0,dt0,iflg)
 
       include '../swift.inc'
 
-c...  Inputs Only: 
+c...  Inputs Only:
       real*8 mu,dt0
 
 c...  Inputs and Outputs:
@@ -64,7 +64,7 @@ c...  Internals:
       real*8 c1,c2,c3,c4,c5
 
 c----
-c...  Executable code 
+c...  Executable code
 
 c...  Set dt = dt0 to be sure timestep is not altered while solving
 c...  for new coords.
@@ -74,7 +74,7 @@ c...  for new coords.
       v0s = vx0*vx0 + vy0*vy0 + vz0*vz0
       u = x0*vx0 + y0*vy0 + z0*vz0
       alpha = 2.0*mu/r0 - v0s
-        
+
       call lyap2_drift_kepu(dt,r0,mu,alpha,u,fp,c1,c2,c3,c4,
      &     c5,s,iflg)
 
@@ -125,18 +125,18 @@ c...     now do the differentials from Mikkola's code
          g2a = 0.5d0 * (2.0d0*cn4 - sn*cn3)
          g1a = 0.5d0 * (      cn3 - sn*cn2)
          xpr = -( sn*r0pr + cn2*etapr + cn3*zetapr +
-     &      (eta*g2a+zeta*g3a)*alfapr )/fp       
+     &      (eta*g2a+zeta*g3a)*alfapr )/fp
          g0 = 1.d0 - alfa*cn2
          g1pr = g0*xpr + g1a*alfapr
          g2pr = cn1*xpr + g2a*alfapr
          g3pr = cn2*xpr + g3a*alfapr
          rpr = r0pr + cn1*etapr + cn2*zetapr + eta*g1pr + zeta*g2pr
          fpr = cn2*r0pr/r0**2 - g2pr/r0
-         gpr = -g3pr 
-         dfpr = -g1pr/(r0*fp) + cn1*rpr/(fp*fp*r0) + 
+         gpr = -g3pr
+         dfpr = -g1pr/(r0*fp) + cn1*rpr/(fp*fp*r0) +
      &        cn1*r0pr/(r0*r0*fp)
          dgpr = -g2pr/fp + cn2*rpr/(fp*fp)
- 
+
          dx = f*dx0 + g*dwx0*sqrtmu + x0*fpr + wx*gpr
          dy = f*dy0 + g*dwy0*sqrtmu + y0*fpr + wy*gpr
          dz = f*dz0 + g*dwz0*sqrtmu + z0*fpr + wz*gpr
@@ -161,8 +161,6 @@ c-----------------------------------------
          vy0 = vy
          vz0 = vz
       endif
-        
+
       return
       end                       ! lyap2_drift_dan
-
-

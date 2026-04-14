@@ -12,32 +12,32 @@ c                 ntp            ==>  number of massive bodies (int scalar)
 c                 mass           ==>  mass of bodies (real array)
 c             j2rp2,j4rp4        ==>  J2*radii_pl^2 and  J4*radii_pl^4
 c                                     (real scalars)
-c             xbeg,ybeg,zbeg     ==>  initial planet position in helio coord 
+c             xbeg,ybeg,zbeg     ==>  initial planet position in helio coord
 c                                         (real arrays)
 c             xtmp,ytmp,ztmp     ==>  position of planet wrt time
 c                                       (2d real arrays)
 c             vxtmp,vytmp,vztmp   ==>  velocity of planet wrt time
 c                                       (2d real arrays)
-c             xht,yht,zht        ==>  initial tp position in helio coord 
+c             xht,yht,zht        ==>  initial tp position in helio coord
 c                                      (real arrays)
-c             vxht,vyht,vzht     ==>  initial tp velocity in helio coord 
+c             vxht,vyht,vzht     ==>  initial tp velocity in helio coord
 c                                        (real arrays)
 c             istat              ==>  status of the test paricles
 c                                      (2d integer array)
 c                                      istat(i,1) = 0 ==> active:  = 1 not
 c                                      istat(i,2) = -1 ==> Danby did not work
-c             ienc               ==> ienc(j) = 0 if tp j not involved in enc 
-c                                       in outer region: = planet# if it is. 
+c             ienc               ==> ienc(j) = 0 if tp j not involved in enc
+c                                       in outer region: = planet# if it is.
 c                                         (integer array)
-c                                              =  0 No (integer scalar)  
+c                                              =  0 No (integer scalar)
 c                 dt            ==>  time step (real sclar)
 c             Output:
-c                 xht,yht,zht    ==>  final tp position in helio coord 
+c                 xht,yht,zht    ==>  final tp position in helio coord
 c                                       (real arrays)
-c                 vxht,vyht,vzht ==>  final tp position in helio coord 
+c                 vxht,vyht,vzht ==>  final tp position in helio coord
 c                                       (real arrays)
 c                                      NOTE: only the tp in the outer region
-c                                            will have their x and v's changed 
+c                                            will have their x and v's changed
 c             istat              ==>  status of the test paricles
 c                                      (2d integer array)
 c                                      istat(i,1) = 0 ==> active:  = 1 not
@@ -52,9 +52,9 @@ c                 peri           ==> set to pericenter dist. if isperi=0
 c                                         (real array)
 c
 c Remarks: Adopted from rmvs2_step_out.f
-c Authors:  Hal Levison 
+c Authors:  Hal Levison
 c Date:    7/10/96
-c Last revision: 
+c Last revision:
 
       subroutine rmvs3_step_out(i1st,nbod,ntp,mass,j2rp2,j4rp4,
      &     xbeg,ybeg,zbeg,vxbeg,vybeg,vzbeg,xtmp,ytmp,ztmp,vxtmp,
@@ -64,7 +64,7 @@ c Last revision:
       include '../swift.inc'
       include '../rmvs/rmvs.inc'
 
-c...  Inputs Only: 
+c...  Inputs Only:
       integer nbod,ntp,i1st
       real*8 mass(nbod),dt,j2rp2,j4rp4
       real*8 xtmp(NPLMAX,NTPENC),ytmp(NPLMAX,NTPENC)
@@ -95,7 +95,7 @@ c...  Internals
       integer isperil(NTPMAX)
 
 c----
-c...  Executable code 
+c...  Executable code
 
       i1sttp = i1st
 
@@ -151,14 +151,14 @@ c...      remember the current position of the planets
           call rmvs3_step_out2(i1sttp,nbod,ntp,mass,j2rp2,j4rp4,
      &         xbegi,ybegi,zbegi,xendi,yendi,zendi,vxbegi,vybegi,
      &         vzbegi,vxendi,vyendi,vzendi,xht,yht,zht,
-     &         vxht,vyht,vzht,istattmp,dto,ienc,isperil,peril)	
+     &         vxht,vyht,vzht,istattmp,dto,ienc,isperil,peril)
 
           do j=1,ntp
              if(isperil(j).eq.0) then
                 peri(j) = peril(j)
                 isperi(j) = isperil(j)
              endif
-             if( (i.eq.1) .or. (isperi(j).ne.0) ) then 
+             if( (i.eq.1) .or. (isperi(j).ne.0) ) then
                 isperi(j) = isperil(j)
              endif
           enddo

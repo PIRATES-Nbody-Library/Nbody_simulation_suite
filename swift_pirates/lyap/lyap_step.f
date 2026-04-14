@@ -1,7 +1,7 @@
 c*************************************************************************
 c                            LYAP_STEP.F
 c*************************************************************************
-c This subroutine takes a step in helio coord.  
+c This subroutine takes a step in helio coord.
 c both massive and test particles and shadow particles for test guys.
 c
 c             Input:
@@ -12,13 +12,13 @@ c                 ntp           ==>  number of massive bodies (int scalar)
 c                 mass          ==>  mass of bodies (real array)
 c                 j2rp2,j4rp4   ==>  J2*radii_pl^2 and  J4*radii_pl^4
 c                                     (real scalars)
-c                 xh,yh,zh      ==>  initial position in helio coord 
+c                 xh,yh,zh      ==>  initial position in helio coord
 c                                    (real arrays)
-c                 vxh,vyh,vzh   ==>  initial velocity in helio coord 
+c                 vxh,vyh,vzh   ==>  initial velocity in helio coord
 c                                    (real arrays)
-c                 xht,yht,zht    ==>  initial part position in helio coord 
+c                 xht,yht,zht    ==>  initial part position in helio coord
 c                                      (real arrays)
-c                 vxht,vyht,vzht ==>  initial velocity in helio coord 
+c                 vxht,vyht,vzht ==>  initial velocity in helio coord
 c                                        (real arrays)
 c                 istat           ==>  status of the test paricles
 c                                      (2d integer array)
@@ -28,13 +28,13 @@ c                 rstat           ==>  status of the test paricles
 c                                      (2d real array)
 c                 dt            ==>  time step
 c             Output:
-c                 xh,yh,zh      ==>  final position in helio coord 
+c                 xh,yh,zh      ==>  final position in helio coord
 c                                       (real arrays)
-c                 vxh,vyh,vzh   ==>  final velocity in helio coord 
+c                 vxh,vyh,vzh   ==>  final velocity in helio coord
 c                                       (real arrays)
-c                 xht,yht,zht    ==>  final position in helio coord 
+c                 xht,yht,zht    ==>  final position in helio coord
 c                                       (real arrays)
-c                 vxht,vyht,vzht ==>  final position in helio coord 
+c                 vxht,vyht,vzht ==>  final position in helio coord
 c                                       (real arrays)
 c
 c Remarks: Adopted from step_kbk
@@ -48,7 +48,7 @@ c Last revision: 2/24/94
 
       include '../swift.inc'
 
-c...  Inputs Only: 
+c...  Inputs Only:
       integer nbod,ntp,i1st
       real*8 mass(nbod),dt,time,j2rp2,j4rp4
 
@@ -78,7 +78,7 @@ c...  Internals
       save dist0,lrsum,iul
 
 c----
-c...  Executable code 
+c...  Executable code
 
 c...  set things up if this is the initial call
       if(i1stin.eq.0) then
@@ -120,17 +120,17 @@ c...  now remember these positions
 c...  next the test particles
       call step_kdk_tp(i1sttp,nbod,ntp,mass,j2rp2,j4rp4,
      &              xbeg,ybeg,zbeg,xend,yend,zend,
-     &              xht,yht,zht,vxht,vyht,vzht,istat,dt)	
+     &              xht,yht,zht,vxht,vyht,vzht,istat,dt)
 
-c... finally the shadow particles 
+c... finally the shadow particles
       call lyap_step_sh(i1stsh,nbod,ntp,mass,j2rp2,j4rp4,
      &              xbeg,ybeg,zbeg,xend,yend,zend,
-     &              xsh,ysh,zsh,vxsh,vysh,vzsh,istat,dt)	
+     &              xsh,ysh,zsh,vxsh,vysh,vzsh,istat,dt)
 
       tin = tin + dt
 
 c...  now do the lyap anal stuff
-      if(tin .ge. tnorm) then 
+      if(tin .ge. tnorm) then
 
          do i=1,ntp
             if(istat(i,1).ne.0) then
@@ -139,7 +139,7 @@ c...  now do the lyap anal stuff
                call lyap_renorm(xht(i),yht(i),zht(i),
      &              vxht(i),vyht(i),vzht(i),xsh(i),ysh(i),zsh(i),
      &              vxsh(i),vysh(i),vzsh(i),dist0(i),lrsum(i))
-               logpr(i) = dlog10(lrsum(i)/tin) 
+               logpr(i) = dlog10(lrsum(i)/tin)
             endif
          enddo
 
@@ -151,4 +151,3 @@ c...  now do the lyap anal stuff
       return
       end   ! lyap_step
 c------------------------------------------------------------------------
-

@@ -2,7 +2,7 @@ c*************************************************************************
 c                          ANAL_JACOBI_WRITE.F
 c*************************************************************************
 c Writes the mean and maximum absolute value of the change in jacobi
-c to the screen as a function of time.  Writes the value of the first 10 
+c to the screen as a function of time.  Writes the value of the first 10
 c test particles to a file called jacobi.out (unit=iu)
 c
 c      Input:
@@ -10,26 +10,26 @@ c            t              ==>  current time
 c            nbod           ==>  number of massive bodies (int scalar)
 c            ntp            ==>  number of tp (int scalar)
 c            mass           ==>  mass of bodies (real array)
-c            xh,yh,zh       ==>  current position in helio coord 
+c            xh,yh,zh       ==>  current position in helio coord
 c                               (real arrays)
-c            vxh,vyh,vzh    ==>  current velocity in helio coord 
+c            vxh,vyh,vzh    ==>  current velocity in helio coord
 c                               (real arrays)
-c            xht,yht,zht    ==>  current tp position in helio coord 
+c            xht,yht,zht    ==>  current tp position in helio coord
 c                               (real arrays)
-c            vxht,vyht,vzht ==>  current tp velocity in helio coord 
+c            vxht,vyht,vzht ==>  current tp velocity in helio coord
 c                               (real arrays)
 c            istat          ==>  status of the test paricles
 c                                      (integer array)
 c                                      istat(i) = 0 ==> active:  = 1 not
-c                                    NOTE: it is really a 2d array but 
-c            ipl            ==>  Planet to take jacobi with respect to 
+c                                    NOTE: it is really a 2d array but
+c            ipl            ==>  Planet to take jacobi with respect to
 c            iu             ==>  unit to write to
-c            fopenstat      ==>  The status flag for the open 
-c                                statements of the output files.  
+c            fopenstat      ==>  The status flag for the open
+c                                statements of the output files.
 c                                          (character*80)
 c
-c Remarks: If the particle is not active a value of -100 is written out 
-c Authors:  Hal Levison 
+c Remarks: If the particle is not active a value of -100 is written out
+c Authors:  Hal Levison
 c Date:    3/4/93
 c Last revision: 10/3/96
 
@@ -39,7 +39,7 @@ c Last revision: 10/3/96
 
       include '../swift.inc'
 
-c...  Inputs: 
+c...  Inputs:
       integer nbod,ntp,ipl,iu
       integer istat(ntp)
       real*8 mass(nbod),t
@@ -63,13 +63,13 @@ c...  Internals
       save i1st,jac0
 
 c----
-c...  Executable code 
+c...  Executable code
 
       nw = min0(ntp,10)
 
 c...   Compute ang. mom. vector for Sun-planet relative orbit
       gmsum = mass(1) + mass(ipl)
-      energy = 0.5d0*(vxh(ipl)**2 + vyh(ipl)**2 + vzh(ipl)**2) 
+      energy = 0.5d0*(vxh(ipl)**2 + vyh(ipl)**2 + vzh(ipl)**2)
       energy = energy - gmsum/sqrt(xh(ipl)**2 + yh(ipl)**2 + zh(ipl)**2)
       aplh = -0.5d0*gmsum/energy
       omega = sqrt(gmsum/(aplh**3))
@@ -83,7 +83,7 @@ c...   Compute ang. mom. vector for Sun-planet relative orbit
 
 c...  put things in bary
       call coord_h2b(nbod,mass,xh,yh,zh,vxh,vyh,vzh,
-     &           xb,yb,zb,vxb,vyb,vzb,msys)   
+     &           xb,yb,zb,vxb,vyb,vzb,msys)
 
       call coord_h2b_tp(ntp,xht,yht,zht,vxht,vyht,vzht,
      &      xb(1),yb(1),zb(1),vxb(1),vyb(1),vzb(1),
@@ -126,7 +126,7 @@ c...  put things in bary
  1       format(5x,'mean |dj/j|, max |dj/j|,',2(2x,1p1e12.5))
 
          call io_jacobi_write(i1st,t,jac0,dj,nw,iu,fopenstat)
-         
+
       endif
 
       return

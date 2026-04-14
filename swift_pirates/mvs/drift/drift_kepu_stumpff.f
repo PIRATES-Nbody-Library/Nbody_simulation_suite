@@ -9,7 +9,7 @@ c                 x             ==>  argument
 c             Output:
 c                 c0,c1,c2,c3   ==>  c's from p171-172
 c                                       (real scalors)
-c Author:  Hal Levison  
+c Author:  Hal Levison
 c Date:    2/3/93
 c Last revision: 2/3/93
 
@@ -17,7 +17,7 @@ c Last revision: 2/3/93
 
       include '../../swift.inc'
 
-c...  Inputs: 
+c...  Inputs:
       real*8 x
 
 c...  Outputs:
@@ -28,7 +28,7 @@ c...  Internals:
       real*8 xm
 
 c----
-c...  Executable code 
+c...  Executable code
 
       n = 0
       xm = 0.1

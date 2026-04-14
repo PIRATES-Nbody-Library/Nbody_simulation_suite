@@ -3,7 +3,7 @@ c                        SWIFT.INC
 c*************************************************************************
 C Include file for SWIFT
 c
-c Author:  Hal Levison  
+c Author:  Hal Levison
 c Date:    2/2/93
 c Last revision: 3/7/93
 
@@ -15,18 +15,18 @@ c...   Version of Swift
 
 c...   Maximum array size
        integer  NPLMAX, NTPMAX
-c       parameter  (NPLMAX = 21)   ! max number of planets, including the Sun 
-       parameter  (NPLMAX = 51)   ! max number of planets, including the Sun 
+c       parameter  (NPLMAX = 21)   ! max number of planets, including the Sun
+       parameter  (NPLMAX = 51)   ! max number of planets, including the Sun
        parameter  (NTPMAX = 1001) ! max number of test particles
 
 c...   Size of the test particle integer status flag
 	integer NSTATP            ! Number of status parameters
-        parameter  (NSTATP = 3)  
+        parameter  (NSTATP = 3)
 	integer NSTAT            ! Number of status parameters
-        parameter  (NSTAT = NSTATP + NPLMAX - 1)  ! include one for @ planet  
+        parameter  (NSTAT = NSTATP + NPLMAX - 1)  ! include one for @ planet
 
 c...   Size of the test particle integer status flag
-	integer NSTATR    
+	integer NSTATR
         parameter  (NSTATR = NSTAT)  ! io_init_tp assumes NSTAT==NSTATR
 
 c...   convergence criteria for danby

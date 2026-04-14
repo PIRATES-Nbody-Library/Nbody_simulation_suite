@@ -6,24 +6,24 @@ c code based on Ham. of the form T(p) + V(x).
 c
 c             Input:
 c                 nbod          ==>  number of massive bodies (int scalar)
-c                 vxb,vyb,vzb   ==>  initial velocity in beri coord 
+c                 vxb,vyb,vzb   ==>  initial velocity in beri coord
 c                                    (real arrays)
-c                 axb,ayb,azb   ==>  accel in beri coord (real arrays) 
+c                 axb,ayb,azb   ==>  accel in beri coord (real arrays)
 c                 dt            ==>  time step
 c             Output:
-c                 vxb,vyb,vzb   ==>  final velocity in beri coord 
+c                 vxb,vyb,vzb   ==>  final velocity in beri coord
 c                                       (real arrays)
 c
-c Remarks:  Based on Martin's NB4M routines 
-c Authors:  Martin Duncan 
+c Remarks:  Based on Martin's NB4M routines
+c Authors:  Martin Duncan
 c Date:    3/8/93
-c Last revision: 
+c Last revision:
 
 	  subroutine tu4_vkickb(nbod,vxb,vyb,vzb,axb,ayb,azb,dt)
 
       include '../swift.inc'
 
-c...  Inputs Only: 
+c...  Inputs Only:
       integer nbod
       real*8 axb(nbod),ayb(nbod),azb(nbod),dt
 

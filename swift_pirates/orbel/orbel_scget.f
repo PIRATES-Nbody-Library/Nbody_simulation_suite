@@ -5,26 +5,26 @@ c	                  ORBEL_SCGET.F
 *
 *        Input:
 *             angle ==> angle in radians (real scalar)
-*        
+*
 *        Output:
 *             sx    ==>  sin(angle)  (real scalar)
 *             cx    ==>  cos(angle)  (real scalar)
 *
-*     ALGORITHM: Obvious from the code 
+*     ALGORITHM: Obvious from the code
 *     REMARKS: The HP 700 series won't return correct answers for sin
 *       and cos if the angle is bigger than 3e7. We first reduce it
 *       to the range [0,2pi) and use the sqrt rather than cos (it's faster)
 *       BE SURE THE ANGLE IS IN RADIANS - NOT DEGREES!
 *     AUTHOR:  M. Duncan.
 *     DATE WRITTEN:  May 6, 1992.
-*     REVISIONS: 
+*     REVISIONS:
 ***********************************************************************
 
 	subroutine orbel_scget(angle,sx,cx)
 
       include '../swift.inc'
 
-c...  Inputs Only: 
+c...  Inputs Only:
         real*8 angle
 
 c...  Output:
@@ -37,7 +37,7 @@ c... Internals:
 	parameter(PI3BY2 = 1.5d0*PI)
 
 c----
-c...  Executable code 
+c...  Executable code
 
         nper = angle/TWOPI
 	x = angle - nper*TWOPI

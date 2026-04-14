@@ -2,7 +2,7 @@
 *	                    COORD_VH2VJ.F
 ***********************************************************************
 *     PURPOSE: Converts from Heliocentric to Jacobi coords. VELOCITIES ONLY.
-*     ARGUMENTS:  Input is 
+*     ARGUMENTS:  Input is
 *                    nbod ==> number of  objects (must be less than NBMAX)
 *                             (integer)
 *	             mass(*) ==> planetary masses (real array)
@@ -11,10 +11,10 @@
 *                 Returned are
 *                    vxj(*),vyj(*),vzj(*) ==> jacobi. particle velocities
 *                                              (real array)
-*       
-*     ALGORITHM: See my notes Nov 21/92 
-*     REMARKS:  
-*       
+*
+*     ALGORITHM: See my notes Nov 21/92
+*     REMARKS:
+*
 *     AUTHOR:  M. Duncan.
 *     DATE WRITTEN:  Jan 29, 1993.
 *     REVISIONS:  2/20/2K HFL
@@ -24,7 +24,7 @@
 
       include '../swift.inc'
 
-c...  Inputs: 
+c...  Inputs:
 	integer nbod
 	real*8 mass(nbod)
 	real*8 vxh(nbod),vyh(nbod),vzh(nbod)
@@ -34,12 +34,12 @@ c...  Outputs:
 
 c...  Internals:
 	real*8 eta(NTPMAX)
-	real*8 sumvx,sumvy,sumvz	
+	real*8 sumvx,sumvy,sumvz
 	real*8 capvx,capvy,capvz
 	integer n
 
 c----
-c...  Executable code 
+c...  Executable code
 
 c First calc. the array eta(*) then convert to jacobi velocities
 

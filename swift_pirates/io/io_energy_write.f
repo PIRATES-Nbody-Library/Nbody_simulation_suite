@@ -10,12 +10,12 @@ c            energy         ==>  Total energy
 c            eltot          ==>  components of total angular momentum
 c                               (real array)
 c            iu             ==>  unit to write to
-c            fopenstat      ==>  The status flag for the open 
-c                                statements of the output files.  
+c            fopenstat      ==>  The status flag for the open
+c                                statements of the output files.
 c                                          (character*80)
 c
-c Remarks: 
-c Authors:  Hal Levison 
+c Remarks:
+c Authors:  Hal Levison
 c Date:    2/21/94
 c Last revision: 3/4/94
 
@@ -24,7 +24,7 @@ c Last revision: 3/4/94
       include '../swift.inc'
       include 'io.inc'
 
-c...  Inputs: 
+c...  Inputs:
       integer iu,i1st
       real*8 t,energy,eltot(3)
       character*(*) fopenstat
@@ -33,7 +33,7 @@ c...  Internals
       integer ierr
 
 c----
-c...  Executable code 
+c...  Executable code
 
       if(i1st.eq.0) then
 
@@ -43,9 +43,9 @@ c...  Executable code
             write(*,*) '     Could not open energy.out '
             call util_exit(1)
          endif
-         
+
       else
-         
+
          call io_open(iu,'energy.out','append','FORMATTED',ierr)
 
       endif
