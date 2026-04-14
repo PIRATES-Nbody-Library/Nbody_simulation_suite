@@ -1,0 +1,33 @@
+#!/bin/csh -f
+
+# @make template — used internally by setup.sh to generate @make
+
+set SWIFT_DIR=__SWIFT_DIR__
+set FORTRAN=__FORTRAN__
+set FFLAGS='__FFLAGS__'
+set PRECOMP=__PRECOMP__
+set CPPFLAGS='__CPPFLAGS__'
+
+if ( `ls *.F | wc -l` != 0 ) then
+  echo Doing precompiler
+  foreach file (*.F)
+    echo $file | set file2=`awk -F"." '{print$1}'`
+    echo $file2
+    $PRECOMP $CPPFLAGS "$file2".F "$file2"_CPP.f
+  end
+else
+  echo No need to precompile
+endif
+
+echo Doing Fortran
+foreach file (*.f)
+  echo $file | set file2=`awk -F"." '{print$1}'`
+  echo $file2
+  $FORTRAN $FFLAGS "$file2".f
+  ar vr $SWIFT_DIR/libswift.a  "$file2".o
+end
+
+rm *.o
+rm *CPP.f
+echo Done directory $PWD
+echo
