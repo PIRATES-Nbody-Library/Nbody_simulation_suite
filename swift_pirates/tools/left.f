@@ -21,7 +21,7 @@
 
 	character*80 outfile,fopenstat
 
-c Get parameters 
+c Get parameters
 	call io_init_param('dump_param.dat',t0,tstop,dt,dtout,
      &       dtdump,iflgchk,rmin,rmax,rmaxu,qmin,lclose,
      &       outfile,fopenstat)
@@ -35,7 +35,7 @@ c Get data for the run and the test particles
      &            vxht,vyht,vzht,istat,rstat)
 
 
-c 
+c
        open(unit=7,file='left.out')
 
        do i=-4,nbod
@@ -77,7 +77,7 @@ c
 
        write(7,*) ' '
        write(7,*) ' Active Particles : '
-       write(7,1011) 
+       write(7,1011)
  1011  format(8x,'#',10x,'a',17x,'e',12x,'i',13x,'q              Q ')
 
        do i=1,ntp
@@ -100,7 +100,7 @@ c
 
        write(7,*) ' '
 c       write(7,*) '     #     why?   Last pl       a         q        Q'
-       write(7,1010) 
+       write(7,1010)
  1010  format(6x,'#',5x,'why?  Last pl',6x,'a',11x,'q',11x,'Q',13x,'i')
        write(7,*) '               encountered '
        do i=1,ntp
@@ -148,9 +148,3 @@ c       write(7,*) '     #     why?   Last pl       a         q        Q'
        stop
        end                      ! left.f
 c---------------------------------------------------------------------
-
-
-
-
-
-

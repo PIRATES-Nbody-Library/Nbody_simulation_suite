@@ -2,7 +2,7 @@ c*************************************************************************
 c                        GETACCH.F
 c*************************************************************************
 c This subroutine calculates the acceleration on the massive particles
-c in the HELIOCENTRIC frame. 
+c in the HELIOCENTRIC frame.
 c             Input:
 c                 nbod        ==>  number of massive bodies (int scalor)
 c                 mass        ==>  mass of bodies (real array)
@@ -13,7 +13,7 @@ c                 xh,yh,zh    ==>  position in heliocentric coord (real arrays)
 c             Output:
 c                 axh,ayh,azh ==>  acceleration in helio coord (real arrays)
 c
-c Author:  Hal Levison  
+c Author:  Hal Levison
 c Date:    2/2/93
 c Last revision: 2/18/93
 
@@ -22,14 +22,14 @@ c Last revision: 2/18/93
 
       include '../../swift.inc'
 
-c...  Inputs: 
+c...  Inputs:
       integer nbod
       real*8 mass(NPLMAX),xj(NPLMAX),yj(NPLMAX),zj(NPLMAX),j2rp2,j4rp4
       real*8 xh(NPLMAX),yh(NPLMAX),zh(NPLMAX)
 
 c...  Outputs:
       real*8 axh(NPLMAX),ayh(NPLMAX),azh(NPLMAX)
-                
+
 c...  Internals:
       integer i
       real*8 ir3h(NPLMAX),ir3j(NPLMAX)
@@ -41,14 +41,14 @@ c...  Internals:
       real*8 aoblx(NPLMAX),aobly(NPLMAX),aoblz(NPLMAX)
 
 c----
-c...  Executable code 
+c...  Executable code
 
 c...  get thr r^-3's
       call getacch_ir3(nbod,2,xj,yj,zj,ir3j,irj)
       call getacch_ir3(nbod,2,xh,yh,zh,ir3h,irh)
 
 c...  calc the ah0's:  recall that they are the same for all particles
-      call getacch_ah0(3,nbod,mass,xh,yh,zh,ir3h,axh0,ayh0,azh0) 
+      call getacch_ah0(3,nbod,mass,xh,yh,zh,ir3h,axh0,ayh0,azh0)
 
 c...  now the first terms
       call getacch_ah1(nbod,mass,xh,yh,zh,xj,yj,zj,ir3h,ir3j,
@@ -85,7 +85,3 @@ c...  Now do j2 and j4 stuff
       end      ! getacch
 
 c---------------------------------------------------------------------
-
-
-
-

@@ -3,9 +3,9 @@ c                        BS.INC
 c*************************************************************************
 C Include file for the bs integrator
 c
-c Author:  Hal Levison  
+c Author:  Hal Levison
 c Date:    5/17/93
-c Last revision: 
+c Last revision:
 
 c...   Size of internal arrays
        integer N6DBS
@@ -17,5 +17,5 @@ c...   maximum numbers of internations
        integer NTRYS
 c       parameter(NTRYS=30)
        parameter(NTRYS=100)
-  
+
 c------------------------------------------------------------------------

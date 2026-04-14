@@ -6,17 +6,17 @@ c was called.  If so write out the position and vol of tp and planets
 c
 c             Input:
 c                 init          ==>  initiize flag if = 0 initialize and return
-c                                                     = 1 run through 
+c                                                     = 1 run through
 c                 time          ==>  current time (real scalar)
 c                 nbod          ==>  number of massive bodies (int scalar)
 c                 ntp           ==>  number of test bodies (int scalar)
-c                 xh,yh,zh      ==>  current position in helio coord 
+c                 xh,yh,zh      ==>  current position in helio coord
 c                                    (real arrays)
-c                 vxh,vyh,vzh   ==>  current velocity in helio coord 
+c                 vxh,vyh,vzh   ==>  current velocity in helio coord
 c                                    (real arrays)
-c                 xht,yht,zht    ==>  current part position in helio coord 
+c                 xht,yht,zht    ==>  current part position in helio coord
 c                                      (real arrays)
-c                 vxht,vyht,vzht ==>  current velocity in helio coord 
+c                 vxht,vyht,vzht ==>  current velocity in helio coord
 c                                        (real arrays)
 c                 istat           ==>  status of the test paricles
 c                                      (2d integer array)
@@ -28,15 +28,15 @@ c                                      rstat(i,1) time of discard.
 c                                      rstat(i,2) closest approach to a planet
 c                                          as determined by encounter routines.
 c                 iu              ==> unit number to write to
-c                 rname           ==> output file name (character string) 
+c                 rname           ==> output file name (character string)
 c
-c                 fopenstat       ==>  The status flag for the open 
-c                                      statements of the output files.  
+c                 fopenstat       ==>  The status flag for the open
+c                                      statements of the output files.
 c                                          (character*80)
 c                 nleft           ==>  number of active test bodies(int scalar)
 c
-c Remarks: 
-c Authors:  Hal Levison 
+c Remarks:
+c Authors:  Hal Levison
 c Date:    5/7/93
 c Last revision: 7/11/94
 
@@ -47,7 +47,7 @@ c Last revision: 7/11/94
       include '../swift.inc'
       include 'io.inc'
 
-c...  Inputs: 
+c...  Inputs:
       integer init,nbod,ntp,iu
       real*8 time
       real*8 rstat(NTPMAX,NSTATR)
@@ -58,7 +58,7 @@ c...  Inputs:
       real*8 vxht(ntp),vyht(ntp),vzht(ntp)
       character*(*) rname,fopenstat
 
-c...  Outputs: 
+c...  Outputs:
       integer nleft
 
 c...  Internals
@@ -69,7 +69,7 @@ c...  Internals
       save istold,izero,iwrite,rzero
 
 c----
-c...  Executable code 
+c...  Executable code
 
 
 c...  if  initialize flag=0
@@ -104,8 +104,8 @@ c...  if  initialize flag=1
 
 c...              if there was an error and fopenstat='append' then
 c...              try to open as new
-                  if(ierr.ne.0) then  
-                     if( (fopenstat(1:6).eq.'append') .or. 
+                  if(ierr.ne.0) then
+                     if( (fopenstat(1:6).eq.'append') .or.
      &                    (fopenstat(1:6).eq.'APPEND') ) then
                         call io_open(iu,rname,'new','FORMATTED',ierr)
                      endif
@@ -148,5 +148,5 @@ c...              try to open as new
 
       close(iu)
 
-      return   
+      return
       end     !io_discard_write

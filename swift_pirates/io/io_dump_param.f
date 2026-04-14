@@ -1,7 +1,7 @@
 c************************************************************************
 c                          IO_DUMP_PARAM.F
 c************************************************************************
-c IO_DUMP_PARAM dumps out the parameters for the integration. 
+c IO_DUMP_PARAM dumps out the parameters for the integration.
 c
 c      Input:
 c       dparfile      ==>  Name of file to write to (character*80)
@@ -21,20 +21,20 @@ c                                      (real scalar)
 c       qmin          ==> Smallest perihelion distance
 c                                 if <0  then don't check
 c                                      (real scalar)
-c       lclose        ==> .true. --> discard particle if it gets 
-c                                    too close to a planet. Read in that 
+c       lclose        ==> .true. --> discard particle if it gets
+c                                    too close to a planet. Read in that
 c                                    distance in io_init_pl
 c                                      (logical*2 scalar)
 c       outfile       ==>  Name of binary output file (character*80)
 
 c
-c Remarks: 
+c Remarks:
 c Authors:  Martin Duncan
-c Date:    3/2/93 
+c Date:    3/2/93
 c Last revision:  5/10/94 HFL
 
 	subroutine io_dump_param(dparfile,t,tstop,dt,dtout,dtdump,
-     &           iflgchk,rmin,rmax,rmaxu,qmin,lclose,outfile)	
+     &           iflgchk,rmin,rmax,rmaxu,qmin,lclose,outfile)
 
 	include '../swift.inc'
 	include 'io.inc'
@@ -52,7 +52,7 @@ c...  Internals
         integer i,ierr
 
 c-----
-c...  Executable code 
+c...  Executable code
 
 c Open parameter data file for the dump
         call io_open(7,dparfile,'unknown','formatted',ierr)
@@ -61,7 +61,7 @@ c Open parameter data file for the dump
 	write(7,*) dtout,dtdump
 
         do i=0,IO_NBITS-1
-           if(btest(iflgchk,i))  then 
+           if(btest(iflgchk,i))  then
               lflg(i) = 'T'
            else
               lflg(i) = 'F'
@@ -80,7 +80,7 @@ c Open parameter data file for the dump
            write(7,*) rmin,rmax,rmaxu,qmin,' ',cclose
         endif
 
-        if(btest(iflgchk,0).or.btest(iflgchk,1))  then 
+        if(btest(iflgchk,0).or.btest(iflgchk,1))  then
            write(7,2000) outfile
  2000      format(a)
         endif
@@ -94,7 +94,3 @@ c Open parameter data file for the dump
 c____________________________________________________________________________
 c
 c
-
-
-
-

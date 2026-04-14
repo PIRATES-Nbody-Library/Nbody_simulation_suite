@@ -2,7 +2,7 @@ c***********************************************************************
 c	                    COORD_H2B_TP.F
 c***********************************************************************
 *     PURPOSE: Converts test part from Heliocentric to Barycentric coords.
-*     ARGUMENTS:  Input is 
+*     ARGUMENTS:  Input is
 *                              ntp ==> number of test part (<= NTPMAX)
 *                                              (integer)
 *		        xht,yht,zht ==> heliocentric particle coords
@@ -18,9 +18,9 @@ c***********************************************************************
 *                                            (real array)
 *                    vxbt,vybt,vzbt ==> bary. particle velocities
 *                                            (real array)
-*       
+*
 *     Authors:  Hal Levison
-*     ALGORITHM: Obvious 
+*     ALGORITHM: Obvious
 *     WRITTEN:  2/18/92
 *     REVISIONS:
 
@@ -30,7 +30,7 @@ c***********************************************************************
 
       include '../swift.inc'
 
-c...  Inputs: 
+c...  Inputs:
 	integer ntp
 	real*8 xht(NTPMAX),yht(NTPMAX),zht(NTPMAX)
 	real*8 vxht(NTPMAX),vyht(NTPMAX),vzht(NTPMAX)
@@ -44,7 +44,7 @@ c...  Internals:
 	integer i
 
 c----
-c...  Executable code 
+c...  Executable code
 	do i=1,ntp
 	  xbt(i) = xht(i) + xs
 	  ybt(i) = yht(i) + ys
@@ -57,4 +57,3 @@ c...  Executable code
 	return
 	end     ! coord_h2b_tp
 c--------------------------------------------------------------------------
-

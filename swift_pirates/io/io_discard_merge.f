@@ -8,28 +8,28 @@ c                 time          ==>  current time (real scalar)
 c                 ip1,ip2       ==>  planets to merge (real scalar)
 c                 m1            ==>  Mass of pl 1 (real scalar)
 c                 r1            ==>  Radius of pl 1 (real scalar)
-c                 x1,y1,z1      ==>  current position of pl 1 in helio coord 
+c                 x1,y1,z1      ==>  current position of pl 1 in helio coord
 c                                    (real arrays)
-c                 vx1,vy1,vz1   ==>  current velocity of pl 1 in helio coord 
+c                 vx1,vy1,vz1   ==>  current velocity of pl 1 in helio coord
 c                                    (real arrays)
 c                 m2            ==>  Mass of pl 2 (real scalar)
 c                 r2            ==>  Radius of pl 2 (real scalar)
-c                 x2,y2,z2      ==>  current position of pl 2 in helio coord 
+c                 x2,y2,z2      ==>  current position of pl 2 in helio coord
 c                                    (real arrays)
-c                 vx2,vy2,vz2   ==>  current velocity of pl 2 in helio coord 
+c                 vx2,vy2,vz2   ==>  current velocity of pl 2 in helio coord
 c                                    (real arrays)
 c                 mn            ==>  Mass of new pl  (real scalar)
 c                 rn            ==>  Radius of new pl (real scalar)
-c                 xn,yn,zn      ==>  current position of new pl in helio coord 
+c                 xn,yn,zn      ==>  current position of new pl in helio coord
 c                                    (real arrays)
-c                 vxn,vyn,vzn   ==>  current velocity of new pl in helio coord 
+c                 vxn,vyn,vzn   ==>  current velocity of new pl in helio coord
 c                                    (real arrays)
 c                 nleft           ==>  number of active test bodies(int scalar)
 c
-c Remarks: 
-c Authors:  Hal Levison 
+c Remarks:
+c Authors:  Hal Levison
 c Date:    12/30/96
-c Last revision: 
+c Last revision:
 
       subroutine io_discard_merge(time,ip1,ip2,m1,r1,x1,y1,z1,vx1,vy1,
      &     vz1,m2,r2,x2,y2,z2,vx2,vy2,vz2,mn,rn,xn,yn,zn,vxn,vyn,vzn)
@@ -37,7 +37,7 @@ c Last revision:
       include '../swift.inc'
       include 'io.inc'
 
-c...  Inputs: 
+c...  Inputs:
       integer ip1,ip2
       real*8 time
       real*8 m1,r1
@@ -54,7 +54,7 @@ c...  Internals
       integer ierr,iu
 
 c----
-c...  Executable code 
+c...  Executable code
 
       iu = 40
 
@@ -82,4 +82,3 @@ c...  Executable code
       return
       end                       ! io_discard_merge.f
 c--------------------------------------------------------------------------
-

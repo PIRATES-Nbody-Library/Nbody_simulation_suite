@@ -1,7 +1,7 @@
 ***********************************************************************
 c                    ORBEL_FHYBRID.F
 ***********************************************************************
-*     PURPOSE:  Solves Kepler's eqn. for hyperbola using hybrid approach.  
+*     PURPOSE:  Solves Kepler's eqn. for hyperbola using hybrid approach.
 *
 *             Input:
 *                           e ==> eccentricity anomaly. (real scalar)
@@ -9,12 +9,12 @@ c                    ORBEL_FHYBRID.F
 *             Returns:
 *               orbel_fhybrid ==>  eccentric anomaly. (real scalar)
 *
-*     ALGORITHM: For abs(N) < 0.636*ecc -0.6 , use FLON 
+*     ALGORITHM: For abs(N) < 0.636*ecc -0.6 , use FLON
 *	         For larger N, uses FGET
-*     REMARKS: 
-*     AUTHOR: M. Duncan 
+*     REMARKS:
+*     AUTHOR: M. Duncan
 *     DATE WRITTEN: May 26,1992.
-*     REVISIONS: 
+*     REVISIONS:
 *     REVISIONS: 2/26/93 hfl
 ***********************************************************************
 
@@ -22,7 +22,7 @@ c                    ORBEL_FHYBRID.F
 
       include '../swift.inc'
 
-c...  Inputs Only: 
+c...  Inputs Only:
 	real*8 e,n
 
 c...  Internals:
@@ -30,21 +30,17 @@ c...  Internals:
         real*8 orbel_flon,orbel_fget
 
 c----
-c...  Executable code 
+c...  Executable code
 
 	abn = n
 	if(n.lt.0.d0) abn = -abn
 
 	if(abn .lt. 0.636d0*e -0.6d0) then
 	  orbel_fhybrid = orbel_flon(e,n)
-	else 
+	else
 	  orbel_fhybrid = orbel_fget(e,n)
-	endif   
+	endif
 
 	return
 	end  ! orbel_fhybrid
 c-------------------------------------------------------------------
-
-
-
-

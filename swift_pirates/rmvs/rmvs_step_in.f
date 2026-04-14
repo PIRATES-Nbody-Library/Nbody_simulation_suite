@@ -21,9 +21,9 @@ c                 xend,yend,zend ==>  position of planet @ end of dt
 c                                       (2d real arrays)
 c                 vxend,vyend,vzend ==>  vel of planet @ end of dt
 c                                       (2d real arrays)
-c                 xht,yht,zht    ==>  initial tp position in helio coord 
+c                 xht,yht,zht    ==>  initial tp position in helio coord
 c                                      (real arrays)
-c                 vxht,vyht,vzht ==>  initial tp velocity in helio coord 
+c                 vxht,vyht,vzht ==>  initial tp velocity in helio coord
 c                                        (real arrays)
 c                 istat          ==>  status of the test paricles
 c                                      (2d integer array)
@@ -35,12 +35,12 @@ c                 itpenci       ==> itpenci(*,i) is a list of tp enc planet i
 c                                   in inner region (2d integer array)
 c                 dt            ==>  time step (real sclar)
 c             Output:
-c                 xht,yht,zht    ==>  final tp position in helio coord 
+c                 xht,yht,zht    ==>  final tp position in helio coord
 c                                       (real arrays)
-c                 vxht,vyht,vzht ==>  final tp position in helio coord 
+c                 vxht,vyht,vzht ==>  final tp position in helio coord
 c                                       (real arrays)
 c                                      NOTE: only the tp in the inner region
-c                                            will have their x and v's changed 
+c                                            will have their x and v's changed
 c                 isperi         ==> = 0 if tp went through peri
 c                                    =-1 if tp pre peri
 c                                    = 1 if tp post peri
@@ -50,7 +50,7 @@ c                                         (real array)
 c
 c
 c Remarks: Adopted from hal's wiscl_fk.f
-c Authors:  Hal Levison 
+c Authors:  Hal Levison
 c Date:    2/19/93
 c Last revision: 1/6/96
 
@@ -63,7 +63,7 @@ c Last revision: 1/6/96
       include '../swift.inc'
       include 'rmvs.inc'
 
-c...  Inputs Only: 
+c...  Inputs Only:
       integer nbod,ntp,i1st
       real*8 mass(nbod),dt,j2rp2,j4rp4
       real*8 xpl(NPLMAX,NTPENC),ypl(NPLMAX,NTPENC)
@@ -97,7 +97,7 @@ c...  Internals
       real*8 aobly(NPLMAX,0:NTPENC),aoblz(NPLMAX,0:NTPENC)
 
 c----
-c...  Executable code 
+c...  Executable code
 
       dti = dt/float(NTPENC)
 
@@ -110,7 +110,7 @@ c...  First get the accel due to J2 and J4 in barycentric frame on planets
      &        irh,aoblx(1,0),aobly(1,0),aoblz(1,0))
          do j=1,NTPENC
             do i=2,nbod
-               irh(i) = 1.0d0/sqrt( xpl(i,j)**2 + ypl(i,j)**2 + 
+               irh(i) = 1.0d0/sqrt( xpl(i,j)**2 + ypl(i,j)**2 +
      &              zpl(i,j)**2 )
             enddo
             call obl_acc(nbod,mass,j2rp2,j4rp4,xpl(1,j),ypl(1,j),
@@ -150,7 +150,7 @@ C...          set up planets at t=0
                  call rmvs_step_in_tp(i1sttp,nbod,nenci(i),masst,
      &              j2rp2,j4rp4,xpltb,ypltb,zpltb,xplte,yplte,zplte,
      &              xtpt,ytpt,ztpt,vxtpt,vytpt,vztpt,istattmp,dti,
-     &              i,aoblx(i,j-1),aobly(i,j-1),aoblz(i,j-1),	
+     &              i,aoblx(i,j-1),aobly(i,j-1),aoblz(i,j-1),
      &              aoblx(i,j),aobly(i,j),aoblz(i,j))
 
                  call util_peri(1,nenci(i),xtpt,ytpt,ztpt,vxtpt,
@@ -187,7 +187,3 @@ c...          put things back
         return
         end  ! rmvs_step_in
 c------------------------------------------------------------------
-
-
-
-

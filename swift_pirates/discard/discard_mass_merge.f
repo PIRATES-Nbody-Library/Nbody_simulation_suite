@@ -8,9 +8,9 @@ c                 time          ==>  current time (real scalar)
 c                 nbod          ==>  number of massive bodies (int scalar)
 c                 ip1,ip2       ==>  planets to merge (real scalar)
 c                 mass          ==>  mass of bodies (real array)
-c                 xh,yh,zh      ==>   position in helio coord 
+c                 xh,yh,zh      ==>   position in helio coord
 c                                    (real arrays)
-c                 vxh,vyh,vzh   ==>   pl vel in helio coord 
+c                 vxh,vyh,vzh   ==>   pl vel in helio coord
 c                                    (real arrays)
 c                 rpl           ==>  physical size of a planet.
 c                                    (real array)
@@ -21,22 +21,22 @@ c                ielc           ==>  number of encounters (integer*2 scalar)
 c                ielst          ==>  list of ecnounters (2D integer*2 array)
 c             Output:
 c                 mass          ==>  recalculated mass of bodies (real array)
-c                 xh,yh,zh      ==>  recalculated position in helio coord 
+c                 xh,yh,zh      ==>  recalculated position in helio coord
 c                                    (real arrays)
-c                 vxh,vyh,vzh   ==>  recalculated pl vel in helio coord 
+c                 vxh,vyh,vzh   ==>  recalculated pl vel in helio coord
 c                                    (real arrays)
 c                 rpl           ==>  recalculated physical sizes of a planet.
 c                                    (real array)
-c                 lemat         ==> Reordered encounter matrix 
+c                 lemat         ==> Reordered encounter matrix
 c                                     (logical 2D array)
 c                 eoff          ==> Updated amount of energy lost from discards
 c                                          (real scalar)
 c                ielc           ==>  number of encounters (integer*2 scalar)
 c                ielst          ==>  list of ecnounters (2D integer*2 array)
 c
-c Remarks: 
+c Remarks:
 c
-c Authors:  Hal Levison 
+c Authors:  Hal Levison
 c Date:    12/30/96
 c Last revision: 1/30/97
 
@@ -46,7 +46,7 @@ c Last revision: 1/30/97
 
       include '../swift.inc'
 
-c...  Inputs: 
+c...  Inputs:
       integer ip1,ip2
       real*8 time
 
@@ -69,7 +69,7 @@ c...  internal
       real*8 j2rp2,j4rp4,ke,pot,energy1,energy2,eltot(3)
 
 c-----
-c...  Executable code 
+c...  Executable code
 
       j2rp2=0.0d0
       j4rp4=0.0d0
@@ -116,8 +116,8 @@ c...        of close approach.
 
 c..   Put in zeros for the rest the second particle
       xh(ip2) = xh(ip2)*1.0d10   ! so danby does not fail
-      yh(ip2) = yh(ip2)*1.0d10 
-      zh(ip2) = zh(ip2)*1.0d10 
+      yh(ip2) = yh(ip2)*1.0d10
+      zh(ip2) = zh(ip2)*1.0d10
       vxh(ip2) = 0.0d0
       vyh(ip2) = 0.0d0
       vzh(ip2) = 0.0d0

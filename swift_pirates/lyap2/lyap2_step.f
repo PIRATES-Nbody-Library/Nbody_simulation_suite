@@ -1,7 +1,7 @@
 c*************************************************************************
 c                            LYAP2_STEP.F
 c*************************************************************************
-c This subroutine takes a step in helio coord.  
+c This subroutine takes a step in helio coord.
 c Uses the difference equations as discussed my Mikola
 c
 c             Input:
@@ -12,13 +12,13 @@ c                 ntp           ==>  number of massive bodies (int scalar)
 c                 mass          ==>  mass of bodies (real array)
 c                 j2rp2,j4rp4   ==>  J2*radii_pl^2 and  J4*radii_pl^4
 c                                     (real scalars)
-c                 xh,yh,zh      ==>  initial position in helio coord 
+c                 xh,yh,zh      ==>  initial position in helio coord
 c                                    (real arrays)
-c                 vxh,vyh,vzh   ==>  initial velocity in helio coord 
+c                 vxh,vyh,vzh   ==>  initial velocity in helio coord
 c                                    (real arrays)
-c                 xht,yht,zht    ==>  initial part position in helio coord 
+c                 xht,yht,zht    ==>  initial part position in helio coord
 c                                      (real arrays)
-c                 vxht,vyht,vzht ==>  initial velocity in helio coord 
+c                 vxht,vyht,vzht ==>  initial velocity in helio coord
 c                                        (real arrays)
 c                 istat           ==>  status of the test paricles
 c                                      (2d integer array)
@@ -26,27 +26,27 @@ c                                      istat(i,1) = 0 ==> active:  = 1 not
 c                                      istat(i,2) = -1 ==> Danby did not work
 c                 rstat           ==>  status of the test paricles
 c                                      (2d real array)
-c	                                rstat(i,3), rstat(i,3), rstat(i,5) = 
-c                                             the dx(1)-dx(3) from the 
+c	                                rstat(i,3), rstat(i,3), rstat(i,5) =
+c                                             the dx(1)-dx(3) from the
 c                                             difference equations.
-c	                                rstat(i,6), rstat(i,7), rstat(i,8) = 
-c                                             the dv(1)-dv(3) from the 
+c	                                rstat(i,6), rstat(i,7), rstat(i,8) =
+c                                             the dv(1)-dv(3) from the
 c                                             difference equations
 c                 dt            ==>  time step
 c             Output:
-c                 xh,yh,zh      ==>  final position in helio coord 
+c                 xh,yh,zh      ==>  final position in helio coord
 c                                       (real arrays)
-c                 vxh,vyh,vzh   ==>  final velocity in helio coord 
+c                 vxh,vyh,vzh   ==>  final velocity in helio coord
 c                                       (real arrays)
-c                 xht,yht,zht    ==>  final position in helio coord 
+c                 xht,yht,zht    ==>  final position in helio coord
 c                                       (real arrays)
-c                 vxht,vyht,vzht ==>  final position in helio coord 
+c                 vxht,vyht,vzht ==>  final position in helio coord
 c                                       (real arrays)
 c
 c Remarks: Adopted from step_kbk
 c Authors:  Hal Levison
 c Date:    7/11/95
-c Last revision: 
+c Last revision:
 
       subroutine lyap2_step(i1st,time,nbod,ntp,mass,j2rp2,j4rp4,
      &     xh,yh,zh,vxh,vyh,vzh,xht,yht,zht,vxht,vyht,vzht,
@@ -54,7 +54,7 @@ c Last revision:
 
       include '../swift.inc'
 
-c...  Inputs Only: 
+c...  Inputs Only:
       integer nbod,ntp,i1st
       real*8 mass(nbod),dt,time,j2rp2,j4rp4
 
@@ -83,7 +83,7 @@ c...  Internals
       save dxht,dyht,dzht,dvxht,dvyht,dvzht
 
 c----
-c...  Executable code 
+c...  Executable code
 
 c...  set things up if this is the initial call
       if(i1stin.eq.0) then
@@ -91,7 +91,7 @@ c...  set things up if this is the initial call
         if( (j2rp2.ne.0.0d0) .or. (j4rp4.ne.0.0d0) ) then
            write(*,*) 'LYAP2 routines must have J2,J4=0!'
            call util_exit(1)   !    <==== NOTE!
-        endif                 
+        endif
 
 	write(*,*) 'Input how aften the  distance is written:'
 	read(*,*) dtlout
@@ -126,8 +126,8 @@ c...  set things up if this is the initial call
            if(istat(i,1).ne.0) then
               dist(i) = 0.0d0
            else
-              dist(i) = sqrt( dxht(i)**2 + dyht(i)**2 + 
-     &             dzht(i)**2 + dvxht(i)**2 + dvyht(i)**2 + 
+              dist(i) = sqrt( dxht(i)**2 + dyht(i)**2 +
+     &             dzht(i)**2 + dvxht(i)**2 + dvyht(i)**2 +
      &             dvzht(i)**2 )
            endif
         enddo
@@ -162,19 +162,19 @@ c...  next the test particles
       call lyap2_step_tp(i1sttp,nbod,ntp,mass,j2rp2,j4rp4,
      &              xbeg,ybeg,zbeg,xend,yend,zend,
      &              xht,yht,zht,vxht,vyht,vzht,
-     &              dxht,dyht,dzht,dvxht,dvyht,dvzht,istat,dt)	
+     &              dxht,dyht,dzht,dvxht,dvyht,dvzht,istat,dt)
 
       tin = tin + dt
 
 c...  now do the lyap anal stuff
-      if(tin .ge. tlout) then 
+      if(tin .ge. tlout) then
 
          do i=1,ntp
             if(istat(i,1).ne.0) then
                dist(i) = 0.0d0
             else
-               dist(i) = sqrt( dxht(i)**2 + dyht(i)**2 + 
-     &              dzht(i)**2 + dvxht(i)**2 + dvyht(i)**2 + 
+               dist(i) = sqrt( dxht(i)**2 + dyht(i)**2 +
+     &              dzht(i)**2 + dvxht(i)**2 + dvyht(i)**2 +
      &              dvzht(i)**2 )
             endif
          enddo
@@ -196,4 +196,3 @@ c...  now do the lyap anal stuff
       return
       end   ! lyap2_step
 c------------------------------------------------------------------------
-

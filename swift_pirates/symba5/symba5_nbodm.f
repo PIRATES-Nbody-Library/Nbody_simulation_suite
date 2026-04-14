@@ -8,7 +8,7 @@ c                 nbod          ==>  number of massive bodies (int scalar)
 c                 mass          ==>  mass of bodies (real array)
 c                 mtiny         ==>  Small mass  (real array)
 c             Output:
-c                 nbodm         ==>  location of the last massive body 
+c                 nbodm         ==>  location of the last massive body
 c                                    (int scalar)
 c
 c Remarks:  If all the objects are massive, then nbodm=nbod-1 so that
@@ -22,7 +22,7 @@ c Last revision: 1/29/06
       include '../swift.inc'
       include 'symba5.inc'
 
-c...  Inputs Only: 
+c...  Inputs Only:
       integer nbod
       real*8 mass(nbod),mtiny
 
@@ -33,7 +33,7 @@ c...  Internals
       integer i
 
 c----
-c...  Executable code 
+c...  Executable code
 
       if(mass(nbod).gt.mtiny) then
          nbodm = nbod - 1
@@ -51,4 +51,3 @@ c...  Executable code
       return
       end             ! symba5_nbodm.f
 c--------------------------------------------------------
-

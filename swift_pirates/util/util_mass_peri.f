@@ -24,16 +24,16 @@ c                                         (logical*2 array)
 c
 c
 c Remarks: Based on util_peri.f
-c Authors:  Hal Levison 
+c Authors:  Hal Levison
 c Date:    12/30/96
-c Last revision: 
+c Last revision:
 
       subroutine util_mass_peri(iflg,nbod,x,y,z,vx,vy,vz,
      &     mass,isperi,peri,lperi)
 
       include '../swift.inc'
 
-c...  Inputs Only: 
+c...  Inputs Only:
       integer nbod,iflg
       real*8 x(nbod),y(nbod),z(nbod),mass(nbod)
       real*8 vx(nbod),vy(nbod),vz(nbod),gm
@@ -48,7 +48,7 @@ c...  Internals
       real*8 vdotr,a,e
 
 c----
-c...  Executable code 
+c...  Executable code
 
       if(iflg.eq.0) then    ! are we just setting thing up?
 
@@ -56,7 +56,7 @@ c...  Executable code
             vdotr = x(i)*vx(i) + y(i)*vy(i) + z(i)*vz(i)
             if (vdotr .gt. 0.d0) then
                isperi(i) = 1
-            else 
+            else
                isperi(i) =-1
             endif
          enddo
@@ -93,5 +93,3 @@ c...  Executable code
       return
       end    ! util_mass_peri
 c------------------------------------------------------------------
-
-

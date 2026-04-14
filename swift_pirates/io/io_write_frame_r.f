@@ -9,29 +9,29 @@ c                 time          ==>  current time (real scalar)
 c                 nbod          ==>  number of massive bodies (int scalar)
 c                 ntp            ==>  number of massive bodies (int scalar)
 c                 mass          ==>  mass of bodies (real array)
-c                 xh,yh,zh      ==>  current position in helio coord 
+c                 xh,yh,zh      ==>  current position in helio coord
 c                                    (real arrays)
-c                 vxh,vyh,vzh   ==>  current velocity in helio coord 
+c                 vxh,vyh,vzh   ==>  current velocity in helio coord
 c                                    (real arrays)
-c                 xht,yht,zht    ==>  current part position in helio coord 
+c                 xht,yht,zht    ==>  current part position in helio coord
 c                                      (real arrays)
-c                 vxht,vyht,vzht ==>  current velocity in helio coord 
+c                 vxht,vyht,vzht ==>  current velocity in helio coord
 c                                        (real arrays)
 c                 istat           ==>  status of the test paricles
 c                                      (2d integer array)
 c                                      istat(i,1) = 0 ==> active:  = 1 not
 c                                      istat(i,2) = -1 ==> Danby did not work
-c                 oname           ==> output file name (character string) 
+c                 oname           ==> output file name (character string)
 c                 iu              ==> unit number to write to
-c                 fopenstat       ==>  The status flag for the open 
-c                                      statements of the output files.  
+c                 fopenstat       ==>  The status flag for the open
+c                                      statements of the output files.
 c                                          (character*80)
 c
 c
 c Remarks: Based on io_write_frame
-c Authors:  Hal Levison 
+c Authors:  Hal Levison
 c Date:    2/22/94
-c Last revision: 
+c Last revision:
 
       subroutine io_write_frame_r(time,nbod,ntp,mass,xh,yh,zh,vxh,
      &           vyh,vzh,xht,yht,zht,vxht,vyht,vzht,istat,oname,
@@ -40,7 +40,7 @@ c Last revision:
       include '../swift.inc'
       include 'io.inc'
 
-c...  Inputs: 
+c...  Inputs:
       integer nbod,ntp,iu
       real*8 mass(nbod),time
       integer istat(NTPMAX,NSTAT)
@@ -60,7 +60,7 @@ c...  Internals
       save i1st
 
 c----
-c...  Executable code 
+c...  Executable code
 
 c...  if first time through open file
       if(i1st.eq.0) then
@@ -76,7 +76,7 @@ c...  if first time through open file
       endif
 
       call io_write_hdr_r(iu,time,nbod,ntp,istat)
-      
+
 c...  write out planets
       do i=2,nbod
          gm = mass(1)+mass(i)

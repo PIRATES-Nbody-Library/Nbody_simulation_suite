@@ -7,11 +7,11 @@ c
 c             Input:
 c                 time          ==>  current time (real scalar)
 c                 ntp           ==>  number of test bodies (int scalar)
-c                 xht,yht,zht    ==>   part position in helio coord 
+c                 xht,yht,zht    ==>   part position in helio coord
 c                                      (real arrays)
-c                 vxht,vyht,vzht ==>   part vel in helio coord 
+c                 vxht,vyht,vzht ==>   part vel in helio coord
 c                                      (real arrays)
-c                 qmin            ==>  Smallest perihelion distance 
+c                 qmin            ==>  Smallest perihelion distance
 c                                      (real scalar)
 c                 istat           ==>  status of the test paricles
 c                                      (2d  integer array)
@@ -21,9 +21,9 @@ c                                      (2d  real array)
 c                 nbod            ==>  Number of planets (int scalar)
 c                 nbod          ==>  number of massive bodies (int scalar)
 c                 mass          ==>  mass of bodies (real array)
-c                 xh,yh,zh      ==>   position in helio coord 
+c                 xh,yh,zh      ==>   position in helio coord
 c                                    (real arrays)
-c                 vxh,vyh,vzh   ==>   pl vel in helio coord 
+c                 vxh,vyh,vzh   ==>   pl vel in helio coord
 c                                    (real arrays)
 c             Output:
 c                 istat           ==>  status of the test paricles
@@ -35,9 +35,9 @@ c                                      (2d  real array)
 c                                      rstat(i,2) perihelion distance.
 c                                      rstat(i,1) time of discard.
 c
-c Remarks: 
+c Remarks:
 c
-c Authors:  Hal Levison 
+c Authors:  Hal Levison
 c Date:    5/10/94
 c Last revision: 1/20/97
 
@@ -46,7 +46,7 @@ c Last revision: 1/20/97
 
       include '../swift.inc'
 
-c...  Inputs: 
+c...  Inputs:
       integer ntp,nbod
       real*8 mass(nbod),time,qmin
       real*8 xht(ntp),yht(ntp),zht(ntp)
@@ -68,7 +68,7 @@ c...  internal
       save i1st,isperi,r2hill
 
 c-----
-c...  Executable code 
+c...  Executable code
 
       if(i1st.eq.0) then     ! if first time through, set things up
          call util_hills(nbod,mass,xh,yh,zh,vxh,vyh,vzh,r2hill)
@@ -83,10 +83,10 @@ c...  Executable code
 
       do i=1,ntp
          if( (istat(i,1).eq.0).and. (isperi(i).eq.0) ) then
-            
+
             ih = 0
             do j=2,nbod
-               r2 = (xht(i)-xh(j))**2 + (yht(i)-yh(j))**2 + 
+               r2 = (xht(i)-xh(j))**2 + (yht(i)-yh(j))**2 +
      &              (zht(i)-zh(j))**2
                if(r2.le.r2hill(j)) then
                   ih = 1
@@ -108,13 +108,3 @@ c...  Executable code
 
       return
       end       ! discard_peri
-
-
-
-
-
-
-
-
-
-

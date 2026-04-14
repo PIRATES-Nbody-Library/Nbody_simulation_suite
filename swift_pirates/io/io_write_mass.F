@@ -10,24 +10,24 @@ c             Input:
 c                 time          ==>  current time (real scalar)
 c                 nbod          ==>  number of massive bodies (int scalar)
 c                 mass          ==>  mass of bodies (real array)
-c                 oname           ==> output file name (character string) 
+c                 oname           ==> output file name (character string)
 c                 iu              ==> unit number to write to
-c                 fopenstat       ==>  The status flag for the open 
-c                                      statements of the output files.  
+c                 fopenstat       ==>  The status flag for the open
+c                                      statements of the output files.
 c                                          (character*80)
 c
 c
 c Remarks: Based on io_write_frame
-c Authors:  Hal Levison 
+c Authors:  Hal Levison
 c Date:    11/2/99
-c Last revision: 
+c Last revision:
 
       subroutine io_write_mass(time,nbod,mass,oname,iu,fopenstat)
 
       include '../swift.inc'
       include 'io.inc'
 
-c...  Inputs: 
+c...  Inputs:
       integer nbod,iu
       real*8 mass(nbod),time
       character*80 oname,fopenstat
@@ -44,19 +44,19 @@ c...  Internals
       save i1st,dirname,filename,ldir,lfile
 
 c----
-c...  Executable code 
+c...  Executable code
 
 #ifdef  _FXDR_AVAIL
 
 c...  if first time through open file
       if(i1st.eq.0) then
          call io_splitname(oname,dirname,ldir,filename,lfile)
-         if( (fopenstat(1:6).eq.'append') .or. 
+         if( (fopenstat(1:6).eq.'append') .or.
      &        (fopenstat(1:6).eq.'APPEND') ) then
             call io_open_fxdr(dirname(1:ldir)//'mass.'//
      &           filename(1:lfile),'a', .true., iu, ierr)
          else
-            if( (fopenstat(1:3).eq.'new') .or. 
+            if( (fopenstat(1:3).eq.'new') .or.
      &           (fopenstat(1:3).eq.'NEW') ) then
                call io_open_fxdr(dirname(1:ldir)//'mass.'//
      &              filename(1:lfile),'w', .true., iu, ierr)

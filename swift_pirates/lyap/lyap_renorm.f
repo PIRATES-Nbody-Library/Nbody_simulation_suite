@@ -5,29 +5,29 @@ c   Computes the distance and adds to the cum. sum for computing
 c   Lyap exponent for a tp and its shadow. Moves the shadow back to
 c   its original distance in phase space along the separation vector.
 c             Input:
-c              xt,yt,zt      ==>  current position of a TP in Helio coord 
+c              xt,yt,zt      ==>  current position of a TP in Helio coord
 c                                    (real scalars)
-c              vxt,vyt,vzt   ==>  current position of TP in Helio coord 
+c              vxt,vyt,vzt   ==>  current position of TP in Helio coord
 c                                    (real scalars)
-c              xs,ys,zs      ==>  current position of shawdow part in Helio coord 
+c              xs,ys,zs      ==>  current position of shawdow part in Helio coord
 c                                    (real scalars)
-c              vxs,vys,vzs   ==>  current position of SP in Helio coord 
+c              vxs,vys,vzs   ==>  current position of SP in Helio coord
 c                                    (real scalars)
 c                  distorig  ==>  original distance between TP and SP
 c                  logsum    ==>  current values of the log of gamma
 c                                    (real scalar)
 c
 c             Output:
-c              xs,ys,zs      ==>  renormalized position of SP in Helio coord 
+c              xs,ys,zs      ==>  renormalized position of SP in Helio coord
 c                                    (real scalars)
-c              vxs,vys,vzs   ==>  renormalized position of SP in Helio coord 
+c              vxs,vys,vzs   ==>  renormalized position of SP in Helio coord
 c                                    (real scalars)
 c               logsum       ==>  renormalized values of the log of gamma
 c                                    (real scalar)
 c
-c Remarks: 
+c Remarks:
 c Authors:  Martin Duncan
-c Date:    5/5/93 
+c Date:    5/5/93
 c Last revision:  5/11/93  HFL
 
 	subroutine lyap_renorm(xt,yt,zt,vxt,vyt,vzt,xs,ys,zs,

@@ -6,17 +6,17 @@ c
 c             Input:
 c                 nbod           ==>  number of massive bodies (int scalar)
 c                 ntp            ==>  number of test bodies (int scalar)
-c                 ipl            ==>  the planet that is currently in the 
+c                 ipl            ==>  the planet that is currently in the
 c                                      center (integer scalar)
 c                 mass           ==>  mass of bodies (real array)
 c                 j2rp2,j4rp4    ==>  J2*radii_pl^2 and  J4*radii_pl^4
 c                                     (real scalars)
-c                 xpl,ypl,zpl    ==>  massive part position at 
+c                 xpl,ypl,zpl    ==>  massive part position at
 c                                       (real arrays)
 c              aoblx,aobly,aoblz ==> acceleration of the Sun on the central pl
 c                                     due to J2 anf J4
 c                                      (real scalars)
-c                 xpt,ypt,zpt    ==>  initial part position in planet-coord 
+c                 xpt,ypt,zpt    ==>  initial part position in planet-coord
 c                                      (real arrays)
 c                 istat           ==>  status of the test paricles
 c                                      (2d integer array)
@@ -30,9 +30,9 @@ c                 axpt,aypt,azpt ==>  accel on tp WITH J2 and J4 added.
 c                                       (real arrays)
 c
 c Remarks: Taken from step_kdk_tp.f
-c Authors:  Hal Levison 
+c Authors:  Hal Levison
 c Date:    2/24/94
-c Last revision: 
+c Last revision:
 
       subroutine rmvs_obl_acc(nbod,ntp,ipl,mass,j2rp2,j4rp4,xpl,ypl,
      &     zpl,aoblx,aobly,aoblz,xpt,ypt,zpt,istat,axpt,aypt,azpt)
@@ -40,10 +40,10 @@ c Last revision:
       include '../swift.inc'
       include 'rmvs.inc'
 
-c...  Inputs Only: 
+c...  Inputs Only:
       integer nbod,ntp,ipl
       integer istat(NTPMAX,NSTAT)
-      real*8 mass(nbod),j2rp2,j4rp4  
+      real*8 mass(nbod),j2rp2,j4rp4
       real*8 xpl(NPLMAX),ypl(NPLMAX),zpl(NPLMAX)
       real*8 xpt(ntp),ypt(ntp),zpt(ntp)
       real*8 aoblx,aobly,aoblz
@@ -59,14 +59,14 @@ c...  Internals:
 
 
 c----
-c...  Executable code 
+c...  Executable code
 
 c...  Do we need to do this?
       if(j2rp2.eq.0.0d0) then
-         return                  !!!!!!! NOTE 
+         return                  !!!!!!! NOTE
       endif
 
-c...  first get barycentric accel 
+c...  first get barycentric accel
       do i=1,ntp
          xht(i) = xpt(i)-xpl(ipl)
          yht(i) = ypt(i)-ypl(ipl)

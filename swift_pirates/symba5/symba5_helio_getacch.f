@@ -2,7 +2,7 @@ c*************************************************************************
 c                        SYMBA5_HELIO_GETACCH.F
 c*************************************************************************
 c This subroutine calculates the acceleration on the massive particles
-c in the HELIOCENTRIC frame. 
+c in the HELIOCENTRIC frame.
 c             Input:
 c                 iflg        ==>  =0 calculate forces (int scalor)
 c                                  =1 don't
@@ -17,26 +17,26 @@ c             Output:
 c                 axh,ayh,azh ==>  acceleration in helio coord (real arrays)
 c
 c Remarks Based on helio_getacch.f
-c Author:  Hal Levison  
+c Author:  Hal Levison
 c Date:    9/12/99
-c Last revision: 11/08/13 
+c Last revision: 11/08/13
 
       subroutine symba5_helio_getacch(iflg,nbod,nbodm,mass,
      &     j2rp2,j4rp4,xh,yh,zh,axh,ayh,azh)
 
       include '../swift.inc'
 
-c...  Inputs: 
+c...  Inputs:
       integer nbod,nbodm,iflg
       real*8 mass(nbod),j2rp2,j4rp4
       real*8 xh(nbod),yh(nbod),zh(nbod)
 
 c...  Outputs:
       real*8 axh(nbod),ayh(nbod),azh(nbod)
-                
+
 c...  Internals:
       integer i,j
-      real*8 aoblx(NTPMAX),aobly(NTPMAX),aoblz(NTPMAX) 
+      real*8 aoblx(NTPMAX),aobly(NTPMAX),aoblz(NTPMAX)
       real*8 axhl(NTPMAX),ayhl(NTPMAX),azhl(NTPMAX)
       real*8 ir3h(NTPMAX),irh(NTPMAX)
       real*8 dx,dy,dz,rji2,faci,facj,irij3
@@ -44,7 +44,7 @@ c...  Internals:
       save axhl,ayhl,azhl     ! Note this !!
 
 c----
-c...  Executable code 
+c...  Executable code
 
       if(iflg.eq.0) then
 
@@ -57,24 +57,24 @@ c...  Executable code
 c...     now the third terms
          do i=2,nbodm
             do j=i+1,nbod
-               
+
                dx = xh(j) - xh(i)
                dy = yh(j) - yh(i)
                dz = zh(j) - zh(i)
                rji2 = dx*dx + dy*dy + dz*dz
-               
+
                irij3 = 1.0d0/(rji2*sqrt(rji2))
                faci = mass(i)*irij3
                facj = mass(j)*irij3
-               
+
                axhl(j) = axhl(j) - faci*dx
                ayhl(j) = ayhl(j) - faci*dy
                azhl(j) = azhl(j) - faci*dz
-               
+
                axhl(i) = axhl(i) + facj*dx
                ayhl(i) = ayhl(i) + facj*dy
                azhl(i) = azhl(i) + facj*dz
-               
+
             enddo
          enddo
 
@@ -102,7 +102,3 @@ c...  Now do j2 and j4 stuff
       end      ! symba5_helio_getacch
 
 c---------------------------------------------------------------------
-
-
-
-

@@ -19,9 +19,9 @@ c                                       (1d real arrays)
 c
 c
 c Remarks: Adopted from hal's wiscl_fk.f
-c Authors:  Hal Levison 
+c Authors:  Hal Levison
 c Date:    2/19/93
-c Last revision: 
+c Last revision:
 
       subroutine rmvs_step_in_mvpl(ipl,nbod,mass,xpl,ypl,zpl,
      &             masst,xpltb,ypltb,zpltb,xplte,yplte,zplte)
@@ -30,7 +30,7 @@ c Last revision:
       include '../swift.inc'
       include 'rmvs.inc'
 
-c...  Inputs Only: 
+c...  Inputs Only:
       integer ipl,nbod
       real*8 mass(NPLMAX)
       real*8 xpl(NPLMAX),ypl(NPLMAX)
@@ -45,13 +45,13 @@ c...  Internals
       integer i
 
 c----
-c...  Executable code 
+c...  Executable code
 
 c...  Move things over
       do i = 1,nbod
-         xpltb(i) = xplte(i) 
-         ypltb(i) = yplte(i) 
-         zpltb(i) = zplte(i) 
+         xpltb(i) = xplte(i)
+         ypltb(i) = yplte(i)
+         zpltb(i) = zplte(i)
       enddo
 
 c...  first just move the planets
@@ -76,5 +76,3 @@ c...  now switch things
       return
       end   ! rmvs_step_in_mvpl
 c---------------------------------------------------------------------------
-
-

@@ -1,7 +1,7 @@
 ***********************************************************************
 c                    ORBEL_FGET.F
 ***********************************************************************
-*     PURPOSE:  Solves Kepler's eqn. for hyperbola using hybrid approach.  
+*     PURPOSE:  Solves Kepler's eqn. for hyperbola using hybrid approach.
 *
 *             Input:
 *                           e ==> eccentricity anomaly. (real scalar)
@@ -11,8 +11,8 @@ c                    ORBEL_FGET.F
 *
 *     ALGORITHM: Based on pp. 70-72 of Fitzpatrick's book "Principles of
 *           Cel. Mech. ".  Quartic convergence from Danby's book.
-*     REMARKS: 
-*     AUTHOR: M. Duncan 
+*     REMARKS:
+*     AUTHOR: M. Duncan
 *     DATE WRITTEN: May 11, 1992.
 *     REVISIONS: 2/26/93 hfl
 ***********************************************************************
@@ -21,7 +21,7 @@ c                    ORBEL_FGET.F
 
       include '../swift.inc'
 
-c...  Inputs Only: 
+c...  Inputs Only:
 	real*8 e,capn
 
 c...  Internals:
@@ -31,12 +31,12 @@ c...  Internals:
 	PARAMETER (IMAX = 10)
 
 c----
-c...  Executable code 
+c...  Executable code
 
 c Function to solve "Kepler's eqn" for F (here called
-c x) for given e and CAPN. 
+c x) for given e and CAPN.
 
-c  begin with a guess proposed by Danby	
+c  begin with a guess proposed by Danby
 	if( capn .lt. 0.d0) then
 	   tmp = -2.d0*capn/e + 1.8d0
 	   x = -log(tmp)
@@ -53,9 +53,9 @@ c  begin with a guess proposed by Danby
 	  ech = e*chx
 	  f = esh - x - capn
 c	  write(6,*) 'i,x,f : ',i,x,f
-	  fp = ech - 1.d0  
-	  fpp = esh 
-	  fppp = ech 
+	  fp = ech - 1.d0
+	  fpp = esh
+	  fppp = ech
 	  dx = -f/fp
 	  dx = -f/(fp + dx*fpp/2.d0)
 	  dx = -f/(fp + dx*fpp/2.d0 + dx*dx*fppp/6.d0)
@@ -63,9 +63,9 @@ c	  write(6,*) 'i,x,f : ',i,x,f
 c   If we have converged here there's no point in going on
 	  if(abs(dx) .le. TINY) RETURN
 	  x = orbel_fget
-	enddo	
+	enddo
 
-	write(6,*) 'FGET : RETURNING WITHOUT COMPLETE CONVERGENCE' 
+	write(6,*) 'FGET : RETURNING WITHOUT COMPLETE CONVERGENCE'
 	return
 	end   ! orbel_fget
 c------------------------------------------------------------------

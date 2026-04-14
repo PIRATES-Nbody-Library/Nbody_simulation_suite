@@ -9,7 +9,7 @@ c            msun          ==>   Mass of the Sun (real scalar)
 c            mpl           ==>   Mass of the Planet (real scalar)
 c            omegax,..y,z  ==>   vector components of planet-sun orbit's
 c                                 angular velocity vector(real scalars)
-c            xb,yb,zb      ==>   Barycentric position of particle 
+c            xb,yb,zb      ==>   Barycentric position of particle
 c                                   (real scalars)
 c            vxb,vyb,vzb   ==>   Barycentric vel of particle (real scalars)
 c            xsb,ysb,zsb   ==>   Barycentric position of Sun (real scalars)
@@ -18,17 +18,17 @@ c
 c       Output:
 c            jacobi         ==>  Value of the jacobi constant
 c
-c Remarks: 
+c Remarks:
 c Authors:  Martin Duncan
-c Date:   April 13/93 
-c Last revision:  3/4/93 HFL 
+c Date:   April 13/93
+c Last revision:  3/4/93 HFL
 
       subroutine anal_jacobi(msun,mpl,omegax,omegay,omegaz,xb,yb,zb,
      &      vxb,vyb,vzb,xsb,ysb,zsb,xplb,yplb,zplb,jacobi)
 
       include '../swift.inc'
 
-c...  Inputs: 
+c...  Inputs:
       real*8 msun,mpl,omegax,omegay,omegaz,xb,yb,zb,vxb,vyb,vzb
       real*8 xsb,ysb,zsb,xplb,yplb,zplb
 
@@ -39,7 +39,7 @@ c...  Internals
       real*8 rr,jx,jy,jz
 
 c----
-c...  Executable code 
+c...  Executable code
 
       jacobi = 0.5d0*(vxb**2 + vyb**2 + vzb**2)
 
@@ -58,8 +58,3 @@ c...  Executable code
       return
       end       ! anal_jacobi
 c-------------------------------------------------------------------------
-
-
-
-
-

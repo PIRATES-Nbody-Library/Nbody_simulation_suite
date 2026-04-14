@@ -9,19 +9,19 @@ c            nbod          ==>  number of massive bodies (int scalar)
 c            mass          ==>  mass of bodies (real array)
 c            j2rp2         ==>  scaled value of j2 moment (real*8 scalar)
 c            j4rp4         ==>  scaled value of j4 moment (real*8 scalar)
-c            xh,yh,zh      ==>  current position in helio coord 
+c            xh,yh,zh      ==>  current position in helio coord
 c                               (real arrays)
-c            vxh,vyh,vzh   ==>  current velocity in helio coord 
+c            vxh,vyh,vzh   ==>  current velocity in helio coord
 c                               (real arrays)
 c            iu            ==>  unit to write to (int scalar)
-c            fopenstat     ==>  The status flag for the open 
-c                                statements of the output files.  
+c            fopenstat     ==>  The status flag for the open
+c                                statements of the output files.
 c                                      (character*80)
 c            eoff          ==> An energy offset that is added to the energy
 c                                      (real*8 scalar)
 c
-c Remarks: 
-c Authors:  Hal Levison 
+c Remarks:
+c Authors:  Hal Levison
 c Date:    3/4/93
 c Last revision: 12/27/96
 
@@ -30,7 +30,7 @@ c Last revision: 12/27/96
 
       include '../swift.inc'
 
-c...  Inputs: 
+c...  Inputs:
       integer nbod,iu
       real*8 mass(nbod),t,j2rp2,j4rp4,eoff
       real*8 xh(nbod),yh(nbod),zh(nbod)
@@ -45,7 +45,7 @@ c...  Internals
       save i1st
 
 c----
-c...  Executable code 
+c...  Executable code
 
 c Compute and print initial ke,pot,energy and ang. mom.
       call anal_energy(nbod,mass,j2rp2,j4rp4,xh,yh,zh,
@@ -62,4 +62,3 @@ c Compute and print initial ke,pot,energy and ang. mom.
       return
       end     !anal_energy_write
 c--------------------------------------------------------------------------
-

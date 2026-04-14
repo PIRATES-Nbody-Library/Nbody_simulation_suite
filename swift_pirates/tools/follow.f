@@ -81,9 +81,9 @@ c Get data for the run and the test particles
 	ic = 0
  1      continue
              if(btest(iflgchk,0))  then ! bit 0 is set
-                ierr = io_read_hdr(iu,t,nbod,nleft) 
+                ierr = io_read_hdr(iu,t,nbod,nleft)
              else
-                ierr = io_read_hdr_r(iu,t,nbod,nleft) 
+                ierr = io_read_hdr_r(iu,t,nbod,nleft)
              endif
 
              if(ierr.ne.0) then
@@ -94,9 +94,9 @@ c Get data for the run and the test particles
              istep = 0
              do i=2,nbod
                 if(btest(iflgchk,0))  then ! bit 0 is set
-                   ierr = io_read_line(iu,id,a,e,inc,capom,omega,capm) 
+                   ierr = io_read_line(iu,id,a,e,inc,capom,omega,capm)
                 else
-                   ierr = io_read_line_r(iu,id,a,e,inc,capom,omega,capm) 
+                   ierr = io_read_line_r(iu,id,a,e,inc,capom,omega,capm)
                 endif
 		if(ierr.ne.0) then
 		   write(*,*) ' Stop while reading planets ierr=',ierr
@@ -126,9 +126,9 @@ c Get data for the run and the test particles
 
              do i=1,nleft
                 if(btest(iflgchk,0))  then ! bit 0 is set
-                   ierr = io_read_line(iu,id,a,e,inc,capom,omega,capm) 
+                   ierr = io_read_line(iu,id,a,e,inc,capom,omega,capm)
                 else
-                   ierr = io_read_line_r(iu,id,a,e,inc,capom,omega,capm) 
+                   ierr = io_read_line_r(iu,id,a,e,inc,capom,omega,capm)
                 endif
 		if(ierr.ne.0) then
 		   write(*,*) ' Stop while reading planets ierr=',ierr

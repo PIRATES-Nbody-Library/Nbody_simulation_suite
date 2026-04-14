@@ -13,17 +13,17 @@ c
 c             Returns:
 c               io_read_hdr_r     ==>   =0 read ok
 c                                    !=0 read failed is set to iostat variable
-c Remarks: 
-c Authors:  Hal Levison 
+c Remarks:
+c Authors:  Hal Levison
 c Date:    2/22/94
-c Last revision: 
+c Last revision:
 
-      integer function io_read_hdr_r(iu,time,nbod,nleft) 
+      integer function io_read_hdr_r(iu,time,nbod,nleft)
 
       include '../swift.inc'
       include 'io.inc'
 
-c...  Inputs: 
+c...  Inputs:
       integer iu
 
 c...  Output
@@ -36,7 +36,7 @@ c...  Internals
       integer ierr
 
 c----
-c...  Executable code 
+c...  Executable code
 
 
       read(iu,iostat=ierr) ttmp,nbod2,nleft2
@@ -52,4 +52,3 @@ c...  Executable code
       return
       end     ! io_read_hdr_r.f
 c---------------------------------------------------------------------------
-

@@ -21,10 +21,10 @@ c                 peri           ==> set to pericenter dist. if isperi=0
 c                                         (real array)
 c
 c
-c Remarks: 
-c Authors:  Hal Levison 
+c Remarks:
+c Authors:  Hal Levison
 c Date:    2/25/94
-c Last revision: 
+c Last revision:
 
       subroutine rmvs_peri(iflg,nenci,xt,yt,zt,vxt,vyt,vzt,
      &     massp,isperi,peri)
@@ -32,7 +32,7 @@ c Last revision:
       include '../swift.inc'
       include 'rmvs.inc'
 
-c...  Inputs Only: 
+c...  Inputs Only:
       integer nenci,iflg
       real*8 xt(nenci),yt(nenci),zt(nenci),massp
       real*8 vxt(nenci),vyt(nenci),vzt(nenci)
@@ -46,7 +46,7 @@ c...  Internals
       real*8 vdotr,a,e
 
 c----
-c...  Executable code 
+c...  Executable code
 
       if(iflg.eq.0) then    ! are we just setting thing up?
 
@@ -54,7 +54,7 @@ c...  Executable code
             vdotr = xt(i)*vxt(i) + yt(i)*vyt(i) + zt(i)*vzt(i)
             if (vdotr .gt. 0.d0) then
                isperi(i) = 1
-            else 
+            else
                isperi(i) =-1
             endif
          enddo
@@ -77,5 +77,3 @@ c...  Executable code
       return
       end    ! rmvs_peri
 c------------------------------------------------------------------
-
-

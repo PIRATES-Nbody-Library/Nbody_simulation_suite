@@ -1,13 +1,13 @@
 c*************************************************************************
 c                            RMVS4_STEP.F
 c*************************************************************************
-c This subroutine takes a step in helio coord.  
+c This subroutine takes a step in helio coord.
 c both massive and test particles
 c INCLUDES close approuches between test particles and planets
 c
-c VERSION 4 of RMVS.  The only difference from RMVS3 is that the forces are 
+c VERSION 4 of RMVS.  The only difference from RMVS3 is that the forces are
 c                     always calculated between the planets.  This hopefully
-c                     will fix the problem that when I do multiple runs, the 
+c                     will fix the problem that when I do multiple runs, the
 c                     planets end up at different places.
 c
 c             Input:
@@ -18,13 +18,13 @@ c                 ntp            ==>  number of massive bodies (int scalar)
 c                 mass          ==>  mass of bodies (real array)
 c                 j2rp2,j4rp4   ==>  J2*radii_pl^2 and  J4*radii_pl^4
 c                                     (real scalars)
-c                 xh,yh,zh      ==>  initial planet position in helio coord 
+c                 xh,yh,zh      ==>  initial planet position in helio coord
 c                                    (real arrays)
-c                 vxh,vyh,vzh   ==>  initial planet velocity in helio coord 
+c                 vxh,vyh,vzh   ==>  initial planet velocity in helio coord
 c                                    (real arrays)
-c                 xht,yht,zht    ==>  initial tp position in helio coord 
+c                 xht,yht,zht    ==>  initial tp position in helio coord
 c                                      (real arrays)
-c                 vxht,vyht,vzht ==>  initial tp velocity in helio coord 
+c                 vxht,vyht,vzht ==>  initial tp velocity in helio coord
 c                                        (real arrays)
 c                 istat           ==>  status of the test paricles
 c                                      (2d integer array)
@@ -34,29 +34,29 @@ c                 rstat           ==>  status of the test paricles
 c                                      (2d real array)
 c                 dt            ==>  time step
 c             Output:
-c                 xh,yh,zh      ==>  final planet position in helio coord 
+c                 xh,yh,zh      ==>  final planet position in helio coord
 c                                       (real arrays)
-c                 vxh,vyh,vzh   ==>  final planet velocity in helio coord 
+c                 vxh,vyh,vzh   ==>  final planet velocity in helio coord
 c                                       (real arrays)
-c                 xht,yht,zht    ==>  final tp position in helio coord 
+c                 xht,yht,zht    ==>  final tp position in helio coord
 c                                       (real arrays)
-c                 vxht,vyht,vzht ==>  final tp position in helio coord 
+c                 vxht,vyht,vzht ==>  final tp position in helio coord
 c                                       (real arrays)
 c
 c
 c Remarks: Based on rmvs3_step.f
-c Authors:  Hal Levison 
+c Authors:  Hal Levison
 c Date:    9/18/05
-c Last revision: 
+c Last revision:
 
       subroutine rmvs4_step(i1st,time,nbod,ntp,mass,j2rp2,j4rp4,
      &     xh,yh,zh,vxh,vyh,vzh,xht,yht,zht,vxht,vyht,vzht,
-     &     istat,rstat,dt)	
+     &     istat,rstat,dt)
 
       include '../swift.inc'
       include '../rmvs/rmvs.inc'
 
-c...  Inputs Only: 
+c...  Inputs Only:
       integer nbod,ntp,i1st
       real*8 mass(nbod),dt,time,j2rp2,j4rp4
 
@@ -82,7 +82,7 @@ c...  Internals
       integer istattmp(NTPMAX,NSTAT),isperi(NTPMAX)
 
 c----
-c...  Executable code 
+c...  Executable code
 
       i1sttp = i1st
       i1sto = i1st
@@ -122,7 +122,7 @@ c...  save initial x and v of planets if there are planocentric enc
 c... do a full step for the planets
       i1stpl = 0
       call step_kdk_pl(i1stpl,nbod,mass,j2rp2,j4rp4,xh,yh,zh,
-     &     vxh,vyh,vzh,dt)	
+     &     vxh,vyh,vzh,dt)
 
 c...  save the final position and velocity of planets
       do i=1,nbod
@@ -171,7 +171,7 @@ c...  do a full step
       i1sto = 0      ! we need to recalculate accel arrays
       call step_kdk_tp(i1sto,nbod,ntp,mass,j2rp2,j4rp4,
      &              xbeg,ybeg,zbeg,xend,yend,zend,
-     &              xht,yht,zht,vxht,vyht,vzht,istattmp,dt)	
+     &              xht,yht,zht,vxht,vyht,vzht,istattmp,dt)
 
 c...  fix up the istat array
       do i=1,ntp
@@ -210,14 +210,8 @@ c...  put the enc info into istat
 
 c...  we MUST make sure that the saved accel arrays are ok
 c...  calculate them again
-       i1st = 0 
+       i1st = 0
 
       return
       end   ! step_enc
 c------------------------------------------------------------------------
-
-
-
-
-
-

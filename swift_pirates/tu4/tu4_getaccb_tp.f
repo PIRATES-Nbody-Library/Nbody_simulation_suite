@@ -9,22 +9,22 @@ c                 nbod          ==>  number of massive bodies (int scalar)
 c                 mass          ==>  mass of planets (real array)
 c                 j2rp2,j4rp4   ==>  J2*radii_pl^2 and  J4*radii_pl^4
 c                                     (real scalars)
-c                 xb,yb,zb      ==>  position of planets in beri coord 
+c                 xb,yb,zb      ==>  position of planets in beri coord
 c                                    (real arrays)
 c                 ntp           ==> number of test particles (int scalar)
-c                 xbt,ybt,zbt   ==>  position of test part in beri coord 
+c                 xbt,ybt,zbt   ==>  position of test part in beri coord
 c                                    (real arrays)
 c                 istat         ==>  status of the test paricles
 c                                      (integer array)
 c                                      istat(i) = 0 ==> active:  = 1 not
-c                                    NOTE: it is really a 2d array but 
+c                                    NOTE: it is really a 2d array but
 c                                          we only use the 1st row
 c
 c             Output:
-c               axbt,aybt,azbt   ==>  accel in beri coord (real arrays) 
+c               axbt,aybt,azbt   ==>  accel in beri coord (real arrays)
 c
 c Remarks:  Based on Martin's NB4M routines
-c Authors:  Martin Duncan 
+c Authors:  Martin Duncan
 c Date:    3/8/93
 c Last revision: 2/24/94
 
@@ -33,7 +33,7 @@ c Last revision: 2/24/94
 
       include '../swift.inc'
 
-c...  Inputs Only: 
+c...  Inputs Only:
       integer nbod,ntp,istat(ntp)
       real*8 mass(nbod),j2rp2,j4rp4
       real*8 xb(nbod),yb(nbod),zb(nbod)
@@ -58,7 +58,7 @@ c...  first do the Sun
             xx = xbt(i) - xb(1)
             yy = ybt(i) - yb(1)
             zz = zbt(i) - zb(1)
-            rr2 = xx**2 + yy**2 + zz**2 
+            rr2 = xx**2 + yy**2 + zz**2
             fac1 = 1.d0/sqrt(rr2)
             fac = mass(1)*fac1/rr2
 
@@ -82,7 +82,7 @@ c...  do the rest of the planets
                xx = xbt(i) - xb(j)
                yy = ybt(i) - yb(j)
                zz = zbt(i) - zb(j)
-               rr2 = xx**2 + yy**2 + zz**2 
+               rr2 = xx**2 + yy**2 + zz**2
                fac = mass(j)/(rr2*sqrt(rr2))
                axbt(i) = axbt(i) - fac*xx
                aybt(i) = aybt(i) - fac*yy
@@ -101,7 +101,6 @@ c...  do the rest of the planets
          enddo
       endif
 
-      return	
+      return
       end                       !  tu4_getaccb_tp
 c____________________________________________________________________________
-

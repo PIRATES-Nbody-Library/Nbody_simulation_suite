@@ -1,19 +1,19 @@
 c************************************************************************
 c                         IO_DUMP_PL_SYMBA.F
 c************************************************************************
-c Dumps the data for the Sun and planets 
+c Dumps the data for the Sun and planets
 
 c
 c             Input:
 c                 dplfile       ==>  Name of file to write to (character*80)
 c                 nbod          ==>  number of massive bodies (int scalar)
 c                 mass          ==>  mass of bodies (real array)
-c                 xh,yh,zh      ==>  initial position in Helio coord 
+c                 xh,yh,zh      ==>  initial position in Helio coord
 c                                    (real arrays)
-c                 vxh,vyh,vzh   ==>  initial position in Helio coord 
+c                 vxh,vyh,vzh   ==>  initial position in Helio coord
 c                                    (real arrays)
-c                 lclose        ==> .true. --> discard particle if it gets 
-c                                    too close to a planet. Read in that 
+c                 lclose        ==> .true. --> discard particle if it gets
+c                                    too close to a planet. Read in that
 c                                    distance in io_init_pl
 c                                      (logical*2 scalar)
 c                 iflgchk       ==>  bit 5 set ==>  include J2 and J4 terms
@@ -28,7 +28,7 @@ c
 c Remarks: Based on io_dump_pl.f
 c Authors:  Hal Levison
 c Date:    1/8/97
-c Last revision: 
+c Last revision:
 
 	subroutine io_dump_pl_symba(dplfile,nbod,mass,xh,yh,zh,
      &     vxh,vyh,vzh,lclose,iflgchk,rpl,rhill,j2rp2,j4rp4)
@@ -49,7 +49,7 @@ c...   Internal
 	integer j,ierr
 
 c-----
-c...  Executable code      
+c...  Executable code
 
         call io_open(7,dplfile,'unknown','formatted',ierr)
 
@@ -78,4 +78,3 @@ c...  Executable code
 	return
 	end    ! io_dump_pl_symba.f
 c--------------------------------------------------------------------------
-

@@ -2,7 +2,7 @@ c***********************************************************************
 c	                    COORD_Y2H.F
 c***********************************************************************
 *     PURPOSE: Converts from Yosemite to Helio coords.
-*     ARGUMENTS:  Input is 
+*     ARGUMENTS:  Input is
 *                    nbod ==> number of bodies (must be less than NBMAX)
 *                             (integer)
 *	             mass(*) ==>  masses (real array)
@@ -16,9 +16,9 @@ c***********************************************************************
 *		     vxh(*),vyh(*),vzh(*) ==> Helio particle velocities
 *                                             (real array)
 *                    xyo,yyo,zyo,vxyo,vyyo,vzyo ==>  Yose Offset vectors (real scalors)
-*       
-*     ALGORITHM: Obvious 
-*     REMARKS:  
+*
+*     ALGORITHM: Obvious
+*     REMARKS:
 *
 *     Authors:  Hal Levison
 *     WRITTEN:  9/13/02
@@ -28,7 +28,7 @@ c***********************************************************************
 
       include '../swift.inc'
 
-c...  Inputs: 
+c...  Inputs:
       integer nbod
       real*8 mass(NPLMAX)
       real*8 xy(NPLMAX),yy(NPLMAX),zy(NPLMAX)
@@ -43,8 +43,8 @@ c...  Internals:
       integer i
       real*8 const,mu,p1
 
-c---- 
-c...  Executable code 
+c----
+c...  Executable code
 
       mu = 0.0d0
       xyo = 0.0d0
@@ -93,4 +93,3 @@ c...  Executable code
       end                       ! coord_y2h
 
 c--------------------------------------------------------------------------
-

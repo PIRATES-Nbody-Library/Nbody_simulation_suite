@@ -1,7 +1,7 @@
 c************************************************************************
 c                          IO_INIT_PARAM.F
 c************************************************************************
-c INIT_PARAM reads in the parameters for the integration. 
+c INIT_PARAM reads in the parameters for the integration.
 c
 c      Input:
 c            infile   ==> File name to read from (character*80)
@@ -14,7 +14,7 @@ c            dtout    ==> time between binary outputs (real scalar)
 c            dtdump   ==> time between dumps  (real scalar)
 c            iflgchk  ==>  =0 don't run diagnostic routines
 c                          bit 0 set ==>  write int*2 binary data file
-c                          bit 1 set ==>  write real*4 binary file 
+c                          bit 1 set ==>  write real*4 binary file
 c                          bit 2 set ==>  calc energy of system wrt time
 c                          bit 3 set ==>  calc jacobi of the test particles
 c                          bit 4 set ==>  check if particles are removed
@@ -28,8 +28,8 @@ c                                      (real scalar)
 c       qmin          ==> Smallest perihelion distance
 c                                 if <0  then don't check
 c                                      (real scalar)
-c       lclose        ==> .true. --> discard particle if it gets 
-c                                    too close to a planet. Read in that 
+c       lclose        ==> .true. --> discard particle if it gets
+c                                    too close to a planet. Read in that
 c                                    distance in io_init_pl
 c                                      (logical*2 scalar)
 c       outfile       ==>  Name of binary output file (character*80)
@@ -41,9 +41,9 @@ c                                 unknown  (just write over what is there)
 c                                 (character*80)
 c
 c
-c Remarks: 
+c Remarks:
 c Authors:  Martin Duncan
-c Date:    3/2/93 
+c Date:    3/2/93
 c Last revision:  5/10/94  HFL
 
         subroutine io_init_param(infile,t0,tstop,dt,dtout,dtdump,
@@ -55,7 +55,7 @@ c Last revision:  5/10/94  HFL
 c...    Input
 	character*(*) infile
 
-c...  Outputs: 
+c...  Outputs:
 	integer iflgchk
 	real*8 t0,tstop,dt
 	real*8 dtout,dtdump
@@ -68,7 +68,7 @@ c...  Internals
         integer i,ierr
 
 c-----
-c...  Executable code 
+c...  Executable code
 
 	write(*,*) 'Parameter data file is ',infile
         call io_open(7,infile,'old','formatted',ierr)
@@ -87,7 +87,7 @@ c...  Executable code
 
         write(*,*) (lflg(i),i=IO_NBITS-1,0,-1),' = ',iflgchk
 
-        if(btest(iflgchk,0) .and. btest(iflgchk,1))  then 
+        if(btest(iflgchk,0) .and. btest(iflgchk,1))  then
            write(*,*) ' SWIFT ERROR: in io_init_param:'
            write(*,*) '    Invalid logical flags '
            write(*,*) '    You cannot request that both a real and ',
@@ -107,7 +107,7 @@ c...  Executable code
            lclose = .false.
         endif
 
-        if(btest(iflgchk,0) .or. btest(iflgchk,1))  then 
+        if(btest(iflgchk,0) .or. btest(iflgchk,1))  then
            read(7,999) outfile
  999       format(a)
            write(*,*) 'outfile : ', outfile
@@ -115,17 +115,17 @@ c...  Executable code
         endif
 
         read(7,999) fopenstat
-        if(  (fopenstat(1:3).ne.'new') .and. 
+        if(  (fopenstat(1:3).ne.'new') .and.
      &       (fopenstat(1:3).ne.'NEW') .and.
-     &       (fopenstat(1:7).ne.'unknown') .and. 
+     &       (fopenstat(1:7).ne.'unknown') .and.
      &       (fopenstat(1:7).ne.'UNKNOWN') .and.
-     &       (fopenstat(1:6).ne.'append') .and. 
+     &       (fopenstat(1:6).ne.'append') .and.
      &       (fopenstat(1:6).ne.'APPEND') ) then
            write(*,*) ' SWIFT ERROR: in io_init_param:'
            write(*,*) '    Invalid status flag:',fopenstat(1:7),':'
            call util_exit(1)
         endif
-        
+
 	close(unit = 7)
 
 	return
@@ -133,4 +133,3 @@ c...  Executable code
 c____________________________________________________________________________
 c
 c
-

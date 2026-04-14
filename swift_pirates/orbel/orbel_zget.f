@@ -1,7 +1,7 @@
 ***********************************************************************
 c                    ORBEL_ZGET.F
 ***********************************************************************
-*     PURPOSE:  Solves the equivalent of Kepler's eqn. for a parabola 
+*     PURPOSE:  Solves the equivalent of Kepler's eqn. for a parabola
 *          given Q (Fitz. notation.)
 *
 *             Input:
@@ -11,7 +11,7 @@ c                    ORBEL_ZGET.F
 *
 *     ALGORITHM: p. 70-72 of Fitzpatrick's book "Princ. of Cel. Mech."
 *     REMARKS: For a parabola we can solve analytically.
-*     AUTHOR: M. Duncan 
+*     AUTHOR: M. Duncan
 *     DATE WRITTEN: May 11, 1992.
 *     REVISIONS: May 27 - corrected it for negative Q and use power
 *	      series for small Q.
@@ -21,7 +21,7 @@ c                    ORBEL_ZGET.F
 
       include '../swift.inc'
 
-c...  Inputs Only: 
+c...  Inputs Only:
 	real*8 q
 
 c...  Internals:
@@ -29,7 +29,7 @@ c...  Internals:
 	real*8 x,tmp
 
 c----
-c...  Executable code 
+c...  Executable code
 
 	iflag = 0
 	if(q.lt.0.d0) then
@@ -49,9 +49,7 @@ c...  Executable code
            orbel_zget = -orbel_zget
 	   q = -q
 	endif
-	
+
 	return
 	end    ! orbel_zget
 c----------------------------------------------------------------------
-
-

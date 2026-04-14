@@ -12,10 +12,10 @@ c                    ORBEL_EGET.F
 *     ALGORITHM: Quartic convergence from Danby
 *     REMARKS: For results very near roundoff, give it M between
 *           0 and 2*pi. One can condition M before calling EGET
-*           by calling my double precision function MOD2PI(M). 
+*           by calling my double precision function MOD2PI(M).
 *           This is not done within the routine to speed it up
 *           and because it works fine even for large M.
-*     AUTHOR: M. Duncan 
+*     AUTHOR: M. Duncan
 *     DATE WRITTEN: May 7, 1992.
 *     REVISIONS: May 21, 1992.  Now have it go through EXACTLY two iterations
 *                with the premise that it will only be called if
@@ -26,7 +26,7 @@ c                    ORBEL_EGET.F
 
       include '../swift.inc'
 
-c...  Inputs Only: 
+c...  Inputs Only:
 	real*8 e,m
 
 c...  Internals:
@@ -34,7 +34,7 @@ c...  Internals:
 	real*8 es,ec,f,fp,fpp,fppp,dx
 
 c----
-c...  Executable code 
+c...  Executable code
 
 c Function to solve Kepler's eqn for E (here called
 c x) for given e and M. returns value of x.
@@ -43,7 +43,7 @@ c MAY 21 : FOR e > 0.8 use EHIE - this one may not converge fast enough.
 
 	  call orbel_scget(m,sm,cm)
 
-c  begin with a guess accurate to order ecc**3	
+c  begin with a guess accurate to order ecc**3
 	  x = m + e*sm*( 1.d0 + e*( cm + e*( 1.d0 -1.5d0*sm*sm)))
 
 c  Go through one iteration for improved estimate
@@ -51,9 +51,9 @@ c  Go through one iteration for improved estimate
 	  es = e*sx
 	  ec = e*cx
 	  f = x - es  - m
-	  fp = 1.d0 - ec 
-	  fpp = es 
-	  fppp = ec 
+	  fp = 1.d0 - ec
+	  fpp = es
+	  fppp = ec
 	  dx = -f/fp
 	  dx = -f/(fp + dx*fpp/2.d0)
 	  dx = -f/(fp + dx*fpp/2.d0 + dx*dx*fppp/6.d0)
@@ -68,9 +68,9 @@ c get near roundoff error for eccentricities between 0 and 0.8
 	  es = e*sx
 	  ec = e*cx
 	  f = x - es  - m
-	  fp = 1.d0 - ec 
-	  fpp = es 
-	  fppp = ec 
+	  fp = 1.d0 - ec
+	  fpp = es
+	  fppp = ec
 	  dx = -f/fp
 	  dx = -f/(fp + dx*fpp/2.d0)
 	  dx = -f/(fp + dx*fpp/2.d0 + dx*dx*fppp/6.d0)

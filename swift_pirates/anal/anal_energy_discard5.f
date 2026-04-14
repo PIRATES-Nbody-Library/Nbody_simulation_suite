@@ -13,9 +13,9 @@ c            nbodm         ==>  Location of last massive body(int scalar)
 c            mass          ==>  mass of bodies (real array)
 c            j2rp2         ==>  scaled value of j2 moment (real*8 scalar)
 c            j4rp4         ==>  scaled value of j4 moment (real*8 scalar)
-c            xh,yh,zh      ==>  current position in heliocentric coord 
+c            xh,yh,zh      ==>  current position in heliocentric coord
 c                               (real arrays)
-c            vxh,vyh,vzh   ==>  current velocity in heliocentric coord 
+c            vxh,vyh,vzh   ==>  current velocity in heliocentric coord
 c                               (real arrays)
 c
 c      Output:
@@ -28,14 +28,14 @@ c
 c Remarks: Based on anal_energy
 c Authors:  Hal Levison
 c Date:  12/16/06
-c Last revision:  
+c Last revision:
 
       subroutine anal_energy_discard5(iflg,nbod,nbodm,mass,j2rp2,j4rp4,
      &     xh,yh,zh,vxh,vyh,vzh,ke,pot,energy,eltot)
 
       include '../swift.inc'
 
-c...  Inputs: 
+c...  Inputs:
       integer iflg,nbod,nbodm
       real*8 mass(nbod),j2rp2,j4rp4
       real*8 xh(nbod),yh(nbod),zh(nbod)
@@ -76,7 +76,6 @@ c...  iflg = 0
       endif
 
 
-      return	
+      return
       end      ! anal_energy_discard5
 c-----------------------------------------------------------------------
-

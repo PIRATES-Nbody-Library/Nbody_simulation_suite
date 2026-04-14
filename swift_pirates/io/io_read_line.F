@@ -20,20 +20,20 @@ c       Returns:
 c      io_read_line    ==>   =0 read ok
 c                           !=0 read failed is set to iostat variable
 c
-c Remarks: 
-c Authors:  Hal Levison 
+c Remarks:
+c Authors:  Hal Levison
 c Date:    11/2/99
-c Last revision: 
+c Last revision:
 
-      integer function io_read_line(iu,id,a,e,inc,capom,omega,capm) 
+      integer function io_read_line(iu,id,a,e,inc,capom,omega,capm)
 
       include '../swift.inc'
       include 'io.inc'
 
-c...  Inputs: 
+c...  Inputs:
       integer iu
 
-c...  Output: 
+c...  Output:
       integer id
       real*8 a,e,inc,capom,omega,capm
 
@@ -43,7 +43,7 @@ c...  Internals
       integer ixdrint,ixdrrmat
 
 c----
-c...  Executable code 
+c...  Executable code
 
 #ifdef  _FXDR_AVAIL
 
@@ -77,4 +77,3 @@ c...  Executable code
       return
       end      ! io_read_line
 c--------------------------------------------------------------------------
-

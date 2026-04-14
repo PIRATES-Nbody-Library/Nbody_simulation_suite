@@ -9,9 +9,9 @@ c                 tin           ==>  current time (real scaler)
 c                 logpr         ==>  gamma (real array)
 c                 ntp           ==>  number of objects (int scalar)
 c
-c Remarks: 
+c Remarks:
 c Authors:  Hal Levison
-c Date:    8/12/93  
+c Date:    8/12/93
 c Last revision: 3/3/94
 
       subroutine io_lyap_write(iul,tin,logpr,ntp)
@@ -19,7 +19,7 @@ c Last revision: 3/3/94
       include '../swift.inc'
       include 'io.inc'
 
-c...  Inputs: 
+c...  Inputs:
       integer iul,ntp
       real*8 logpr(ntp),tin
 
@@ -27,7 +27,7 @@ c...  Internals
       integer i,ierr
 
 c----
-c...  Executable code 
+c...  Executable code
 
       call io_open(iul,'lyap.out','append','formatted',ierr)
 

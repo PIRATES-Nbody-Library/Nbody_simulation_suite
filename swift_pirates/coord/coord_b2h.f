@@ -2,7 +2,7 @@ c***********************************************************************
 c	                    COORD_B2H.F
 c***********************************************************************
 *     PURPOSE: Converts from Barycentric to Helio coords.
-*     ARGUMENTS:  Input is 
+*     ARGUMENTS:  Input is
 *                    nbod ==> number of bodies (must be less than NBMAX)
 *                             (integer)
 *	             mass(*) ==>  masses (real array)
@@ -17,8 +17,8 @@ c***********************************************************************
 *                                          (real array)
 *                    vxh(*),vyh(*),vzh(*) ==> Helio particle velocities
 *                                            (real array)
-*       
-*     ALGORITHM: Obvious 
+*
+*     ALGORITHM: Obvious
 *     REMARKS:  Can of course use this to get coords. relative to any body.
 *              by changing the one subtracted off.
 *
@@ -32,7 +32,7 @@ c***********************************************************************
 
       include '../swift.inc'
 
-c...  Inputs: 
+c...  Inputs:
 	integer nbod
 	real*8 mass(NPLMAX)
 	real*8 xb(NPLMAX),yb(NPLMAX),zb(NPLMAX)
@@ -46,7 +46,7 @@ c...  Internals:
 	integer n
 
 c----
-c...  Executable code 
+c...  Executable code
 
 	do n=1,nbod
 	  xh(n) = xb(n) - xb(1)
@@ -61,4 +61,3 @@ c...  Executable code
 	end     ! coord_b2h
 
 c--------------------------------------------------------------------------
-

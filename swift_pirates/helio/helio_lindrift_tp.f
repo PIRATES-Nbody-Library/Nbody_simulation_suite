@@ -11,16 +11,16 @@ c                 dt               ==>  time step
 c                 istat            ==>  status of the test paricles
 c                                         (integer array)
 c                                         istat(i) = 0 ==> active:  = 1 not
-c                                        NOTE: it is really a 2d array but 
+c                                        NOTE: it is really a 2d array but
 c                                          we only use the 1st row
-c                 xht,yht,zht      ==>  initial position in helio coord 
+c                 xht,yht,zht      ==>  initial position in helio coord
 c                                          (real arrays)
 c             Output:
-c                 xht,yht,zht      ==>  final position in helio coord 
+c                 xht,yht,zht      ==>  final position in helio coord
 c                                       (real arrays)
 c
 c Remarks: Bases on Martin's code h2.f
-c Authors:  Hal Levison 
+c Authors:  Hal Levison
 c Date:    11/14/96
 c Last revision: 11/15/96
 
@@ -29,7 +29,7 @@ c Last revision: 11/15/96
 
       include '../swift.inc'
 
-c...  Inputs Only: 
+c...  Inputs Only:
       integer ntp,istat(NTPMAX)
       real*8 ptx,pty,ptz,dt
 
@@ -40,7 +40,7 @@ c...  Internals:
       integer n
 
 c----
-c...  Executable code 
+c...  Executable code
 
       do n=1,ntp
          if(istat(n).eq.0) then

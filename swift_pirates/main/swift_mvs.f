@@ -14,7 +14,7 @@ c Authors:  Hal Levison \& Martin Duncan
 c Date:    5/7/93
 c Last revision: 12/27/96
 
-     
+
 	include 'swift.inc'
 
 	real*8 xht(NTPMAX),yht(NTPMAX),zht(NTPMAX)
@@ -33,13 +33,13 @@ c Last revision: 12/27/96
 	real*8 t,tout,tdump,tfrac,eoff
 
 	real*8 rmin,rmax,rmaxu,qmin,rplsq(NPLMAX)
-        logical*2 lclose 
+        logical*2 lclose
 
 	character*80 outfile,inparfile,inplfile,intpfile,fopenstat
 
 
 c-----
-c...    Executable code 
+c...    Executable code
 
 c...    print version number
         call util_version
@@ -105,7 +105,7 @@ c...    must initize discard io routine
 c***************here's the big loop *************************************
         write(*,*) ' ************** MAIN LOOP ****************** '
 
-	  do while ( (t .le. tstop) .and. 
+	  do while ( (t .le. tstop) .and.
      &       ((ntp.eq.0).or.(nleft.gt.0)) )
 
  	     call step_kdk(i1st,t,nbod,ntp,mass,j2rp2,j4rp4,
@@ -125,8 +125,8 @@ c***************here's the big loop *************************************
                 nleft = ntp
              endif
 
-c if it is time, output orb. elements, 
-	  if(t .ge. tout) then 
+c if it is time, output orb. elements,
+	  if(t .ge. tout) then
 
              if(btest(iflgchk,0))  then    ! bit 0 is set
                 call  io_write_frame(t,nbod,ntp,mass,xh,yh,zh,vxh,
@@ -172,7 +172,7 @@ c If it is time, do a dump
 	enddo
 c********** end of the big loop from time 't0' to time 'tstop'
 
-c Do a final dump for possible resumption later 
+c Do a final dump for possible resumption later
 
 	call io_dump_pl('dump_pl.dat',nbod,mass,xh,yh,zh,
      &            vxh,vyh,vzh,lclose,iflgchk,rplsq,j2rp2,j4rp4)

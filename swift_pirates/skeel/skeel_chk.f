@@ -5,24 +5,24 @@ c This subroutine checks to see if there are encounters
 c
 c             Input:
 c                 mpl           ==>  mass of the planet (real scalar)
-c                 xh,yh,zh      ==>  initial position in helio coord 
+c                 xh,yh,zh      ==>  initial position in helio coord
 c                                    (real scalar)
-c                 vxh,vyh,vzh   ==>  initial velocity in helio coord 
+c                 vxh,vyh,vzh   ==>  initial velocity in helio coord
 c                                    (real scalar)
-c                 xht,yht,zht    ==>  initial part position in helio coord 
+c                 xht,yht,zht    ==>  initial part position in helio coord
 c                                      (real scalar)
-c                 vxht,vyht,vzht ==>  initial velocity in helio coord 
+c                 vxht,vyht,vzht ==>  initial velocity in helio coord
 c                                        (real scalar)
 c                 dt            ==>  time step  (real scalor)
 c                 r2crit        ==>  critical distence (real scalor)
 c             Output:
 c                 icflg         ==> ecounters? = 1 Yes
-c                                              =  0 No (integer scalar)  
+c                                              =  0 No (integer scalar)
 c
 c Remarks: Based on RMVS3_CHK.F
-c Authors:  Hal Levison 
+c Authors:  Hal Levison
 c Date:    9/24/96
-c Last revision: 
+c Last revision:
 
       subroutine skeel_chk(mpl,xh,yh,zh,vxh,vyh,vzh,xht,yht,
      &       zht,vxht,vyht,vzht,dt,r2crit,icflg)
@@ -30,7 +30,7 @@ c Last revision:
       include '../swift.inc'
       include 'skeel.inc'
 
-c...  Inputs: 
+c...  Inputs:
       real*8 mpl,xh,yh,zh,dt
       real*8 xht,yht,zht
       real*8 vxh,vyh,vzh
@@ -46,7 +46,7 @@ c...  Internals
        real*8 r2critp
 
 c-----
-c...  Executable code 
+c...  Executable code
 
        xr = xht - xh
        yr = yht - yh
@@ -65,8 +65,7 @@ c...  Executable code
        else
           icflg = 0
        endif
-		 
+
        return
        end                      ! skeel_chk
 c------------------------------------------------------
-

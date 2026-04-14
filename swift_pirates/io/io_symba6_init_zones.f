@@ -2,14 +2,14 @@ c************************************************************************
 c                          IO_SYMBA6_INIT_ZONES.F
 c************************************************************************
 c
-c  Purpose:  This subroutine reads in the number or radial and 
+c  Purpose:  This subroutine reads in the number or radial and
 c            azimuthal zones for the encounter search algorithm from
-c            a file. 
+c            a file.
 c
 c  Input:    inznfile    ==>  The zone input file
 c
-c  Output:   nrz        ==>  Number of radial search zones  
-c            naz        ==>  Number of azimuthal search zones  
+c  Output:   nrz        ==>  Number of radial search zones
+c            naz        ==>  Number of azimuthal search zones
 c            nsect      ==>  Total number of sectors
 c                             (both are integer scalars)
 c

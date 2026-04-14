@@ -8,11 +8,11 @@ c             Input:
 c                 time          ==>  current time
 c                 ntp           ==>  number of test particles (int scalar)
 c                 msys          ==>  Total Planet Mass (real scalar)
-c                 xht,yht,zht    ==>   part position in helio coord 
+c                 xht,yht,zht    ==>   part position in helio coord
 c                                      (real arrays)
-c                 xbt,ybt,zbt    ==>   part position in bary coord 
+c                 xbt,ybt,zbt    ==>   part position in bary coord
 c                                      (real arrays)
-c                 vxbt,vybt,vzbt ==>   part velocity in bary coord 
+c                 vxbt,vybt,vzbt ==>   part velocity in bary coord
 c                                        (real arrays)
 c                 rmin,rmax      ==>  maximum and min distance from Sun
 c                                     if <0  then don't check
@@ -35,17 +35,17 @@ c                                      (2d  real array)
 c                                      rstat(i,1) time of discard.
 c
 c
-c Remarks: 
-c Authors:  Hal Levison 
+c Remarks:
+c Authors:  Hal Levison
 c Date:    3/2/93
-c Last revision: 
+c Last revision:
 
       subroutine discard_sun(time,ntp,msys,xht,yht,zht,xbt,ybt,zbt,
      &       vxbt,vybt,vzbt,rmin,rmax,rmaxu,istat,rstat)
 
       include '../swift.inc'
 
-c...  Inputs: 
+c...  Inputs:
       integer ntp
       real*8 msys
       real*8 xht(ntp),yht(ntp),zht(ntp)
@@ -64,7 +64,7 @@ c...  Internal
 
 
 c-----
-c...  Executable code 
+c...  Executable code
 
       rmin2 = rmin*rmin
       rmax2 = rmax*rmax
@@ -103,6 +103,3 @@ c...  Executable code
       return
       end     ! discard_sun
 c------------------------------------------------------------------
-
-
-

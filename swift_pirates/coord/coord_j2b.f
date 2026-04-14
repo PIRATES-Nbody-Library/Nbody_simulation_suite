@@ -2,7 +2,7 @@ c***********************************************************************
 c	                    COORD_J2B.F
 c***********************************************************************
 *     PURPOSE: Converts from Jacobi to Barycentric coords.
-*     ARGUMENTS:  Input is 
+*     ARGUMENTS:  Input is
 *                    nbod ==> number of bodies (must be less than NBMAX)
 *                             (integer)
 *	             mass(*) ==>  masses (real array)
@@ -15,8 +15,8 @@ c***********************************************************************
 *                                          (real array)
 *                    vxb(*),vyb(*),vzb(*) ==> Barycentric particle velocities
 *                                            (real array)
-*       
-*     ALGORITHM: See my notes on Nov 21. 
+*
+*     ALGORITHM: See my notes on Nov 21.
 *
 *     Authors:  Martin Duncan
 *     WRITTEN:  Jan 27/93
@@ -27,7 +27,7 @@ c***********************************************************************
 
       include '../swift.inc'
 
-c...  Inputs: 
+c...  Inputs:
 	integer nbod
 	real*8 mass(NPLMAX)
 	real*8 xj(NPLMAX),yj(NPLMAX),zj(NPLMAX)
@@ -44,7 +44,7 @@ c...  Internals:
 	real*8 mtot,rat,rat2
 	real*8 eta(NPLMAX)
 c----
-c...  Executable code 
+c...  Executable code
 
 c First compute the necessary auxiliary vbles, then compute the bary. positions
 
@@ -60,7 +60,7 @@ c First compute the necessary auxiliary vbles, then compute the bary. positions
 	vxb(nbod) = eta(nbod-1)*vxj(nbod)/mtot
 	vyb(nbod) = eta(nbod-1)*vyj(nbod)/mtot
 	vzb(nbod) = eta(nbod-1)*vzj(nbod)/mtot
-	
+
 	capx = mass(nbod)*xj(nbod)/mtot
 	capy = mass(nbod)*yj(nbod)/mtot
 	capz = mass(nbod)*zj(nbod)/mtot
@@ -85,7 +85,7 @@ c First compute the necessary auxiliary vbles, then compute the bary. positions
 	  capvy = capvy + rat2*vyj(n)
 	  capvz = capvz + rat2*vzj(n)
 	enddo
-	
+
 c Now compute the Sun's barycentric position
 	xtmp =0.d0
 	ytmp =0.d0

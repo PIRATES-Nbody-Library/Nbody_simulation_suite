@@ -10,7 +10,7 @@ c             Output:
 c                 ir3       ==>  r^-3  (real array)
 c                 ir        ==>  r^-1  (real array)
 c
-c Author:  Hal Levison  
+c Author:  Hal Levison
 c Date:    2/2/93
 c Last revision: 2/24/94
 
@@ -18,7 +18,7 @@ c Last revision: 2/24/94
 
       include '../../swift.inc'
 
-c...  Inputs: 
+c...  Inputs:
       integer nbod,istart
       real*8 x(nbod),y(nbod),z(nbod)
 

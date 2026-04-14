@@ -9,22 +9,22 @@ c                    ORBEL_EHIE.F
 *             Returns:
 *              orbel_ehybrid ==>  eccentric anomaly. (real scalar)
 *
-*     ALGORITHM: Use Danby's quartic for 3 iterations. 
+*     ALGORITHM: Use Danby's quartic for 3 iterations.
 *                Eqn. is f(x) = x - e*sin(x+M). Note  that
 *	         E = x + M. First guess is very good for e near 1.
 *	         Need to first get M between 0. and PI and use
 *		 symmetry to return right answer if M between PI and 2PI
 *     REMARKS: Modifies M so that both E and M are in range (0,TWOPI)
-*     AUTHOR: M. Duncan 
+*     AUTHOR: M. Duncan
 *     DATE WRITTEN: May 25,1992.
-*     REVISIONS: 
+*     REVISIONS:
 ***********************************************************************
 
       real*8 function orbel_ehie(e,m)
 
       include '../swift.inc'
 
-c...  Inputs Only: 
+c...  Inputs Only:
 	real*8 e,m
 
 c...  Internals:
@@ -34,7 +34,7 @@ c...  Internals:
       parameter (NMAX = 3)
 
 c----
-c...  Executable code 
+c...  Executable code
 
 c In this section, bring M into the range (0,TWOPI) and if
 c the result is greater than PI, solve for (TWOPI - M).
@@ -75,4 +75,3 @@ c Iteration loop
 	return
 	end         !orbel_ehie
 c------------------------------------------------------------------
-

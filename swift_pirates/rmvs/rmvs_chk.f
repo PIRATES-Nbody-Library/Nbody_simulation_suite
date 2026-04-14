@@ -7,24 +7,24 @@ c             Input:
 c                 nbod          ==>  number of massive bodies (int scalar)
 c                 ntp            ==>  number of massive bodies (int scalar)
 c                 mass          ==>  mass of bodies (real array)
-c                 xh,yh,zh      ==>  initial position in helio coord 
+c                 xh,yh,zh      ==>  initial position in helio coord
 c                                    (real arrays)
-c                 vxh,vyh,vzh   ==>  initial velocity in helio coord 
+c                 vxh,vyh,vzh   ==>  initial velocity in helio coord
 c                                    (real arrays)
-c                 xht,yht,zht    ==>  initial part position in helio coord 
+c                 xht,yht,zht    ==>  initial part position in helio coord
 c                                      (real arrays)
-c                 vxht,vyht,vzht ==>  initial velocity in helio coord 
+c                 vxht,vyht,vzht ==>  initial velocity in helio coord
 c                                        (real arrays)
 c                 istat           ==>  status of the test paricles
 c                                      (integer array)
 c                                      istat(i) = 0 ==> active:  = 1 not
-c                                    NOTE: it is really a 2d array but 
+c                                    NOTE: it is really a 2d array but
 c                                          we only use the 1st row
 c                 dt            ==>  time step  (real scalor)
 c             Output:
 c                 icflg         ==> ecounters? = 1 Yes, in outer region only
 c                                              = -1 in inner region
-c                                              =  0 No (integer scalar)  
+c                                              =  0 No (integer scalar)
 c                 nenco         ==> nenco(i) is the number of tp enc planet i
 c                                   in outer region (integer array)
 c                 nenci         ==> nenci(i) is the number of tp enc planet i
@@ -33,19 +33,19 @@ c                 itpenco       ==> itpenco(*,i) is a list of tp enc planet i
 c                                   in outer region (2d integer array)
 c                 itpenci       ==> itpenci(*,i) is a list of tp enc planet i
 c                                   in inner region (2d integer array)
-c                 ienco         ==> ienco(j) = 0 if tp j not involved in enc 
-c                                   in outer region: = planet# if it is. 
+c                 ienco         ==> ienco(j) = 0 if tp j not involved in enc
+c                                   in outer region: = planet# if it is.
 c                                     (integer array)
 c                 ienci         ==> same but for inner region.
 c
 c
 c Remarks: Based on Hal's wiscl_fk.f
-c Authors:  Hal Levison 
+c Authors:  Hal Levison
 c Date:    2/19/93
 c
-c Last revision: 7/14/94,  Brett Gladman,  main loop changed to "do while" to 
+c Last revision: 7/14/94,  Brett Gladman,  main loop changed to "do while" to
 c                                          improved efficiency.
-c 
+c
 
       subroutine rmvs_chk(nbod,ntp,mass,xh,yh,zh,vxh,vyh,vzh,xht,yht,
      &       zht,vxht,vyht,vzht,istat,dt,icflg,nenco,itpenco,nenci,
@@ -55,7 +55,7 @@ c
       include '../swift.inc'
       include 'rmvs.inc'
 
-c...  Inputs: 
+c...  Inputs:
       integer nbod,ntp,istat(ntp)
       real*8 mass(nbod),xh(nbod),yh(nbod),zh(nbod),dt
       real*8 xht(ntp),yht(ntp),zht(ntp)
@@ -77,7 +77,7 @@ c...  Internals
        save i1st,r2hill
 
 c-----
-c...  Executable code 
+c...  Executable code
 
 c...  if first time through, calc hill's shere for the planets
         if(i1st.eq.0) then
@@ -104,13 +104,13 @@ c...    clear everything out
 
         rts = RHSCALE*RHSCALE
         rps = RHPSCALE*RHPSCALE
-        
+
         do j=1,ntp
            if(istat(j).eq.0) then
 
 	      i = 2
 	      iflag = 0				! precaution
- 
+
 c... Check for close encounters until we find one or run out of planets. BG
 
               do while ( (iflag .eq. 0) .and. (i .le. nbod) )
@@ -138,7 +138,7 @@ c... Check for close encounters until we find one or run out of planets. BG
                     nenci(i) = nenci(i) + 1
                     itpenci(nenci(i),i) = j
                  endif
-		 
+
  		 i = i + 1    		! next planet
               enddo
            endif
@@ -152,4 +152,3 @@ c... Check for close encounters until we find one or run out of planets. BG
         return
         end  ! rmvs_chk
 c------------------------------------------------------
-

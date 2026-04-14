@@ -12,17 +12,17 @@ c                 mu            ==>  Reduced mass of system (real scalar)
 c                 alpha         ==>  Twice the binding energy (real scalar)
 c                 u             ==>  Vel. dot radial vector (real scalar)
 c             Output:
-c                 s             ==>  solution of cubic eqn for the  
+c                 s             ==>  solution of cubic eqn for the
 c                                    universal variable
 c                 iflg          ==>  success flag ( = 0 if O.K.) (integer)
 c
-c Author:  Martin Duncan  
+c Author:  Martin Duncan
 c Date:    March 12/93
 c Last revision: March 12/93
 
       subroutine drift_kepu_p3solve(dt,r0,mu,alpha,u,s,iflg)
 
-c...  Inputs: 
+c...  Inputs:
       real*8 dt,r0,mu,alpha,u
 
 c...  Outputs:
@@ -33,7 +33,7 @@ c...  Internals:
       real*8 denom,a0,a1,a2,q,r,sq2,sq,p1,p2
 
 c----
-c...  Executable code 
+c...  Executable code
 
 	denom = (mu - alpha*r0)/6.d0
 	a2 = 0.5*u/denom

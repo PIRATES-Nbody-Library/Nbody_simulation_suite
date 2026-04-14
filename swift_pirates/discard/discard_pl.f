@@ -10,13 +10,13 @@ c                 dt            ==>  time step  (real scalar)
 c                 nbod          ==>  number of massive bodies (int scalar)
 c                 ntp            ==>  number of massive bodies (int scalar)
 c                 mass          ==>  mass of bodies (real array)
-c                 xh,yh,zh      ==>   position in helio coord 
+c                 xh,yh,zh      ==>   position in helio coord
 c                                    (real arrays)
-c                 vxh,vyh,vzh   ==>   pl vel in helio coord 
+c                 vxh,vyh,vzh   ==>   pl vel in helio coord
 c                                    (real arrays)
-c                 xht,yht,zht    ==>   part position in helio coord 
+c                 xht,yht,zht    ==>   part position in helio coord
 c                                      (real arrays)
-c                 vxht,vyht,vzht ==>   part vel in helio coord 
+c                 vxht,vyht,vzht ==>   part vel in helio coord
 c                                      (real arrays)
 c                 rplsq         ==>  min distance^2 that a tp can get from pl
 c                                    (real array)
@@ -40,9 +40,9 @@ c                                      (2d  real array)
 c                                      rstat(i,1) time of discard.
 c
 c
-c Remarks: 
+c Remarks:
 c
-c Authors:  Hal Levison 
+c Authors:  Hal Levison
 c Date:    3/2/93
 c Last revision: 2/22/94
 
@@ -51,7 +51,7 @@ c Last revision: 2/22/94
 
       include '../swift.inc'
 
-c...  Inputs: 
+c...  Inputs:
       integer nbod,ntp
       real*8 mass(nbod),xh(nbod),yh(nbod),zh(nbod)
       real*8 vxh(nbod),vyh(nbod),vzh(nbod)
@@ -68,7 +68,7 @@ c...  internal
       real*8 xr,yr,zr,vxr,vyr,vzr,peri2,r2min
 
 c-----
-c...  Executable code 
+c...  Executable code
 
       do j=1,ntp
          if(istat(j,1).eq.0) then
@@ -112,5 +112,3 @@ c...  Executable code
       return
       end                       ! discard_pl
 c-------------------------------------------------------------------------
-
-

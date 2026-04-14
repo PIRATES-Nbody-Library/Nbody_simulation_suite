@@ -6,18 +6,18 @@ c             Input:
 c                 i1st          ==>  = 0 if first step; = 1 not (int scalar)
 c                 time          ==>  current time (real scalar)
 c                 nbod          ==>  number of massive bodies (int scalar)
-c                 nbodm         ==>  location of the last massie body 
+c                 nbodm         ==>  location of the last massie body
 c                                    (int scalar)
 c                 mass          ==>  mass of bodies (real array)
 c                 j2rp2,j4rp4   ==>  J2*radii_pl^2 and  J4*radii_pl^4
 c                                     (real scalars)
-c                 xh,yh,zh      ==>  initial position in helio coord 
+c                 xh,yh,zh      ==>  initial position in helio coord
 c                                    (real arrays)
-c                 vxh,vyh,vzh   ==>  initial velocity in helio coord 
+c                 vxh,vyh,vzh   ==>  initial velocity in helio coord
 c                                    (real arrays)
 c                 dt            ==>  time step
 c                 lclose        ==> .true. --> marge particles if they
-c                                    get too close. Read in that 
+c                                    get too close. Read in that
 c                                    distance in io_init_pl
 c                                      (logical*2 scalar)
 c                 rpl           ==>  physical size of a planet.
@@ -27,15 +27,15 @@ c                 rhill         ==>  size of planet's hills sphere
 c                                    (real array)
 c                 mtiny         ==>  Small mass  (real array)
 c             Output:
-c                 xh,yh,zh      ==>  final position in helio coord 
+c                 xh,yh,zh      ==>  final position in helio coord
 c                                       (real arrays)
-c                 vxh,vyh,vzh   ==>  final velocity in helio coord 
+c                 vxh,vyh,vzh   ==>  final velocity in helio coord
 c                                       (real arrays)
 c                 rpl           ==>  Recalculated physical size of a planet.
 c                                    if merger happened (real array)
-c                 nbod          ==>  Recalculated number of massive bodies 
+c                 nbod          ==>  Recalculated number of massive bodies
 c                                    if merger happened (int scalar)
-c                 mass          ==>  Recalculated mass of bodies 
+c                 mass          ==>  Recalculated mass of bodies
 c                                    if merger happened (real array)
 c                 isenc         ==>  0 --> No encounter during last dt
 c                                    1 --> There was encounters
@@ -47,10 +47,10 @@ c                 eoff          ==>  Energy offset (real scalar)
 c                 rhill         ==>  size of planet's hills sphere
 c                                    (real array)
 c
-c Remarks: Based on symba2_step_pl.f 
+c Remarks: Based on symba2_step_pl.f
 c Authors:  Hal Levison
 c Date:    11/27/97
-c Last revision: 
+c Last revision:
 
       subroutine symba5_step_pl(i1st,time,nbod,nbodm,mass,j2rp2,
      &     j4rp4,xh,yh,zh,vxh,vyh,vzh,dt,lclose,rpl,isenc,
@@ -59,10 +59,10 @@ c Last revision:
       include '../swift.inc'
       include 'symba5.inc'
 
-c...  Inputs Only: 
+c...  Inputs Only:
       integer nbod,i1st,nbodm
       real*8 mass(nbod),dt,time,j2rp2,j4rp4,mtiny
-      logical*2 lclose 
+      logical*2 lclose
 
 c...  Inputs and Outputs:
       real*8 xh(nbod),yh(nbod),zh(nbod)
@@ -80,7 +80,7 @@ c...  Internals
       integer*2 ielst(2,NENMAX),ielc
 
 c----
-c...  Executable code 
+c...  Executable code
 
       do i=2,nbod
          iecnt(i) = 0
@@ -124,10 +124,9 @@ c...  do a step
      &     nbodm,mass,rhill,j2rp2,j4rp4,lclose,rpl,xh,yh,zh,
      &     vxh,vyh,vzh,dt,mergelst,mergecnt,eoff,ielc,ielst,
      &     mtiny)
-         i1st = 0  
+         i1st = 0
       endif
 
       return
       end ! symba5_step_pl.f
 c-----------------------------------------------------------
-

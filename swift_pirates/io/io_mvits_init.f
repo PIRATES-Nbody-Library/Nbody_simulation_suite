@@ -21,8 +21,8 @@ c                                           (int array)
 c                 idpl               ==>  list of what planets are active wrt t
 c                                           (int array)
 c
-c Remarks: 
-c Authors:  Hal Levison 
+c Remarks:
+c Authors:  Hal Levison
 c Date:    12/16/93
 c Last revision: 2/21/94
 

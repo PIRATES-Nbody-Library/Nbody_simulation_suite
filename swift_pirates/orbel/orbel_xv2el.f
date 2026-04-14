@@ -19,10 +19,10 @@ C            capom    ==> longitude of ascending node (real scalar)
 C	     omega    ==> argument of perihelion (real scalar)
 C	     capm     ==> mean anomoly(real scalar)
 c
-*     ALGORITHM: See e.g. p.70 of Fitzpatrick's "Priciples of Cel. Mech." 
+*     ALGORITHM: See e.g. p.70 of Fitzpatrick's "Priciples of Cel. Mech."
 *     REMARKS:  If the inclination INC is less than TINY, we
 *       arbitrarily choose the longitude of the ascending node LGNODE
-*       to be 0.0 (so the ascending node is then along the X axis).  If 
+*       to be 0.0 (so the ascending node is then along the X axis).  If
 *       the  eccentricity E is less than SQRT(TINY), we arbitrarily
 *       choose the argument of perihelion to be 0.
 *     AUTHOR:  M. Duncan.
@@ -36,7 +36,7 @@ c
 
       include '../swift.inc'
 
-c...  Inputs Only: 
+c...  Inputs Only:
 	real*8 x,y,z,vx,vy,vz,gmsum
 
 c...  Outputs
@@ -48,7 +48,7 @@ c...  Internals:
 	real*8 cw,sw,w,u
 
 c----
-c...  Executable code 
+c...  Executable code
 
 * Compute the angular momentum H, and thereby the inclination INC.
 
@@ -73,7 +73,7 @@ c...  Executable code
 	  u = atan2(y,x)
 	  if(abs(inc - PI).lt. 10.d0*TINY) u = -u
 	else
-	  capom = atan2(hx,-hy)	  
+	  capom = atan2(hx,-hy)
 	  u = atan2 ( z/sin(inc) , x*cos(capom) + y*sin(capom))
 	endif
 
@@ -93,7 +93,7 @@ c...  Executable code
 	if(abs(energy*r/gmsum) .lt. sqrt(TINY)) then
 	   ialpha = 0
 	else
-	   if(energy .lt. 0.d0) ialpha = -1 
+	   if(energy .lt. 0.d0) ialpha = -1
 	   if(energy .gt. 0.d0) ialpha = +1
 	endif
 
@@ -102,7 +102,7 @@ c...  Executable code
 ***
 c ELLIPSE :
 	if(ialpha .eq. -1) then
-	  a = -0.5d0*gmsum/energy  
+	  a = -0.5d0*gmsum/energy
 	  fac = 1.d0 - h2/(gmsum*a)
 
           if (fac .gt. TINY) then
@@ -134,7 +134,7 @@ c... Apr. 16/93 : watch for case where face is slightly outside unity
 	  capm = cape - e*sin (cape)
 	  omega = u - w
 	  if(omega .lt. 0.d0) omega = omega + 2.d0*PI
-	  omega = omega - int(omega/(2.d0*PI))*2.d0*PI 	 
+	  omega = omega - int(omega/(2.d0*PI))*2.d0*PI
 
 	endif
 ***
@@ -142,7 +142,7 @@ c... Apr. 16/93 : watch for case where face is slightly outside unity
 c HYPERBOLA
 	if(ialpha .eq. +1) then
 
-	  a = +0.5d0*gmsum/energy  
+	  a = +0.5d0*gmsum/energy
 	  fac = h2/(gmsum*a)
 
           if (fac .gt. TINY) then
@@ -171,13 +171,13 @@ c so we calculate e and w accordingly to avoid singularities
 	  capm = e * sinh(capf) - capf
 	  omega = u - w
 	  if(omega .lt. 0.d0) omega = omega + 2.d0*PI
-	  omega = omega - int(omega/(2.d0*PI))*2.d0*PI 	 
+	  omega = omega - int(omega/(2.d0*PI))*2.d0*PI
 	endif
 ***
 ***
 c PARABOLA : ( NOTE - in this case we use "a" to mean pericentric distance)
 	if(ialpha .eq. 0) then
-	  a =  0.5d0*h2/gmsum  
+	  a =  0.5d0*h2/gmsum
 	  e = 1.d0
 	  w = acos(2.d0*a/r -1.d0)
 	  if ( vdotr .lt. 0.d0) w = 2.d0*PI - w
@@ -185,11 +185,10 @@ c PARABOLA : ( NOTE - in this case we use "a" to mean pericentric distance)
 	  capm = tmpf* (1.d0 + tmpf*tmpf/3.d0)
 	  omega = u - w
 	  if(omega .lt. 0.d0) omega = omega + 2.d0*PI
-	  omega = omega - int(omega/(2.d0*PI))*2.d0*PI 	 
+	  omega = omega - int(omega/(2.d0*PI))*2.d0*PI
 	endif
 ***
 ***
 	return
 	end    ! orbel_xv2el
 c------------------------------------------------------------------
-

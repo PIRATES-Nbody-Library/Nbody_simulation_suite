@@ -2,7 +2,7 @@ c***********************************************************************
 c	                    COORD_H2B.F
 c***********************************************************************
 *     PURPOSE: Converts from Heliocentric to Barycentric coords.
-*     ARGUMENTS:  Input is 
+*     ARGUMENTS:  Input is
 *                    nbod ==> number of bodies (must be less than NBMAX)
 *                             (integer)
 *	             mass(*) ==>  masses (real array)
@@ -16,9 +16,9 @@ c***********************************************************************
 *                    vxb(*),vyb(*),vzb(*) ==> bary. particle velocities
 *                                            (real array)
 *                    msys              ==>  Total mass of of system
-*                                            (real scalar)       
+*                                            (real scalar)
 *     Authors:  Martin Duncan
-*     ALGORITHM: Obvious 
+*     ALGORITHM: Obvious
 *     WRITTEN:  Jan 27/93
 *     REVISIONS: 2/22/94  HFL
 
@@ -27,7 +27,7 @@ c***********************************************************************
 
       include '../swift.inc'
 
-c...  Inputs: 
+c...  Inputs:
 	integer nbod
 	real*8 mass(NPLMAX)
 	real*8 xh(NPLMAX),yh(NPLMAX),zh(NPLMAX)
@@ -42,7 +42,7 @@ c...  Internals:
 	integer n
 
 c----
-c...  Executable code 
+c...  Executable code
 
 	msys = mass(1)
 	xtmp =0.d0
@@ -81,4 +81,3 @@ c...  Executable code
 	return
 	end     ! coord_h2b
 c--------------------------------------------------------------------------
-

@@ -18,7 +18,7 @@ c
 c             Output:
 c 	         dy  ==> derivatives of the independant var (real array)
 c
-c Remarks:  This used TU4 routines !!  
+c Remarks:  This used TU4 routines !!
 c Authors:  Hal Levison
 c Date:    5/17/93
 c Last revision: 2/24/94
@@ -28,7 +28,7 @@ c Last revision: 2/24/94
       include '../swift.inc'
       include 'bs.inc'
 
-c...  Inputs Only: 
+c...  Inputs Only:
       integer nbod,ntp
       real*8 mass(nbod),j2rp2,j4rp4
       real*8 ybs(6,(NTPMAX+NPLMAX))
@@ -49,7 +49,7 @@ c...  Internals
       real*8 axbt(NTPMAX),aybt(NTPMAX),azbt(NTPMAX)
 
 c----
-c...  Executable code 
+c...  Executable code
 
 c...  move things so that I can deal with it
       do i=1,nbod

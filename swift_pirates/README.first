@@ -13,23 +13,23 @@ integrate a set of mutually gravitationally interacting bodies
 together with a group of test particles which feel the gravitational
 influence of the massive bodies but do not affect each other or the
 massive bodies.  Four integration techniques are included:
-            1) Wisdom-Holmam Mapping (WHM).  This is the n-body mapping 
+            1) Wisdom-Holmam Mapping (WHM).  This is the n-body mapping
                method of Wisdom & Holman~(1991; AJ, 102, 1528).
             2) Regularized Mixed Variable Symplectic (RMVS) method. This
-               is an extension of the WHM that handles close approachs 
-               between test particles and planets. See Levison & Duncan 
+               is an extension of the WHM that handles close approachs
+               between test particles and planets. See Levison & Duncan
                (1994; Icarus, 108, 18).
-            3) A fourth order T+U Symplectic (TU4) method.  This is the 
+            3) A fourth order T+U Symplectic (TU4) method.  This is the
                T+U method of Candy & Rozmus (1991; J. Comput. Phy., 92, 230).
                Also see Gladman, Duncan, & Candy(1991; CeMDA, 52, 221.)
             4) A Bulirsch-Stoer method.  This is a Bulirsch-Stoer from Press,
-               Teukolsky, Vetterling, & Flannery (1992. `Numerical Recipes in 
-               FORTRAN'). 
+               Teukolsky, Vetterling, & Flannery (1992. `Numerical Recipes in
+               FORTRAN').
             5) SyMBA.  This is a symplectic N-body that handles close
                encounters between massive bodies from Duncan et al
                (1998, aj, 116, 2067). SyMBA is run a little
                differently from the rest of Swift.  See README.symba
-               for more details. 
+               for more details.
  The package is designed so that the calls to each of these look
 identical so that it is trivial to replace one with another.
 
@@ -50,20 +50,20 @@ particle) using the integrator "swift_whm". Descriptions of the
 drivers and the input and output files follow.
 
 
-                             COMPILING SWIFT   
+                             COMPILING SWIFT
 
     There are two files that must be edited in order to complile
 SWIFT. In the top SWIFT directory, you will find a file called
 "@make".  Edit this file.  You will have to change the values of:
      SWIFT_DIR which is the top directory in which you put SWIFT.
-     FORTRAN   which is the command on your machine to run the Fortran 
+     FORTRAN   which is the command on your machine to run the Fortran
                  compliler
      FFLAGS    which are the flags you use for your Fortran. You MUST
                  include a flag that will tell Fortran to make an object
                  file, but does not try to link it.  This is a "-c" on
                  most machines.  (In addition for SyMBA users, the
                  flags must be set so that recursion will work on your
-                 machine.)  
+                 machine.)
       PRECOMP  is the full path of the C pre-compiler on your machine.
                  This program is usually called cpp.
       CPPFLAGS are the flags for the cpp pre-compiler.  See the next section
@@ -73,7 +73,7 @@ SWIFT. In the top SWIFT directory, you will find a file called
 package.  Swift will create a library called "libswift.a".  This file
 must be copied into the "/usr/local/lib" directory on your machine.
 You must be root in order to do this.  Once this is completed you can
-link a program to this package by adding the flag "-L/usr/local/lib -lswift" 
+link a program to this package by adding the flag "-L/usr/local/lib -lswift"
 to your Fortran statements.
 
    Now you must complile the drivers.  Change to the directory main
@@ -86,7 +86,7 @@ files in the directory are now ready for use.
 
 
                                THE CPP FLAGS
- 
+
    We have made a significant effort making sure that SWIFT is ANSI
 standard Fortran 77.  Therefore, in principal, the Fortran source code
 should compile on any UNIX platform.  Unfortunately, there are two
@@ -104,7 +104,7 @@ fortran files to create.  These are:
    If your machine is of the first type then use the CPPFLAG of
    "-D_OPEN_POSITION".  If it is of the second use "-U_OPEN_POSITION".
    We have found that most machines are of the second type, however IBM
-   RS6000's and HP's Fortran 90 are of the first type.  
+   RS6000's and HP's Fortran 90 are of the first type.
 
 2) RECURSIVE ROUTINES: (Only SyMBA users need to worry about this!)
    Fortran 77 and Fortran 90 compilers handle recursion differently. As
@@ -124,7 +124,7 @@ fortran files to create.  These are:
    want to use it then set -U_FXDR_AVAIL.  If you try to write an XDR
    without the FXDR package Swift will complain and stop.
 
-If you don't know which is correct for you, we have supplied a test. 
+If you don't know which is correct for you, we have supplied a test.
 Change to the directory cpp_test (enter: " cd cpp_test").  Follow the
 instructions in the README file.
 
@@ -141,9 +141,9 @@ in the next section.  The differences between drivers is given next.
 SWIFT_WHM : The basic WHM integrator when particles are to be
             removed at the time of close planetary encounters.
             Arbitrarily close solar encounters can occur.
-            (This was called swift_mvs in previously releases of Swift.) 
+            (This was called swift_mvs in previously releases of Swift.)
 
-SWIFT_RMVS3: The Regularized Mixed Variable Symplectic (RMVS) integrator. 
+SWIFT_RMVS3: The Regularized Mixed Variable Symplectic (RMVS) integrator.
             This handles close approachs between test particles and planets.
 
 SWIFT_BS  :  A Bulirsch-Stoer integrator with the same I/O as
@@ -152,7 +152,7 @@ SWIFT_BS  :  A Bulirsch-Stoer integrator with the same I/O as
             used). The tolerance could be added to the end of
             the file mvs.in if redirection is used at input (see I/O below).
             The BS routine CAN get through close encounters, although
-            it is usually about 10 times slower then SWIFT_RMVS.  
+            it is usually about 10 times slower then SWIFT_RMVS.
             One can imagine writing a hybrid driver to switch from the
             WHM stuff to BS during occasional close encounters.
 
@@ -174,7 +174,7 @@ SWIFT_LYAP2: Computes Lyap. exponents for a set of test particles
            to output the phase space distances.  It also asks for a
            phase space vector representing the initial separation
            between a particle and a fictitious particle.  Note that
-           the orbit of the fictitious particle is not integrated, 
+           the orbit of the fictitious particle is not integrated,
            the difference equations are integrated.  An output file called
            'lyap2.out'  has for each output time the phase space distance
            for each particle.  NOTE: WE ARE STILL TESTING THIS, SO BE CAREFULL.
@@ -219,37 +219,37 @@ PARAM.IN : This file has all the run-time parameters of the form :
           L1:  .true.==> Include J2 and J4 for central body.  These values
                          must be included in the pl.in file.
           L2:  .true.==> Does the various checks for coming too close to Sun
-                         or planet, or too far from Sun.  If particles are 
-                         removed a file called 'discard.out' will contain a 
-                         set of entries for each removed particle that gives 
+                         or planet, or too far from Sun.  If particles are
+                         removed a file called 'discard.out' will contain a
+                         set of entries for each removed particle that gives
                          the time, the particle's posn and vel and istat flags
-                         and rstat flags (see a file called README.stat for a 
-                         discription of the status flags), as well as all the 
+                         and rstat flags (see a file called README.stat for a
+                         discription of the status flags), as well as all the
                          planetary posns and vels. at the time of removal.
-                         So you will have a complete discription of the 
+                         So you will have a complete discription of the
                          planetary system at removal time if you need it.
                  NOTE: IF THIS BIT IS NOT SET YOU SHOULD OMIT THE LINE
                  IN PARAM.IN THAT CONTAINS RMIN, RMAX ETC. AND HAVE ONLY
                  THREE LINES IN ALL :  THE LAST HAVING THE NAME OF
                  THE BINARY OUTPUT FILE.
           L3:  .true.==>  Computes Jacobi integral for the tps (only useful
-                          if have only one planet on circ. orbit).  Writes to 
+                          if have only one planet on circ. orbit).  Writes to
                           a file called jacobi.out
-          L4:  .true.==> Computes energy and ang. momentum and writes out 
-                         to a file called energy.out. (of course this only 
+          L4:  .true.==> Computes energy and ang. momentum and writes out
+                         to a file called energy.out. (of course this only
                          checks the accuracy of the planetary integrations).
           L5:  .true.==> Write to a binary output file the heliocentric
                          orbital elements of all bodies and test particles.
-                         The elements are written as REAL*4. The elements are 
-                         a,e,i,OMEGA,omega and M, where OMEGA is the long. of 
-                         ascending node, omega is arg. of peri. and M is mean 
-                         anomaly. ROUTINES TO READ FROM THE BINARY FILE ARE 
-                         GIVEN IN FOR EXAMPLE THE ROUTINE "FOLLOW" IN THE 
-                         "TOOLS" DIRECTORY. TO USE FOLLOW SIMPLY RESPOND TO 
-                         THE PROMPTS (e.g. the last query is for which 
-                         particle # to follow - use a positive integer for a 
-                         tp or a negative number if you want to follow a 
-                         planet (e.g. -3 for the third massive body ie the 
+                         The elements are written as REAL*4. The elements are
+                         a,e,i,OMEGA,omega and M, where OMEGA is the long. of
+                         ascending node, omega is arg. of peri. and M is mean
+                         anomaly. ROUTINES TO READ FROM THE BINARY FILE ARE
+                         GIVEN IN FOR EXAMPLE THE ROUTINE "FOLLOW" IN THE
+                         "TOOLS" DIRECTORY. TO USE FOLLOW SIMPLY RESPOND TO
+                         THE PROMPTS (e.g. the last query is for which
+                         particle # to follow - use a positive integer for a
+                         tp or a negative number if you want to follow a
+                         planet (e.g. -3 for the third massive body ie the
                          second planet).
           L6:  .true.==> Same as L5 except that Swift write an XDR file.
                  NOTE: L5 and L6 cannot both be set to .true.
@@ -267,20 +267,20 @@ PARAM.IN : This file has all the run-time parameters of the form :
         qmin is the perihelion distance at which a tp is stopped because
              it is deemed to be too close to the central body.
              SET TO -1. if you want to ignore this check
-	     Note:  The orbital elements computed are the osculating 
-                    (instantaneous) HELIOCENTRIC values. Because of the 
+	     Note:  The orbital elements computed are the osculating
+                    (instantaneous) HELIOCENTRIC values. Because of the
                     motion of the Sun induced by the planets, these values
-                    are unrepresentative of the barycentric values for 
-                    particles which have semi-major axes beyond a few 
-                    hundred AU.  In particular, values for the pericentric 
-                    distance and the inclination will vary considerably. As 
-                    a result we STRONGLY RECOMMEND that a value of RMAX of 
-                    a few hundred AU be used if a nonzero value of QMIN is 
+                    are unrepresentative of the barycentric values for
+                    particles which have semi-major axes beyond a few
+                    hundred AU.  In particular, values for the pericentric
+                    distance and the inclination will vary considerably. As
+                    a result we STRONGLY RECOMMEND that a value of RMAX of
+                    a few hundred AU be used if a nonzero value of QMIN is
                     used.
-        lclose is a logical.  If .true. then the code will check for close 
-             approaches between tp and planets.  If tp gets within a distance 
-             rpl of the planet then it is stopped.  rpl for each planet must 
-             be included in the pl.in if this flag is set.  NOTE: we recommend 
+        lclose is a logical.  If .true. then the code will check for close
+             approaches between tp and planets.  If tp gets within a distance
+             rpl of the planet then it is stopped.  rpl for each planet must
+             be included in the pl.in if this flag is set.  NOTE: we recommend
              that rpl be greater than a Hill sphere if you are using WHM.
         binary_outputfile is the name of a binary file to store the
             orbital elements at time intervals dtout (see below).
@@ -293,7 +293,7 @@ PARAM.IN : This file has all the run-time parameters of the form :
 
 NOTES : 1) Every dtout time increments, the code outputs various quantities,
          depending on the value of the logical flags L1-L6 (read in from
-         param.in). 
+         param.in).
 
         2) At time increments set by dtdump, the code dumps all of
         the information needed to resume the integration at that time
@@ -304,12 +304,12 @@ NOTES : 1) Every dtout time increments, the code outputs various quantities,
         that t0 in dump_param.dat records the time of the dump and
         that the status_flag_for_open_statements is changed to
         `append', so that these files can be used to restart a stopped
-        integration.  Depending on the situation, one may wish to 
-        increase tstop in order to extend an integration.   The files 
-        are overwritten with each dump so only the most recent one is 
+        integration.  Depending on the situation, one may wish to
+        increase tstop in order to extend an integration.   The files
+        are overwritten with each dump so only the most recent one is
         preserved.
 
-        NOTE: We strongly suggest that you set dtdump=dtout.  This will 
+        NOTE: We strongly suggest that you set dtdump=dtout.  This will
               make it easier to restart the program if your computer
               goes down.
 
@@ -330,16 +330,16 @@ PL.IN : The code requires units in which the grav. constant G is unity.
 
         In addition:  if L1 = .true. then next to the Sun must be the
         values of J_2 * R^2 and J_4 R^4, where R is the radius of the
-        central body.  
+        central body.
 
-        If L2=.true. and lclose=.true. than the lines that contain the masses 
+        If L2=.true. and lclose=.true. than the lines that contain the masses
         of the planets must also include the stopping radius.
 
 TP.IN : In the same units as PL.IN, the first line is # of test particles.
         The test particles are assumed massless so for each particle there
         are 6 lines giving heliocentric x,y,z on first, helioc. vx,vy,vz on
-        second and then 13 istat integers and 13 rstat integers (See 
-        README.stat for the definitions of the status flags).  For most 
+        second and then 13 istat integers and 13 rstat integers (See
+        README.stat for the definitions of the status flags).  For most
         runs one would begin with ststud flags equal to zero
         unless it is a resumption of an earlier run. The code may
         alter the arrays as it runs.
@@ -353,5 +353,3 @@ TP.IN : In the same units as PL.IN, the first line is # of test particles.
         and we note clearly in the description in each subroutine if this
         is the case.
 **************************************************************************
-
-

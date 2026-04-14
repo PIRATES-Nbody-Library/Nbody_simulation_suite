@@ -6,26 +6,26 @@ c
 c             Input:
 c                 nbod          ==>  number of massive bodies (int scalar)
 c                 mass          ==>  mass of bodies (real array)
-c                 xj,yj,zj      ==>  initial position in jacobi coord 
+c                 xj,yj,zj      ==>  initial position in jacobi coord
 c                                    (real arrays)
-c                 vxj,vyj,vzj   ==>  initial position in jacobi coord 
+c                 vxj,vyj,vzj   ==>  initial position in jacobi coord
 c                                    (real arrays)
 c                 dt            ==>  time step
 c             Output:
-c                 xj,yj,zj      ==>  final position in jacobi coord 
+c                 xj,yj,zj      ==>  final position in jacobi coord
 c                                       (real arrays)
-c                 vxj,vyj,vzj   ==>  final position in jacobi coord 
+c                 vxj,vyj,vzj   ==>  final position in jacobi coord
 c                                       (real arrays)
 c
-c Authors:  Hal Levison 
+c Authors:  Hal Levison
 c Date:    2/12/93
 c Last revision: 9/5/94
 
-      subroutine drift(nbod,mass,xj,yj,zj,vxj,vyj,vzj,dt)	
+      subroutine drift(nbod,mass,xj,yj,zj,vxj,vyj,vzj,dt)
 
       include '../../swift.inc'
 
-c...  Inputs Only: 
+c...  Inputs Only:
       integer nbod
       real*8 mass(nbod),dt
 
@@ -38,7 +38,7 @@ c...  Internals:
 	integer j,iflg
 
 c----
-c...  Executable code 
+c...  Executable code
 
 c Take a drift forward dth
 

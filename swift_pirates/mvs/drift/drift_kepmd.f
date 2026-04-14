@@ -23,7 +23,7 @@ c
 
 c...    Inputs
 	real*8 dm,es,ec
-	
+
 c...	Outputs
 	real*8 x,s,c
 
@@ -56,7 +56,7 @@ c...    Compute better value for the root using quartic Newton method
         dx = -f/(fp + 0.5*dx*fpp)
         dx = -f/(fp + 0.5*dx*fpp + 0.16666666666666666*dx*dx*fppp)
         x = x + dx
-     
+
 c...  excellent approx. to sin and cos of x for small x.
 	y = x*x
 	s = x*(A0-y*(A1-y*(A2-y*(A3-y*(A4-y)))))/A0

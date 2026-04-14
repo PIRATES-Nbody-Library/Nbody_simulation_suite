@@ -1,12 +1,12 @@
 c************************************************************************
 c                              IO_INIT_PL.F
 c************************************************************************
-c IO_INIT_PL reads in the data for the Sun and planets 
+c IO_INIT_PL reads in the data for the Sun and planets
 c
 c             Input:
 c                 infile        ==> File name to read from (character*80)
-c                 lclose        ==> .true. --> discard particle if it gets 
-c                                    too close to a planet. Read in that 
+c                 lclose        ==> .true. --> discard particle if it gets
+c                                    too close to a planet. Read in that
 c                                    distance in io_init_pl
 c                                      (logical*2 scalar)
 c                 iflgchk        ==>  bit 5 set ==>  include J2 and J4 terms
@@ -14,18 +14,18 @@ c
 c             Output:
 c                 nbod          ==>  number of massive bodies (int scalar)
 c                 mass          ==>  mass of bodies (real array)
-c                 xh,yh,zh      ==>  initial position in Helio coord 
+c                 xh,yh,zh      ==>  initial position in Helio coord
 c                                    (real arrays)
-c                 vxh,vyh,vzh   ==>  initial position in Helio coord 
+c                 vxh,vyh,vzh   ==>  initial position in Helio coord
 c                                    (real arrays)
 c                 rplsq         ==>  min distance^2 that a tp can get from pl
 c                                    (real array)
 c                 j2rp2,j4rp4   ==>  J2*radii_pl^2 and  J4*radii_pl^4
 c                                     (real scalars)
 c
-c Remarks: 
+c Remarks:
 c Authors:  Martin Duncan
-c Date:    3/2/93 
+c Date:    3/2/93
 c Last revision: 9/30/00  HFL
 
 	subroutine io_init_pl(infile,lclose,iflgchk,nbod,mass,xh,yh,zh,
@@ -50,7 +50,7 @@ c...   Internal
         real*8 rpl
 
 c-----
-c...  Executable code      
+c...  Executable code
 
 	write(*,*) 'Planet data file is ',infile
         call io_open(7,infile,'old','formatted',ierr)
@@ -70,7 +70,7 @@ c Read number of planets
      &   'For each, list mass ',/,
      &   'Followed by x,y,z,vx,vy,vz : '/)
 
-c For each planet read mass, 
+c For each planet read mass,
 c and helioc. position and vel .
         if(btest(iflgchk,5))  then ! bit 5 is set
            read(7,*) mass(1),j2rp2,j4rp4
@@ -117,4 +117,3 @@ c and helioc. position and vel .
 	return
 	end     ! io_init_pl.f
 c--------------------------------------------------------------------------
-

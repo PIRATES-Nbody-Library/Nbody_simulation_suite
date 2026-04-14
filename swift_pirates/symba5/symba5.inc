@@ -4,9 +4,9 @@ c*************************************************************************
 C Include file for the SyMBA subroutines
 c
 c Remarks:  copied from symba.inc
-c Author:  Hal Levison  
+c Author:  Hal Levison
 c Date:    3/20/97
-c Last revision: 
+c Last revision:
 
 c...  Maximum number of encounters
 	integer NENMAX
@@ -19,10 +19,8 @@ c...	scale factor for hill's sphere to take shorter time step
 
 c...   Ratio of shell radii squared
 	real*8 RSHELL
-	parameter (RSHELL = 0.48075d0)   ! should be someting faster than RSHELL ~ NTENC^(-2/3) 
+	parameter (RSHELL = 0.48075d0)   ! should be someting faster than RSHELL ~ NTENC^(-2/3)
 
-c..    ratio of the number of time steps in the adjoining shells 
+c..    ratio of the number of time steps in the adjoining shells
        integer NTENC
        parameter (NTENC=4)
-
-

@@ -6,27 +6,27 @@ c
 c             Input:
 c                 nbod          ==>  number of massive bodies (int scalar)
 c                 mass          ==>  mass of bodies (real array)
-c                 xh,yh,zh      ==>  initial position in helio coord 
+c                 xh,yh,zh      ==>  initial position in helio coord
 c                                    (real arrays)
-c                 vxb,vyb,vzb   ==>  initial position in bary coord 
+c                 vxb,vyb,vzb   ==>  initial position in bary coord
 c                                    (real arrays)
 c                 dt            ==>  time step
 c             Output:
-c                 xh,yh,zh      ==>  final position in helio coord 
+c                 xh,yh,zh      ==>  final position in helio coord
 c                                       (real arrays)
-c                 vxb,vyb,vzb   ==>  final position in bary coord 
+c                 vxb,vyb,vzb   ==>  final position in bary coord
 c                                       (real arrays)
 c
 c Remarks:  Based on drift.f
-c Authors:  Hal Levison 
+c Authors:  Hal Levison
 c Date:    11/14/96
 c Last revision: 1/8/97  for symba
 
-      subroutine helio_drift(nbod,mass,xh,yh,zh,vxb,vyb,vzb,dt)	
+      subroutine helio_drift(nbod,mass,xh,yh,zh,vxb,vyb,vzb,dt)
 
       include '../swift.inc'
 
-c...  Inputs Only: 
+c...  Inputs Only:
       integer nbod
       real*8 mass(nbod),dt
 
@@ -38,7 +38,7 @@ c...  Internals:
       integer j,iflg
 
 c----
-c...  Executable code 
+c...  Executable code
 
 c Take a drift forward dth
 

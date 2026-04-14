@@ -9,11 +9,11 @@ c                 time           ==>  current time (real scalar)
 c                 nbod           ==>  number of test bodies (int scalar)
 c                 iecnt          ==>  Number of encounters (int*2 array)
 c                 mass           ==>  mass of bodies (real array)
-c                 xh,yh,zh       ==>   part position in helio coord 
+c                 xh,yh,zh       ==>   part position in helio coord
 c                                      (real arrays)
-c                 vxh,vyh,vzh    ==>   part vel in helio coord 
+c                 vxh,vyh,vzh    ==>   part vel in helio coord
 c                                      (real arrays)
-c                 qmin           ==>  Smallest perihelion distance 
+c                 qmin           ==>  Smallest perihelion distance
 c                                      (real scalar)
 c                 iwhy           ==>  status of the object
 c                                      (integer array)
@@ -25,16 +25,16 @@ c                                    =-1 if tp pre peri
 c                                    = 1 if tp post peri
 c                                         (integer array)
 c Remarks: Based on discard_mass_peri
-c Authors:  Hal Levison 
+c Authors:  Hal Levison
 c Date:    9/19/03
-c Last revision: 
+c Last revision:
 
       subroutine discard_massy_peri(time,nbod,iecnt,mass,xh,yh,zh,
      &     vxh,vyh,vzh,qmin,iwhy,isperi)
 
       include '../swift.inc'
 
-c...  Inputs: 
+c...  Inputs:
       integer nbod
       real*8 mass(nbod),time,qmin
       real*8 xh(nbod),yh(nbod),zh(nbod)
@@ -55,7 +55,7 @@ c...  internal
       save i1st
 
 c-----
-c...  Executable code 
+c...  Executable code
 
       if(i1st.eq.0) then     ! if first time through, set things up
          call util_mass_peri(0,nbod,xh,yh,zh,vxh,vyh,vzh,
@@ -80,13 +80,3 @@ c...  Executable code
       return
       end       ! discard_massy_peri
 c------------------------------------------------------
-
-
-
-
-
-
-
-
-
-

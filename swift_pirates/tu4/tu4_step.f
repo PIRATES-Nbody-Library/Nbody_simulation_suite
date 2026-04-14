@@ -14,13 +14,13 @@ c                 ntp            ==>  number of massive bodies (int scalar)
 c                 mass          ==>  mass of bodies (real array)
 c                 j2rp2,j4rp4   ==>  J2*radii_pl^2 and  J4*radii_pl^4
 c                                     (real scalars)
-c                 xh,yh,zh      ==>  initial position in helio coord 
+c                 xh,yh,zh      ==>  initial position in helio coord
 c                                    (real arrays)
-c                 vxh,vyh,vzh   ==>  initial velocity in helio coord 
+c                 vxh,vyh,vzh   ==>  initial velocity in helio coord
 c                                    (real arrays)
-c                 xht,yht,zht    ==>  initial part position in helio coord 
+c                 xht,yht,zht    ==>  initial part position in helio coord
 c                                      (real arrays)
-c                 vxht,vyht,vzht ==>  initial velocity in helio coord 
+c                 vxht,vyht,vzht ==>  initial velocity in helio coord
 c                                        (real arrays)
 c                 istat           ==>  status of the test paricles
 c                                      (2d integer array)
@@ -30,28 +30,28 @@ c                 rstat           ==>  status of the test paricles
 c                                      (2d real array)
 c                 dt            ==>  time step
 c             Output:
-c                 xh,yh,zh      ==>  final position in helio coord 
+c                 xh,yh,zh      ==>  final position in helio coord
 c                                       (real arrays)
-c                 vxh,vyh,vzh   ==>  final velocity in helio coord 
+c                 vxh,vyh,vzh   ==>  final velocity in helio coord
 c                                       (real arrays)
-c                 xht,yht,zht    ==>  final position in helio coord 
+c                 xht,yht,zht    ==>  final position in helio coord
 c                                       (real arrays)
-c                 vxht,vyht,vzht ==>  final position in helio coord 
+c                 vxht,vyht,vzht ==>  final position in helio coord
 c                                       (real arrays)
 c
 c
 c Remarks:  Based on Martin's NB4M routines and Hal's STEP_KDK
-c Authors:  Martin Duncan 
+c Authors:  Martin Duncan
 c Date:    3/8/93
 c Last revision: 2/24/94
 
       subroutine tu4_step(i1st,time,nbod,ntp,mass,j2rp2,j4rp4,
      &     xh,yh,zh,vxh,vyh,vzh,xht,yht,zht,vxht,vyht,vzht,
-     &     istat,rstat,dt)	
+     &     istat,rstat,dt)
 
       include '../swift.inc'
 
-c...  Inputs Only: 
+c...  Inputs Only:
       integer nbod,ntp,i1st
       real*8 mass(nbod),dt,time,j2rp2,j4rp4
 
@@ -77,7 +77,7 @@ c...  Internals
 
       save asymp,bsymp
 c----
-c...  Executable code 
+c...  Executable code
 
 c If first time, load up the symplectic coeffs asymp(*) and bsymp(*)
 
@@ -103,7 +103,7 @@ c...  Convert to barycentric coords
       call coord_h2b_tp(ntp,xht,yht,zht,vxht,vyht,vzht,
      &     xb(1),yb(1),zb(1),vxb(1),vyb(1),vzb(1),
      &     xbt,ybt,zbt,vxbt,vybt,vzbt)
-      
+
 c Take a drift forward to begin the leapfrog (the first kick = 0).
       adt = asymp(1)*dt
 
@@ -134,8 +134,8 @@ c...  Convert back to helio. coords at the end of the step
       call coord_b2h_tp(ntp,xbt,ybt,zbt,vxbt,vybt,vzbt,
      &     xb(1),yb(1),zb(1),vxb(1),vyb(1),vzb(1),
      &     xht,yht,zht,vxht,vyht,vzht)
-      
+
       return
-      
+
       end   ! step_tu4
 c------------------------------------------------------------------------

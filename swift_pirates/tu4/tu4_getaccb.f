@@ -3,20 +3,20 @@ c			TU4_GETACCB.F
 c*************************************************************************
 c GETACCB returns the bary. acc. on each of n mutually
 c interacting objects by direct pairwise summation
-c	
+c
 c
 c             Input:
 c                 nbod          ==>  number of massive bodies (int scalar)
 c                 mass          ==>  mass of planets (real array)
 c                 j2rp2,j4rp4   ==>  J2*radii_pl^2 and  J4*radii_pl^4
 c                                     (real scalars)
-c                 xb,yb,zb      ==>  position of planets in beri coord 
+c                 xb,yb,zb      ==>  position of planets in beri coord
 c                                    (real arrays)
 c             Output:
-c               axb,ayb,azb   ==>  accel in beri coord (real arrays) 
+c               axb,ayb,azb   ==>  accel in beri coord (real arrays)
 c
 c Remarks:  Based on Martin's NB4M routines
-c Authors:  Martin Duncan 
+c Authors:  Martin Duncan
 c Date:    3/8/93
 c Last revision: 4/5/95
 
@@ -24,7 +24,7 @@ c Last revision: 4/5/95
 
       include '../swift.inc'
 
-c...  Inputs Only: 
+c...  Inputs Only:
       integer nbod
       real*8 mass(nbod),j2rp2,j4rp4
       real*8 xb(nbod),yb(nbod),zb(nbod)
@@ -109,6 +109,6 @@ c..      save for the J2 and J4 calculations
          enddo
       endif
 
-      return	
+      return
       end                       !  tu4_getaccb
 c____________________________________________________________________________

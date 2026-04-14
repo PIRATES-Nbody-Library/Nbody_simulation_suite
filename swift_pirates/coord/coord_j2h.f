@@ -2,7 +2,7 @@ c***********************************************************************
 c	                    COORD_J2H.F
 c***********************************************************************
 *     PURPOSE: Converts from Jacobi to Helio coords.
-*     ARGUMENTS:  Input is 
+*     ARGUMENTS:  Input is
 *                    nbod ==> number of bodies (must be less than NBMAX)
 *                             (integer)
 *	             mass(*) ==>  masses (real array)
@@ -15,8 +15,8 @@ c***********************************************************************
 *                                          (real array)
 *                    vxh(*),vyh(*),vzh(*) ==> Helio particle velocities
 *                                            (real array)
-*       
-*     ALGORITHM: See my notes on Nov 21. 
+*
+*     ALGORITHM: See my notes on Nov 21.
 *
 *     Authors:  Martin Duncan
 *     WRITTEN:  Jan 27/93
@@ -28,8 +28,8 @@ c***********************************************************************
 
       include '../swift.inc'
 
-c...  Inputs: 
-	integer nbod 
+c...  Inputs:
+	integer nbod
 	real*8 mass(nbod)
 	real*8 xj(nbod),yj(nbod),zj(nbod)
 	real*8 vxj(nbod),vyj(nbod),vzj(nbod)
@@ -44,7 +44,7 @@ c...  Internals:
 	real*8 eta(NTPMAX)
 
 c----
-c...  Executable code 
+c...  Executable code
 
 c First calc. the array eta(*) then convert to jacobi coords
 
@@ -60,7 +60,7 @@ c First calc. the array eta(*) then convert to jacobi coords
 	vyh(1) =  0.d0
 	vzh(1) =  0.d0
 
-        xh(2) = xj(2) 
+        xh(2) = xj(2)
         yh(2) = yj(2)
 	zh(2) = zj(2)
 	vxh(2) = vxj(2)
@@ -74,7 +74,7 @@ c First calc. the array eta(*) then convert to jacobi coords
 	sumvy = mass(2)*vyj(2)/eta(2)
 	sumvz = mass(2)*vzj(2)/eta(2)
 
-	do n=3,nbod 
+	do n=3,nbod
 	  xh(n) = xj(n) + sumx
 	  yh(n) = yj(n) + sumy
 	  zh(n) = zj(n) + sumz
@@ -98,4 +98,3 @@ c First calc. the array eta(*) then convert to jacobi coords
 	end     ! coord_j2h
 
 c--------------------------------------------------------------------------
-

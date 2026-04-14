@@ -6,13 +6,13 @@ c in the HELIOCENTRIC frame. This term is the direct cross terms
 c             Input:
 c                 nbod          ==>  number of massive bodies (int scalor)
 c                 mass          ==>  mass of bodies (real array)
-c                 xh,yh,zh      ==>  position in heliocentric coord 
+c                 xh,yh,zh      ==>  position in heliocentric coord
 c                                   (real arrays)
 c             Output:
-c                 axh3,ayh3,azh3 ==>  3rd term of acceleration in helio coord 
+c                 axh3,ayh3,azh3 ==>  3rd term of acceleration in helio coord
 c                                     (real arrays)
 c
-c Author:  Hal Levison  
+c Author:  Hal Levison
 c Date:    2/2/93
 c Last revision: 11/21/96
 
@@ -20,7 +20,7 @@ c Last revision: 11/21/96
 
       include '../../swift.inc'
 
-c...  Inputs: 
+c...  Inputs:
       integer nbod
       real*8 mass(nbod),xh(nbod),yh(nbod),zh(nbod)
 
@@ -65,4 +65,3 @@ c...  Executable code
 
       return
       end     ! getacch_ah3
-

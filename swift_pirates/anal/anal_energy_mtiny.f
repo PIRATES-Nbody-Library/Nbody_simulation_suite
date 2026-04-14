@@ -12,9 +12,9 @@ c            nbodm         ==>  Location of last massive body(int scalar)
 c            mass          ==>  mass of bodies (real array)
 c            j2rp2         ==>  scaled value of j2 moment (real*8 scalar)
 c            j4rp4         ==>  scaled value of j4 moment (real*8 scalar)
-c            xh,yh,zh      ==>  current position in heliocentric coord 
+c            xh,yh,zh      ==>  current position in heliocentric coord
 c                               (real arrays)
-c            vxh,vyh,vzh   ==>  current velocity in heliocentric coord 
+c            vxh,vyh,vzh   ==>  current velocity in heliocentric coord
 c                               (real arrays)
 c
 c      Output:
@@ -27,14 +27,14 @@ c
 c Remarks: Based on anal_energy
 c Authors:  Hal Levison
 c Date:  12/16/06
-c Last revision:  
+c Last revision:
 
       subroutine anal_energy_mtiny(nbod,nbodm,mass,j2rp2,j4rp4,xh,yh,zh,
      &           vxh,vyh,vzh,ke,pot,energy,eltot)
 
       include '../swift.inc'
 
-c...  Inputs: 
+c...  Inputs:
       integer nbod,nbodm
       real*8 mass(nbod),j2rp2,j4rp4
       real*8 xh(nbod),yh(nbod),zh(nbod)
@@ -51,10 +51,10 @@ c...  Internals
       integer i,j
 
 c----
-c...  Executable code 
+c...  Executable code
 
       call coord_h2b(nbod,mass,xh,yh,zh,vxh,vyh,vzh,
-     &           xb,yb,zb,vxb,vyb,vzb,msys)   
+     &           xb,yb,zb,vxb,vyb,vzb,msys)
 
       eltot(1)=(yb(nbod)*vzb(nbod)-zb(nbod)*vyb(nbod))*mass(nbod)
       eltot(2)=(zb(nbod)*vxb(nbod)-xb(nbod)*vzb(nbod))*mass(nbod)
@@ -71,14 +71,14 @@ c...  Executable code
          eltot(1) = eltot(1) + elx
          eltot(2) = eltot(2) + ely
          eltot(3) = eltot(3) + elz
-         
+
          ke = ke + 0.5*mass(i)*(vxb(i)**2 + vyb(i)**2 + vzb(i)**2)
          do j = i+1,nbod
 
 	    xx = xb(i) - xb(j)
 	    yy = yb(i) - yb(j)
 	    zz = zb(i) - zb(j)
-	    rr2 = xx**2 + yy**2 + zz**2 
+	    rr2 = xx**2 + yy**2 + zz**2
             if((mass(i).ne.0.0d0).and.(mass(j).ne.0.0d0)) then
                pot = pot - mass(i)*mass(j)/(sqrt(rr2))
             endif
@@ -105,7 +105,6 @@ c...  Executable code
 
       energy = ke + pot
 
-      return	
+      return
       end      ! anal_energy
 c-----------------------------------------------------------------------
-

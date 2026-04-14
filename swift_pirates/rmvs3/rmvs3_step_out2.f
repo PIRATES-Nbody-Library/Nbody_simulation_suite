@@ -12,34 +12,34 @@ c                 ntp            ==>  number of massive bodies (int scalar)
 c                 mass           ==>  mass of bodies (real array)
 c             j2rp2,j4rp4        ==>  J2*radii_pl^2 and  J4*radii_pl^4
 c                                     (real scalars)
-c             xbeg,ybeg,zbeg     ==>  initial planet position in helio coord 
+c             xbeg,ybeg,zbeg     ==>  initial planet position in helio coord
 c                                         (real arrays)
-c             vxbeg,vybeg,vzbeg  ==>  initial planet velcoity in helio coord 
+c             vxbeg,vybeg,vzbeg  ==>  initial planet velcoity in helio coord
 c                                         (real arrays)
-c             xend,yend,zend     ==>  final planet position in helio coord 
+c             xend,yend,zend     ==>  final planet position in helio coord
 c                                         (real arrays)
-c             vxend,vyend,vzend  ==>  final planet velcoity in helio coord 
+c             vxend,vyend,vzend  ==>  final planet velcoity in helio coord
 c                                         (real arrays)
-c             xht,yht,zht        ==>  initial tp position in helio coord 
+c             xht,yht,zht        ==>  initial tp position in helio coord
 c                                      (real arrays)
-c             vxht,vyht,vzht     ==>  initial tp velocity in helio coord 
+c             vxht,vyht,vzht     ==>  initial tp velocity in helio coord
 c                                        (real arrays)
 c             istat              ==>  status of the test paricles
 c                                      (2d integer array)
 c                                      istat(i,1) = 0 ==> active:  = 1 not
 c                                      istat(i,2) = -1 ==> Danby did not work
-c             ienc0               ==> ienc0(j) = 0 if tp j not involved in enc 
-c                                       in outer region: = planet# if it is. 
+c             ienc0               ==> ienc0(j) = 0 if tp j not involved in enc
+c                                       in outer region: = planet# if it is.
 c                                         (integer array)
-c                                              =  0 No (integer scalar)  
+c                                              =  0 No (integer scalar)
 c                 dt            ==>  time step (real sclar)
 c             Output:
-c                 xht,yht,zht    ==>  final tp position in helio coord 
+c                 xht,yht,zht    ==>  final tp position in helio coord
 c                                       (real arrays)
-c                 vxht,vyht,vzht ==>  final tp position in helio coord 
+c                 vxht,vyht,vzht ==>  final tp position in helio coord
 c                                       (real arrays)
 c                                      NOTE: only the tp in the outer region
-c                                            will have their x and v's changed 
+c                                            will have their x and v's changed
 c             istat              ==>  status of the test paricles
 c                                      (2d integer array)
 c                                      istat(i,1) = 0 ==> active:  = 1 not
@@ -53,10 +53,10 @@ c                                         (integer array)
 c                 peri           ==> set to pericenter dist. if isperi=0
 c                                         (real array)
 c
-c Remarks: 
-c Authors:  Hal Levison 
+c Remarks:
+c Authors:  Hal Levison
 c Date:    7/10/96
-c Last revision: 
+c Last revision:
 
       subroutine rmvs3_step_out2(i1st,nbod,ntp,mass,j2rp2,j4rp4,
      &           xbeg,ybeg,zbeg,xend,yend,zend,vxbeg,vybeg,
@@ -66,7 +66,7 @@ c Last revision:
       include '../swift.inc'
       include '../rmvs/rmvs.inc'
 
-c...  Inputs Only: 
+c...  Inputs Only:
       integer nbod,ntp,i1st
       real*8 mass(nbod),dt,j2rp2,j4rp4
       real*8 xbeg(NPLMAX),ybeg(NPLMAX),zbeg(NPLMAX)
@@ -95,7 +95,7 @@ c...  Internals
 
 
 c----
-c...  Executable code 
+c...  Executable code
 
       i1sttp = i1st
 
@@ -113,7 +113,7 @@ c.... if not just do a normal step and leave
 
           call step_kdk_tp(i1st,nbod,ntp,mass,j2rp2,j4rp4,
      &              xbeg,ybeg,zbeg,xend,yend,zend,
-     &              xht,yht,zht,vxht,vyht,vzht,istat,dt)	
+     &              xht,yht,zht,vxht,vyht,vzht,istat,dt)
 
          return       !  NOTE AN EXIT
       endif
@@ -130,7 +130,7 @@ c...  Do the inner integration
      &     ytmp,ztmp,xbeg,ybeg,zbeg,vxbeg,vybeg,vzbeg,
      &     xend,yend,zend,vxend,vyend,vzend,xht,yht,zht,
      &     vxht,vyht,vzht,istat,nenc,itpenc,isperi,peri,dt)
-      
+
       do i=1,ntp
          if(istat(i,1).eq.0) then
             istat(i,2) = 0
@@ -161,7 +161,7 @@ c...  do a full step
       i1sto = 0      ! we need to recalculate accel arrays
       call step_kdk_tp(i1sto,nbod,ntp,mass,j2rp2,j4rp4,
      &              xbeg,ybeg,zbeg,xend,yend,zend,
-     &              xht,yht,zht,vxht,vyht,vzht,istattmp,dt)	
+     &              xht,yht,zht,vxht,vyht,vzht,istattmp,dt)
 
 c...  fix up the istat array
       do i=1,ntp
@@ -184,9 +184,8 @@ c...  put the enc info into istat
 
 c...  we MUST make sure that the saved accel arrays are ok
 c...  calculate them again
-       i1st = 0 
+       i1st = 0
 
       return
       end   ! step_enc
 c------------------------------------------------------------------------
-

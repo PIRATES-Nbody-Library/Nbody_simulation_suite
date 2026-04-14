@@ -9,9 +9,9 @@ c                 time          ==>  current time (real scalar)
 c                 dt            ==>  time step  (real scalar)
 c                 nbod          ==>  number of massive bodies (int scalar)
 c                 mass          ==>  mass of bodies (real array)
-c                 xh,yh,zh      ==>   position in helio coord 
+c                 xh,yh,zh      ==>   position in helio coord
 c                                    (real arrays)
-c                 vxh,vyh,vzh   ==>   pl vel in helio coord 
+c                 vxh,vyh,vzh   ==>   pl vel in helio coord
 c                                    (real arrays)
 c                 rmin,rmax      ==>  maximum and min distance from Sun
 c                                     if <0  then don't check
@@ -23,7 +23,7 @@ c                  qmin          ==> Smallest perihelion distance
 c                                      if <0  then don't check
 c                                          (real scalar)
 c                 lclose        ==> .true. --> marge particles if they
-c                                    get too close. Read in that 
+c                                    get too close. Read in that
 c                                    distance in io_init_pl
 c                                      (logical*2 scalar)
 c                 rpl           ==>  physical size of a planet.
@@ -40,12 +40,12 @@ c                 mergecnt      ==>  count of mergers (int array)
 c                 iecnt         ==>  Number of encounters (int*2 array)
 c                 i1st          ==>  = 0 if first step; = 1 not (int scalar)
 c             Output:
-c                 nbod          ==>  recalculated number of massive bodies 
+c                 nbod          ==>  recalculated number of massive bodies
 c                                       (int scalar)
 c                 mass          ==>  recalculated mass of bodies (real array)
-c                 xh,yh,zh      ==>  recalculated position in helio coord 
+c                 xh,yh,zh      ==>  recalculated position in helio coord
 c                                    (real arrays)
-c                 vxh,vyh,vzh   ==>  recalculated pl vel in helio coord 
+c                 vxh,vyh,vzh   ==>  recalculated pl vel in helio coord
 c                                    (real arrays)
 c                 rpl           ==> recalculated physical sizes of a planet.
 c                                    (real array)
@@ -56,9 +56,9 @@ c                                          (real scalar)
 c                 i1st          ==>  set to 0 if reordered (int scalar)
 c
 c
-c Remarks: 
+c Remarks:
 c
-c Authors:  Hal Levison 
+c Authors:  Hal Levison
 c Date:    12/30/96
 c Last revision: 5/13/99
 
@@ -68,7 +68,7 @@ c Last revision: 5/13/99
 
       include '../swift.inc'
 
-c...  Inputs: 
+c...  Inputs:
       real*8 time,dt
       integer isenc
       real*8 rmin,rmax,rmaxu,qmin
@@ -95,7 +95,7 @@ c...  internal
       save isperih
 
 c-----
-c...  Executable code 
+c...  Executable code
 
 
 c.... check for duplicate mergers
@@ -118,7 +118,7 @@ c.... take care of mergers
          vdotr = xh(i1)*vxh(i1)+yh(i1)*vyh(i1)+zh(i1)*vzh(i1)
          if (vdotr .gt. 0.d0) then
             isperih(i1) = 1
-         else 
+         else
             isperih(i1) =-1
          endif
          if(i2.gt.0) then
@@ -186,7 +186,7 @@ c...  check perihelion distance
       iu = 40
       i = 2
       iflg = 0
-      do while(i.le.nbod) 
+      do while(i.le.nbod)
          if(iwhy(i).ne.0) then
             if(iflg.eq.0) then
                iflg = 1
@@ -216,4 +216,3 @@ c...  check perihelion distance
       return
       end         ! discard_massive.f
 c-----------------------------------------------------
-

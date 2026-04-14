@@ -17,9 +17,9 @@ c                 xbeg,ybeg,zbeg ==>  massive part position at beginning of dt
 c                                       (real arrays)
 c                 xend,yend,zend ==>  massive part position at end of dt
 c                                       (real arrays)
-c                 xht,yht,zht    ==>  initial part position in helio coord 
+c                 xht,yht,zht    ==>  initial part position in helio coord
 c                                      (real arrays)
-c                 vxht,vyht,vzht ==>  initial velocity in helio coord 
+c                 vxht,vyht,vzht ==>  initial velocity in helio coord
 c                                        (real arrays)
 c                 istat           ==>  status of the test paricles
 c                                      (2d integer array)
@@ -27,23 +27,23 @@ c                                      istat(i,1) = 0 ==> active:  = 1 not
 c                                      istat(i,2) = -1 ==> Danby did not work
 c                 dt             ==>  time step
 c             Output:
-c                 xht,yht,zht    ==>  final position in helio coord 
+c                 xht,yht,zht    ==>  final position in helio coord
 c                                       (real arrays)
-c                 vxht,vyht,vzht ==>  final position in helio coord 
+c                 vxht,vyht,vzht ==>  final position in helio coord
 c                                       (real arrays)
 c
 c Remarks: Adopted from martin's nbwhnew.f program
-c Authors:  Hal Levison 
+c Authors:  Hal Levison
 c Date:    2/12/93
 c Last revision: 2/25/94
 
       subroutine lyap_step_sh(i1st,nbod,ntp,mass,j2rp2,j4rp4,
      &              xbeg,ybeg,zbeg,xend,yend,zend,
-     &              xht,yht,zht,vxht,vyht,vzht,istat,dt)	
+     &              xht,yht,zht,vxht,vyht,vzht,istat,dt)
 
       include '../swift.inc'
 
-c...  Inputs Only: 
+c...  Inputs Only:
       integer nbod,ntp,i1st
       real*8 mass(nbod),dt,j2rp2,j4rp4
       real*8 xbeg(NPLMAX),ybeg(NPLMAX),zbeg(NPLMAX)
@@ -56,37 +56,36 @@ c...  Inputs and Outputs:
 
 c...  Internals:
 c      integer i
-      real*8 dth 
+      real*8 dth
       real*8 axht(NTPMAX),ayht(NTPMAX),azht(NTPMAX)
 
       save axht,ayht,azht     ! Note this !!
 
 c----
-c...  Executable code 
+c...  Executable code
 
       dth = 0.5d0*dt
 
-      if(i1st.eq.0) then 
+      if(i1st.eq.0) then
 c...      Get the accelerations in helio frame.
           call getacch_tp(nbod,ntp,mass,j2rp2,j4rp4,xbeg,ybeg,zbeg,
      &                  xht,yht,zht,istat,axht,ayht,azht)
           i1st = 1    ! turn this off
       endif
 
-c...  Apply a heliocentric kick for a half dt 
-      call kickvh_tp(ntp,vxht,vyht,vzht,axht,ayht,azht,istat,dth) 
+c...  Apply a heliocentric kick for a half dt
+      call kickvh_tp(ntp,vxht,vyht,vzht,axht,ayht,azht,istat,dth)
 
 c...  Take a drift forward full step
-      call drift_tp(ntp,mass(1),xht,yht,zht,vxht,vyht,vzht,dt,istat)	
+      call drift_tp(ntp,mass(1),xht,yht,zht,vxht,vyht,vzht,dt,istat)
 
 c...  Get the accelerations in helio frame.
       call getacch_tp(nbod,ntp,mass,j2rp2,j4rp4,xend,yend,zend,
      &                  xht,yht,zht,istat,axht,ayht,azht)
 
-c...  Apply a heliocentric kick for a half dt 
-      call kickvh_tp(ntp,vxht,vyht,vzht,axht,ayht,azht,istat,dth) 
+c...  Apply a heliocentric kick for a half dt
+      call kickvh_tp(ntp,vxht,vyht,vzht,axht,ayht,azht,istat,dth)
 
       return
       end   ! lyap_step_sh
 c---------------------------------------------------------------------
-

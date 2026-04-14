@@ -1,9 +1,9 @@
 c***********************************************************************
 c	                    COORD_VH2B.F
 c***********************************************************************
-*     PURPOSE: Converts from Heliocentric to Barycentric coords. 
+*     PURPOSE: Converts from Heliocentric to Barycentric coords.
 *              Velocity only
-*     ARGUMENTS:  Input is 
+*     ARGUMENTS:  Input is
 *                    nbod ==> number of bodies (must be less than NBMAX)
 *                             (integer)
 *	             mass(*) ==>  masses (real array)
@@ -13,9 +13,9 @@ c***********************************************************************
 *                    vxb(*),vyb(*),vzb(*) ==> bary. particle velocities
 *                                            (real array)
 *                    msys              ==>  Total mass of of system
-*                                            (real scalar)       
+*                                            (real scalar)
 *     Authors:  Hal Levison
-*     ALGORITHM: Obvious 
+*     ALGORITHM: Obvious
 *     WRITTEN:  11/14/96
 *     REVISIONS: 11/21/96
 
@@ -23,7 +23,7 @@ c***********************************************************************
 
       include '../swift.inc'
 
-c...  Inputs: 
+c...  Inputs:
 	integer nbod
 	real*8 mass(nbod)
 	real*8 vxh(nbod),vyh(nbod),vzh(nbod)
@@ -36,7 +36,7 @@ c...  Internals:
 	integer n
 
 c----
-c...  Executable code 
+c...  Executable code
 
 	msys = mass(1)
 	vxtmp =0.d0
@@ -63,4 +63,3 @@ c...  Executable code
 	return
 	end     ! coord_vh2b
 c--------------------------------------------------------------------------
-

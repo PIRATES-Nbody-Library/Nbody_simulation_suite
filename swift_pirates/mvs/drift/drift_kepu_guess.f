@@ -11,10 +11,10 @@ c                 mu            ==>  Reduced mass of system (real scalor)
 c                 alpha         ==>  energy (real scalor)
 c                 u             ==>  angular momentun  (real scalor)
 c             Output:
-c                 s             ==>  initial guess for the value of 
+c                 s             ==>  initial guess for the value of
 c                                    universal variable
 c
-c Author:  Hal Levison & Martin Duncan 
+c Author:  Hal Levison & Martin Duncan
 c Date:    3/12/93
 c Last revision: April 6/93
 
@@ -22,7 +22,7 @@ c Last revision: April 6/93
 
       include '../../swift.inc'
 
-c...  Inputs: 
+c...  Inputs:
       real*8 dt,r0,mu,alpha,u
 
 c...  Inputs and Outputs:
@@ -35,9 +35,9 @@ c...  Internals:
       real*8 en,ec,e
 
 c----
-c...  Executable code 
+c...  Executable code
 
-        if (alpha.gt.0.0) then 
+        if (alpha.gt.0.0) then
 c...       find initial guess for elliptic motion
 
             if( dt/r0 .le. 0.4)  then

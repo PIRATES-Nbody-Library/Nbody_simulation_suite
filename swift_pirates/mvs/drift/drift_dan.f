@@ -6,20 +6,20 @@ c
 c             Input:
 c                 nbod          ==>  number of massive bodies (int scalar)
 c                 mass          ==>  mass of bodies (real array)
-c                 x0,y0,z0         ==>  initial position in jacobi coord 
+c                 x0,y0,z0         ==>  initial position in jacobi coord
 c                                    (real scalar)
-c                 vx0,vy0,vz0      ==>  initial position in jacobi coord 
+c                 vx0,vy0,vz0      ==>  initial position in jacobi coord
 c                                    (real scalar)
 c                 dt0            ==>  time step
 c             Output:
-c                 x0,y0,z0         ==>  final position in jacobi coord 
+c                 x0,y0,z0         ==>  final position in jacobi coord
 c                                       (real scalars)
-c                 vx0,vy0,vz0      ==>  final position in jacobi coord 
+c                 vx0,vy0,vz0      ==>  final position in jacobi coord
 c                                       (real scalars)
 c                 iflg             ==>  integer flag (zero if satisfactory)
 c					      (non-zero if nonconvergence)
 c
-c Authors:  Hal Levison & Martin Duncan  
+c Authors:  Hal Levison & Martin Duncan
 c Date:    2/10/93
 c Last revision: April 6/93 - MD adds dt and keeps dt0 unchanged
 
@@ -27,7 +27,7 @@ c Last revision: April 6/93 - MD adds dt and keeps dt0 unchanged
 
       include '../../swift.inc'
 
-c...  Inputs Only: 
+c...  Inputs Only:
       real*8 mu,dt0
 
 c...  Inputs and Outputs:
@@ -47,7 +47,7 @@ c...  Internals:
       real*8 fchk,s,c
 
 c----
-c...  Executable code 
+c...  Executable code
 
 c...  Set dt = dt0 to be sure timestep is not altered while solving
 c...  for new coords.
@@ -105,7 +105,7 @@ c...  for new coords.
 	   endif
 
          endif
-             
+
 100      call drift_kepu(dt,r0,mu,alpha,u,fp,c1,c2,c3,iflg)
 
          if(iflg .eq.0) then
@@ -131,5 +131,3 @@ c...  for new coords.
 
         return
         end   ! drift_dan
-
-
