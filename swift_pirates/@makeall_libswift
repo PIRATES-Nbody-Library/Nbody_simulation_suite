@@ -8,93 +8,93 @@ endif
 echo
 echo DIRECTORY: anal
 cd anal
-csh -f ../@make
+csh -f ../@make_libswift
 
 echo DIRECTORY: bs
 cd ../bs
-csh -f ../@make
+csh -f ../@make_libswift
 
 echo DIRECTORY: coord
 cd ../coord
-csh -f ../@make
+csh -f ../@make_libswift
 
 echo DIRECTORY: discard
 cd ../discard
-csh -f ../@make
+csh -f ../@make_libswift
 
 echo DIRECTORY: io
 cd ../io
-csh -f ../@make
+csh -f ../@make_libswift
 
 echo DIRECTORY: lyap
 cd ../lyap
-csh -f ../@make
+csh -f ../@make_libswift
 
 echo DIRECTORY: lyap2
 cd ../lyap2
-csh -f ../@make
+csh -f ../@make_libswift
 
 echo DIRECTORY: mvs/drift
 cd ../mvs
 cd drift
-csh -f ../../@make
+csh -f ../../@make_libswift
 
 echo DIRECTORY: mvs/getacch
 cd ../getacch
-csh -f ../../@make
+csh -f ../../@make_libswift
 
 echo DIRECTORY: mvs/kickvh
 cd ../kickvh
-csh -f ../../@make
+csh -f ../../@make_libswift
 
 echo DIRECTORY: mvs/step
 cd ../step
-csh -f ../../@make
+csh -f ../../@make_libswift
 cd ..
 
 echo DIRECTORY: orbel
 cd ../orbel
-csh -f ../@make
+csh -f ../@make_libswift
 
 echo DIRECTORY: rmvs
 cd ../rmvs
-csh -f ../@make
+csh -f ../@make_libswift
 
 echo DIRECTORY: rmvs2
 cd ../rmvs2
-csh -f ../@make
+csh -f ../@make_libswift
 
 echo DIRECTORY: rmvs3
 cd ../rmvs3
-csh -f ../@make
+csh -f ../@make_libswift
 
 echo DIRECTORY: rmvs4
 cd ../rmvs4
-csh -f ../@make
+csh -f ../@make_libswift
 
 echo DIRECTORY: tu4
 cd ../tu4
-csh -f ../@make
+csh -f ../@make_libswift
 
 echo DIRECTORY: obl
 cd ../obl
-csh -f ../@make
+csh -f ../@make_libswift
 
 echo DIRECTORY: util
 cd ../util
-csh -f ../@make
+csh -f ../@make_libswift
 
 echo DIRECTORY: helio
 cd ../helio
-csh -f ../@make
+csh -f ../@make_libswift
 
 echo DIRECTORY: symba5
 cd ../symba5
-csh -f ../@make
+csh -f ../@make_libswift
 
 echo DIRECTORY: skeel
 cd ../skeel
-csh -f ../@make
+csh -f ../@make_libswift
 
 # Build and index the static library
 cd ..
