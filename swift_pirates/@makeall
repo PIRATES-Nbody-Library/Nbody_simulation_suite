@@ -34,10 +34,6 @@ echo DIRECTORY: lyap2
 cd ../lyap2
 csh -f ../@make
 
-#echo DIRECTORY: mvits
-#cd ../mvits
-#csh -f ../@make
-
 echo DIRECTORY: mvs/drift
 cd ../mvs
 cd drift
@@ -95,22 +91,6 @@ csh -f ../@make
 echo DIRECTORY: symba5
 cd ../symba5
 csh -f ../@make
-
-#echo DIRECTORY: symba6
-#cd ../symba6
-#csh -f ../@make
-
-#echo DIRECTORY: symba7
-#cd ../symba7
-#csh -f ../@make
-
-#echo DIRECTORY: helioq
-#cd ../helioq
-#csh -f ../@make
-
-#echo DIRECTORY: symba5q
-#cd ../symba5q
-#csh -f ../@make
 
 echo DIRECTORY: skeel
 cd ../skeel
