@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 #
 # setup.sh — Configuration and build script for Swift N-body integrator
 # Create @make from @make.template with paths and compiler options, then
@@ -34,7 +34,7 @@ OS=""
 # Parse command-line arguments
 # ============================================================
 print_help() {
-    sed -n '/^# Usage:/,/^#$/p' "$0" | sed 's/^# \?//'
+    sed -n '/^# Usage:/,/^#$/p' "$0" | sed 's/^# \{0,1\}//'
     echo ""
     echo "Examples:"
     echo "  ./setup.sh                           # Auto-detect everything"
@@ -220,27 +220,27 @@ detect_precomp() {
 # Backup existing @make
 # ============================================================
 backup_make() {
-    local makefile="$SWIFT_DIR/@make"
+    makefile="$SWIFT_DIR/@make"
     if [ -f "$makefile" ]; then
-        local timestamp
         timestamp=$(date +%Y%m%d_%H%M%S)
-        local date_str
         date_str=$(date)
-        local backup="${makefile}.backup.${timestamp}"
+        backup="${makefile}.backup.${timestamp}"
 
         # Build the backup file explicitly using a temporary file
-        local tmpfile
         tmpfile=$(mktemp)
 
         # Write shebang
         head -1 "$makefile" > "$tmpfile"
+
         # Write empty line after shebang
         echo "" >> "$tmpfile"
+
         # Write backup header
         echo "# Backup of @make, generated on ${date_str}." >> "$tmpfile"
         echo "#" >> "$tmpfile"
         echo "# Original @make content below:" >> "$tmpfile"
         echo "# --------------------------------" >> "$tmpfile"
+
         # Write the rest of the original file (skip the shebang line)
         tail -n +2 "$makefile" >> "$tmpfile"
 
@@ -253,14 +253,13 @@ backup_make() {
 # Generate @make from template
 # ============================================================
 generate_make() {
-    local template="$SWIFT_DIR/@make.template"
-    local target="$SWIFT_DIR/@make"
+    template="$SWIFT_DIR/@make.template"
+    target="$SWIFT_DIR/@make"
 
     if [ ! -f "$template" ]; then
         error "Template file not found: $template"
     fi
 
-    local date_str
     date_str=$(date)
 
     # Generate @make from template with placeholder replacement
@@ -313,7 +312,7 @@ do_build() {
         fi
 
         csh -f "@makeall"
-        local status=$?
+        status=$?
 
         if [ $status -eq 0 ]; then
             info "Build complete"
