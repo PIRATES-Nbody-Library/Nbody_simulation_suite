@@ -1,20 +1,24 @@
 #!/bin/sh
 #
 # setup.sh — Configuration and build script for Swift N-body integrator
-# Create @make_libswift from @make_libswift.template with paths and compiler
-# options, then optionally runs @makeall to build libswift.a archive.
+# Create @make_libswift and @make_drivers from templates with paths and
+# compiler options, then optionally build libswift.a and/or driver executables.
 #
 # Usage:
 #   ./setup.sh [options]
 #
 # Options:
 #   --compiler=COMPILER    Fortran compiler (default: auto-detect)
-#   --fflags=FLAGS         Compiler flags (default: set per compiler)
+#   --fflags=FLAGS         Compiler flags for both library and drivers
+#   --fflags-lib=FLAGS     Compiler flags for library only (overrides --fflags)
+#   --fflags-drivers=FLAGS Compiler flags for drivers only (overrides --fflags)
 #   --cppflags=FLAGS       Preprocessor flags (default: '-D_OPEN_POSITION -D_RECUR_SUB')
 #   --precomp=PATH         Preprocessor path (default: auto-detect cpp)
 #   --swift-dir=PATH       Swift root directory (default: ./swift_pirates)
-#   --build                Run @makeall_libswift after configuration
-#   --clean                Remove libswift.a and all .o files before building
+#   --build                Build library and drivers
+#   --build-lib            Build library only
+#   --build-drivers        Build drivers only
+#   --clean                Remove libswift.a, .o files, and driver executables before building
 #   --help                 Show this help message
 #
 
@@ -24,9 +28,14 @@
 SWIFT_DIR=""
 FORTRAN=""
 FFLAGS=""
+FFLAGS_LIB=""
+FFLAGS_DRIVERS=""
+FFLAGS_LIB_USER=""
+FFLAGS_DRIVERS_USER=""
 CPPFLAGS="-D_OPEN_POSITION -D_RECUR_SUB"
 PRECOMP=""
-DO_BUILD=0
+DO_BUILD_LIB=0
+DO_BUILD_DRIVERS=0
 DO_CLEAN=0
 OS=""
 
@@ -39,8 +48,12 @@ print_help() {
     echo "Examples:"
     echo "  ./setup.sh                           # Auto-detect everything"
     echo "  ./setup.sh --compiler=gfortran       # Use gfortran as Fortran compiler"
-    echo "  ./setup.sh --compiler=ifort --build  # Use ifort as Fortran compiler and build"
-    echo "  ./setup.sh --fflags='-O2 -g -c'      # Custom compiler flags"
+    echo "  ./setup.sh --build                   # Build library and drivers"
+    echo "  ./setup.sh --build-lib               # Build library only"
+    echo "  ./setup.sh --build-drivers           # Build drivers only"
+    echo "  ./setup.sh --clean --build           # Clean and rebuild everything"
+    echo "  ./setup.sh --fflags='-O2'            # Custom flags for both"
+    echo "  ./setup.sh --fflags-drivers='-O2 -g' # Custom driver flags only"
 }
 
 for arg in "$@"; do
@@ -50,6 +63,12 @@ for arg in "$@"; do
             ;;
         --fflags=*)
             FFLAGS="${arg#*=}"
+            ;;
+        --fflags-lib=*)
+            FFLAGS_LIB_USER="${arg#*=}"
+            ;;
+        --fflags-drivers=*)
+            FFLAGS_DRIVERS_USER="${arg#*=}"
             ;;
         --cppflags=*)
             CPPFLAGS="${arg#*=}"
@@ -61,7 +80,14 @@ for arg in "$@"; do
             SWIFT_DIR="${arg#*=}"
             ;;
         --build)
-            DO_BUILD=1
+            DO_BUILD_LIB=1
+            DO_BUILD_DRIVERS=1
+            ;;
+        --build-lib)
+            DO_BUILD_LIB=1
+            ;;
+        --build-drivers)
+            DO_BUILD_DRIVERS=1
             ;;
         --clean)
             DO_CLEAN=1
@@ -102,13 +128,13 @@ detect_os() {
 # ============================================================
 set_swift_dir() {
     if [ -z "$SWIFT_DIR" ]; then
-        # setup.sh is at the project root; swift/ is a subdirectory
+        # setup.sh is at the project root; swift_pirates/ is a subdirectory
         SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
         SWIFT_DIR="${SCRIPT_DIR}/swift_pirates"
     fi
 
     if [ ! -f "$SWIFT_DIR/@makeall_libswift" ]; then
-        error "Cannot find @makeall_libswift in $SWIFT_DIR — is the swift/ folder present?"
+        error "Cannot find @makeall_libswift in $SWIFT_DIR — is the swift_pirates/ folder present?"
     fi
 
     info "SWIFT_DIR: $SWIFT_DIR"
@@ -164,30 +190,53 @@ detect_compiler_version() {
 }
 
 # ============================================================
-# Set compiler flags (if not specified by user)
+# Set compiler flags
+# The -c flag compiles without linking (library only).
+#
+# Priority:
+#   --fflags-lib / --fflags-drivers override --fflags for their target.
+#   --fflags sets a common base for both.
+#   If none specified, defaults are chosen per compiler.
 # ============================================================
 set_fflags() {
+    # Determine base flags (used when specific flags are not provided)
+    BASE_FFLAGS=""
     if [ -n "$FFLAGS" ]; then
-        info "Using user-specified FFLAGS: $FFLAGS"
-        return
+        BASE_FFLAGS="$FFLAGS"
+    else
+        case "$FORTRAN" in
+            gfortran*)
+                BASE_FFLAGS="-O3"
+                ;;
+            ifort*)
+                BASE_FFLAGS="-O3"
+                ;;
+            ifx*)
+                BASE_FFLAGS="-O3"
+                ;;
+            *)
+                warn "Unknown compiler '$FORTRAN' — using generic flags"
+                BASE_FFLAGS="-O3"
+                ;;
+        esac
     fi
 
-    case "$FORTRAN" in
-        gfortran*)
-            FFLAGS="-O3 -c"
-            ;;
-        ifort*)
-            FFLAGS="-O3 -c"
-            ;;
-        ifx*)
-            FFLAGS="-O3 -c"
-            ;;
-        *)
-            warn "Unknown compiler '$FORTRAN' — using generic flags"
-            FFLAGS="-O3 -c"
-            ;;
-    esac
-    info "FFLAGS: $FFLAGS"
+    # Set library flags: user-specific override, or base + "-c"
+    if [ -n "$FFLAGS_LIB_USER" ]; then
+        FFLAGS_LIB="$FFLAGS_LIB_USER"
+    else
+        FFLAGS_LIB="${BASE_FFLAGS} -c"
+    fi
+
+    # Set driver flags: user-specific override, or base (no -c)
+    if [ -n "$FFLAGS_DRIVERS_USER" ]; then
+        FFLAGS_DRIVERS="$FFLAGS_DRIVERS_USER"
+    else
+        FFLAGS_DRIVERS="$BASE_FFLAGS"
+    fi
+
+    info "FFLAGS_LIB: $FFLAGS_LIB"
+    info "FFLAGS_DRIVERS: $FFLAGS_DRIVERS"
 }
 
 # ============================================================
@@ -216,36 +265,37 @@ detect_precomp() {
 }
 
 # ============================================================
-# Backup existing @make_libswift
+# Backup existing @make files
 # ============================================================
 backup_make() {
-    makefile="$SWIFT_DIR/@make_libswift"
-    if [ -f "$makefile" ]; then
-        timestamp=$(date +%Y%m%d_%H%M%S)
-        date_str=$(date)
-        backup="${makefile}.backup.${timestamp}"
+    for makefile in "$SWIFT_DIR/@make_libswift" "$SWIFT_DIR/@make_drivers"; do
+        if [ -f "$makefile" ]; then
+            timestamp=$(date +%Y%m%d_%H%M%S)
+            date_str=$(date)
+            backup="${makefile}.backup.${timestamp}"
 
-        # Build the backup file explicitly using a temporary file
-        tmpfile=$(mktemp)
+            # Build the backup file explicitly using a temporary file
+            tmpfile=$(mktemp)
 
-        # Write shebang
-        head -1 "$makefile" > "$tmpfile"
+            # Write shebang
+            head -1 "$makefile" > "$tmpfile"
 
-        # Write empty line after shebang
-        echo "" >> "$tmpfile"
+            # Write empty line after shebang
+            echo "" >> "$tmpfile"
 
-        # Write backup header
-        echo "# Backup of @make_libswift, generated on ${date_str}." >> "$tmpfile"
-        echo "#" >> "$tmpfile"
-        echo "# Original @make_libswift content below:" >> "$tmpfile"
-        echo "# --------------------------------" >> "$tmpfile"
+            # Write backup header
+            echo "# Backup of $(basename "$makefile"), generated on ${date_str}." >> "$tmpfile"
+            echo "#" >> "$tmpfile"
+            echo "# Original $(basename "$makefile") content below:" >> "$tmpfile"
+            echo "# --------------------------------" >> "$tmpfile"
 
-        # Write the rest of the original file (skip the shebang line)
-        tail -n +2 "$makefile" >> "$tmpfile"
+            # Write the rest of the original file (skip the shebang line)
+            tail -n +2 "$makefile" >> "$tmpfile"
 
-        mv "$tmpfile" "$backup"
-        info "Backed up @make_libswift to $backup"
-    fi
+            mv "$tmpfile" "$backup"
+            info "Backed up $(basename "$makefile") to $backup"
+        fi
+    done
 }
 
 # ============================================================
@@ -261,11 +311,11 @@ generate_make_libswift() {
 
     date_str=$(date)
 
-    # Generate @make_libswift make from template with placeholder replacement
+    # Generate @make_libswift from template with placeholder replacement
     sed \
         -e "s|__SWIFT_DIR__|${SWIFT_DIR}|g" \
         -e "s|__FORTRAN__|${FORTRAN}|g" \
-        -e "s|__FFLAGS__|${FFLAGS}|g" \
+        -e "s|__FFLAGS__|${FFLAGS_LIB}|g" \
         -e "s|__PRECOMP__|${PRECOMP}|g" \
         -e "s|__CPPFLAGS__|${CPPFLAGS}|g" \
         "$template" > "$target"
@@ -286,6 +336,41 @@ generate_make_libswift() {
 }
 
 # ============================================================
+# Generate @make_drivers from template
+# ============================================================
+generate_make_drivers() {
+    template="$SWIFT_DIR/@make_drivers.template"
+    target="$SWIFT_DIR/@make_drivers"
+
+    if [ ! -f "$template" ]; then
+        error "Template file not found: $template"
+    fi
+
+    date_str=$(date)
+
+    # Generate @make_drivers from template with placeholder replacement
+    sed \
+        -e "s|__SWIFT_DIR__|${SWIFT_DIR}|g" \
+        -e "s|__FORTRAN__|${FORTRAN}|g" \
+        -e "s|__FFLAGS__|${FFLAGS_DRIVERS}|g" \
+        "$template" > "$target"
+
+    # Replace the template comment with generated-file comments
+    if [ "$OS" = "macos" ]; then
+        sed -i '' \
+            -e "s|^# @make_drivers template — used internally by setup.sh to generate @make_drivers|# Generated by ../setup.sh.\n# Generated on: ${date_str}|" \
+            "$target"
+    else
+        sed -i \
+            -e "s|^# @make_drivers template — used internally by setup.sh to generate @make_drivers|# Generated by ../setup.sh.\n# Generated on: ${date_str}|" \
+            "$target"
+    fi
+
+    chmod +x "$target"
+    info "Generated @make_drivers from template"
+}
+
+# ============================================================
 # Clean (optional)
 # ============================================================
 do_clean() {
@@ -294,16 +379,25 @@ do_clean() {
         rm -f "$SWIFT_DIR/libswift.a"
         find "$SWIFT_DIR" -name "*.o" -delete
         find "$SWIFT_DIR" -name "*CPP.f" -delete
+        # Remove driver executables
+        if [ -d "$SWIFT_DIR/main" ]; then
+            for f in "$SWIFT_DIR"/main/swift_*; do
+                case "$f" in
+                    *.f|*.F|*.o) ;;
+                    *) [ -f "$f" ] && [ -x "$f" ] && rm -f "$f" ;;
+                esac
+            done
+        fi
         info "Clean complete"
     fi
 }
 
 # ============================================================
-# Build (optional)
+# Build library
 # ============================================================
-do_build() {
-    if [ "$DO_BUILD" -eq 1 ]; then
-        info "Starting build..."
+do_build_lib() {
+    if [ "$DO_BUILD_LIB" -eq 1 ]; then
+        info "Building library..."
         cd "$SWIFT_DIR" || error "Cannot cd to $SWIFT_DIR"
 
         if ! command -v csh > /dev/null 2>&1; then
@@ -314,7 +408,6 @@ do_build() {
         status=$?
 
         if [ $status -eq 0 ]; then
-            info "Build complete"
             if [ -f "$SWIFT_DIR/libswift.a" ]; then
                 info "Library created: $SWIFT_DIR/libswift.a"
                 ls -lh "$SWIFT_DIR/libswift.a"
@@ -322,7 +415,35 @@ do_build() {
                 warn "Build finished but libswift.a was not created"
             fi
         else
-            error "Build failed with exit code $status"
+            error "Library build failed with exit code $status"
+        fi
+    fi
+}
+
+# ============================================================
+# Build drivers
+# ============================================================
+do_build_drivers() {
+    if [ "$DO_BUILD_DRIVERS" -eq 1 ]; then
+        info "Building drivers..."
+
+        if [ ! -f "$SWIFT_DIR/libswift.a" ]; then
+            error "libswift.a not found. Build the library first (--build-lib or --build)"
+        fi
+
+        cd "$SWIFT_DIR/main" || error "Cannot cd to $SWIFT_DIR/main"
+
+        if ! command -v csh > /dev/null 2>&1; then
+            error "csh is not installed."
+        fi
+
+        csh -f "$SWIFT_DIR/@make_drivers"
+        status=$?
+
+        if [ $status -eq 0 ]; then
+            info "Drivers built successfully"
+        else
+            error "Driver build failed with exit code $status"
         fi
     fi
 }
@@ -335,17 +456,23 @@ print_summary() {
     echo "========================================"
     echo "  Swift N-body Integrator Configuration"
     echo "========================================"
-    echo "  OS:          $OS"
-    echo "  SWIFT_DIR:   $SWIFT_DIR"
-    echo "  FORTRAN:     $FORTRAN"
-    echo "  FFLAGS:      $FFLAGS"
-    echo "  PRECOMP:     $PRECOMP"
-    echo "  CPPFLAGS:    $CPPFLAGS"
+    echo "  OS:              $OS"
+    echo "  SWIFT_DIR:       $SWIFT_DIR"
+    echo "  FORTRAN:         $FORTRAN"
+    echo "  FFLAGS_LIB:      $FFLAGS_LIB"
+    echo "  FFLAGS_DRIVERS:  $FFLAGS_DRIVERS"
+    echo "  PRECOMP:         $PRECOMP"
+    echo "  CPPFLAGS:        $CPPFLAGS"
     echo "========================================"
     echo ""
-    if [ "$DO_BUILD" -eq 0 ]; then
-        echo "To build, run:  ./setup.sh --build"
-        echo "Or manually:    cd $SWIFT_DIR && csh -f @makeall_libswift"
+    if [ "$DO_BUILD_LIB" -eq 0 ] && [ "$DO_BUILD_DRIVERS" -eq 0 ]; then
+        echo "To build all:      ./setup.sh --build"
+        echo "To build library:  ./setup.sh --build-lib"
+        echo "To build drivers:  ./setup.sh --build-drivers"
+        echo ""
+        echo "Or manually:"
+        echo "  cd $SWIFT_DIR && csh -f @makeall_libswift"
+        echo "  cd $SWIFT_DIR/main && csh -f $SWIFT_DIR/@make_drivers"
     fi
 }
 
@@ -367,9 +494,11 @@ main() {
 
     backup_make
     generate_make_libswift
+    generate_make_drivers
 
     do_clean
-    do_build
+    do_build_lib
+    do_build_drivers
 
     print_summary
 }
