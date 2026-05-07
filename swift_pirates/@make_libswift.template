@@ -1,33 +1,33 @@
-#!/bin/csh -f
+#!/bin/sh
 
 # @make_libswift template — used internally by setup.sh to generate @make_libswift
 
-set SWIFT_DIR=__SWIFT_DIR__
-set FORTRAN=__FORTRAN__
-set FFLAGS='__FFLAGS__'
-set PRECOMP=__PRECOMP__
-set CPPFLAGS='__CPPFLAGS__'
+SWIFT_DIR="__SWIFT_DIR__"
+FORTRAN="__FORTRAN__"
+FFLAGS="__FFLAGS__"
+PRECOMP="__PRECOMP__"
+CPPFLAGS="__CPPFLAGS__"
 
-if ( `ls *.F | wc -l` != 0 ) then
-  echo Doing precompiler
-  foreach file (*.F)
-    echo $file | set file2=`awk -F"." '{print$1}'`
-    echo $file2
-    $PRECOMP $CPPFLAGS "$file2".F "$file2"_CPP.f
-  end
+if ls *.F >/dev/null 2>&1; then
+  echo "Doing precompiler"
+  for file in *.F; do
+    file2=$(echo "$file" | awk -F"." '{print$1}')
+    echo "$file2"
+    $PRECOMP $CPPFLAGS "${file2}.F" "${file2}_CPP.f"
+  done
 else
-  echo No need to precompile
-endif
+  echo "No need to precompile"
+fi
 
-echo Doing Fortran
-foreach file (*.f)
-  echo $file | set file2=`awk -F"." '{print$1}'`
-  echo $file2
-  $FORTRAN $FFLAGS "$file2".f
-  ar vr $SWIFT_DIR/libswift.a  "$file2".o
-end
+echo "Doing Fortran"
+for file in *.f; do
+  file2=$(echo "$file" | awk -F"." '{print$1}')
+  echo "$file2"
+  $FORTRAN $FFLAGS "${file2}.f"
+  ar vr "$SWIFT_DIR/libswift.a" "${file2}.o"
+done
 
-rm *.o
-rm *CPP.f
-echo Done directory $PWD
+rm -f *.o
+rm -f *CPP.f
+echo "Done directory $PWD"
 echo

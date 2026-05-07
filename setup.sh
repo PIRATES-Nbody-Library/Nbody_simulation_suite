@@ -428,11 +428,7 @@ do_build_lib() {
         info "Building library..."
         cd "$SWIFT_DIR" || error "Cannot cd to $SWIFT_DIR"
 
-        if ! command -v csh > /dev/null 2>&1; then
-            error "csh is not installed."
-        fi
-
-        csh -f "@makeall_libswift"
+        sh "@makeall_libswift"
         status=$?
 
         if [ $status -eq 0 ]; then
@@ -461,11 +457,7 @@ do_build_drivers() {
 
         cd "$SWIFT_DIR/main" || error "Cannot cd to $SWIFT_DIR/main"
 
-        if ! command -v csh > /dev/null 2>&1; then
-            error "csh is not installed."
-        fi
-
-        csh -f "$SWIFT_DIR/@make_drivers"
+        sh "$SWIFT_DIR/@make_drivers"
         status=$?
 
         if [ $status -eq 0 ]; then
@@ -504,8 +496,8 @@ print_summary() {
         echo "To build drivers:  ./setup.sh --build-drivers"
         echo ""
         echo "Or manually:"
-        echo "  cd $SWIFT_DIR && csh -f @makeall_libswift"
-        echo "  cd $SWIFT_DIR/main && csh -f $SWIFT_DIR/@make_drivers"
+        echo "  cd $SWIFT_DIR && sh @makeall_libswift"
+        echo "  cd $SWIFT_DIR/main && sh $SWIFT_DIR/@make_drivers"
     fi
 }
 
