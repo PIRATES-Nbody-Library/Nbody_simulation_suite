@@ -1,5 +1,15 @@
 #!/bin/sh
 
+# @makeall_libswift — Master build script for the Swift N-body integrator
+# library. Compiles all Fortran source files across subdirectories and archives
+# them into libswift.a.
+#
+# This script is called by setup.sh or can be run directly:
+#   sh @makeall_libswift
+#
+# Each subdirectory is compiled using the @make_libswift script located
+# in the swift root directory. This @make_libswift is created by setup.sh.
+
 # Remove existing library if present
 if [ -f libswift.a ]; then
   rm libswift.a
