@@ -9,3 +9,37 @@
 
 # Jupyter checkpoints.
 .ipynb_checkpoints
+
+# ============================================================
+# Swift N-body integrator build products
+# ============================================================
+
+# Generated @make files (created by setup.sh from templates)
+swift_pirates/@make_libswift
+swift_pirates/@make_drivers
+
+# Backup files created by setup.sh
+swift_pirates/@make_libswift.backup.*
+swift_pirates/@make_drivers.backup.*
+
+# Compiled static library
+swift_pirates/libswift.a
+
+# Object files and preprocessor output
+*.o
+*CPP.f
+
+# Driver executables (compiled from swift_pirates/main/*.f)
+swift_pirates/main/swift_bs
+swift_pirates/main/swift_helio
+swift_pirates/main/swift_lyap
+swift_pirates/main/swift_lyap2
+swift_pirates/main/swift_mvs
+swift_pirates/main/swift_rmvs3
+swift_pirates/main/swift_rmvs4
+swift_pirates/main/swift_skeel
+swift_pirates/main/swift_symba5
+swift_pirates/main/swift_tu4
+
+# macOS debug symbol bundles
+*.dSYM
