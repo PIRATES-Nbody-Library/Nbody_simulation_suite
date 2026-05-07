@@ -198,6 +198,7 @@ detect_compiler_version() {
 # ============================================================
 # Set compiler flags
 # The -c flag compiles without linking (library only).
+# The -frecursive/-recursive flag enables recursive subroutines.
 # Debug flags enable runtime checks, tracebacks, and FPE trapping.
 #
 # Priority:
@@ -230,13 +231,13 @@ set_fflags() {
         else
             case "$FORTRAN" in
                 gfortran*)
-                    BASE_FFLAGS="-O3"
+                    BASE_FFLAGS="-O3 -frecursive"
                     ;;
                 ifort*)
-                    BASE_FFLAGS="-O3"
+                    BASE_FFLAGS="-O3 -recursive"
                     ;;
                 ifx*)
-                    BASE_FFLAGS="-O3"
+                    BASE_FFLAGS="-O3 -recursive"
                     ;;
                 *)
                     warn "Unknown compiler '$FORTRAN' — using generic flags"
