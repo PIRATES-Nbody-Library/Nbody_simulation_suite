@@ -102,3 +102,4 @@ ar ts libswift.a
 ranlib libswift.a
 
 echo DONE
+echo
