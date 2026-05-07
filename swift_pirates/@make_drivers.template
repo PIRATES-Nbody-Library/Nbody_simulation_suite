@@ -1,0 +1,13 @@
+#!/bin/csh -f
+
+# @make_drivers template — used internally by setup.sh to generate @make_drivers
+
+set SWIFT_DIR=__SWIFT_DIR__
+set FORTRAN=__FORTRAN__
+set FFLAGS='__FFLAGS__'
+
+foreach file (*.f)
+  set file2=`echo $file | awk -F"." '{print$1}'`
+  echo $file2
+  $FORTRAN $FFLAGS -o $file2 $file -L$SWIFT_DIR -lswift
+end
