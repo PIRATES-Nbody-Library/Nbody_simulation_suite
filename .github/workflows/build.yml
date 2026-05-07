@@ -1,0 +1,109 @@
+name: Build and Test Swift Library
+
+on:
+  push:
+    paths:
+      - 'setup.sh'
+      - 'swift_pirates/**'
+  pull_request:
+    paths:
+      - 'setup.sh'
+      - 'swift_pirates/**'
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        toolchain:
+          - {compiler: gcc, version: 'latest'}
+          - {compiler: intel, version: '2025.0'}
+          - {compiler: intel-classic, version: '2021.10'}
+        mode: [production, debug]
+        exclude:
+          # Intel compilers not available on macOS
+          - os: macos-latest
+            toolchain: {compiler: intel, version: '2025.0'}
+          - os: macos-latest
+            toolchain: {compiler: intel-classic, version: '2021.10'}
+      fail-fast: false
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Fortran
+        uses: fortran-lang/setup-fortran@v1
+        id: setup-fortran
+        with:
+          compiler: ${{ matrix.toolchain.compiler }}
+          version: ${{ matrix.toolchain.version }}
+
+      - name: Verify setup.sh runs without errors
+        run: ./setup.sh --compiler=${{ steps.setup-fortran.outputs.fc }}
+
+      - name: Verify generated files exist
+        run: |
+          test -f swift_pirates/@make_libswift || (echo "FAIL: @make_libswift not generated" && exit 1)
+          test -f swift_pirates/@make_drivers || (echo "FAIL: @make_drivers not generated" && exit 1)
+          echo "PASS: Both @make files generated"
+
+      - name: Build library (production)
+        if: matrix.mode == 'production'
+        run: ./setup.sh --compiler=${{ steps.setup-fortran.outputs.fc }} --clean --build-lib
+
+      - name: Build library (debug)
+        if: matrix.mode == 'debug'
+        run: ./setup.sh --compiler=${{ steps.setup-fortran.outputs.fc }} --debug --clean --build-lib
+
+      - name: Verify libswift.a was created
+        run: |
+          test -f swift_pirates/libswift.a || (echo "FAIL: libswift.a not found" && exit 1)
+          echo "PASS: libswift.a created"
+          ls -lh swift_pirates/libswift.a
+
+      - name: Build drivers (production)
+        if: matrix.mode == 'production'
+        run: ./setup.sh --compiler=${{ steps.setup-fortran.outputs.fc }} --build-drivers
+
+      - name: Build drivers (debug)
+        if: matrix.mode == 'debug'
+        run: ./setup.sh --compiler=${{ steps.setup-fortran.outputs.fc }} --debug --build-drivers
+
+      - name: Verify driver executables were created
+        run: |
+          count=0
+          for f in swift_pirates/main/swift_*; do
+            case "$f" in
+              *.f|*.F|*.o) ;;
+              *)
+                if [ -f "$f" ] && [ -x "$f" ]; then
+                  count=$((count + 1))
+                  echo "  OK: $(basename "$f")"
+                fi
+                ;;
+            esac
+          done
+          if [ $count -eq 0 ]; then
+            echo "FAIL: No driver executables found"
+            exit 1
+          fi
+          echo "PASS: $count driver executables built"
+
+      - name: Test clean removes all build products
+        run: |
+          ./setup.sh --clean
+          test ! -f swift_pirates/libswift.a || (echo "FAIL: libswift.a not cleaned" && exit 1)
+          for f in swift_pirates/main/swift_*; do
+            case "$f" in
+              *.f|*.F|*.o) ;;
+              *)
+                if [ -f "$f" ] && [ -x "$f" ]; then
+                  echo "FAIL: $f not cleaned"
+                  exit 1
+                fi
+                ;;
+            esac
+          done
+          echo "PASS: Clean successful"
