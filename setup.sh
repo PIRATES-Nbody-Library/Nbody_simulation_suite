@@ -15,6 +15,7 @@
 #   --cppflags=FLAGS       Preprocessor flags (default: '-D_OPEN_POSITION -D_RECUR_SUB')
 #   --precomp=PATH         Preprocessor path (default: auto-detect cpp)
 #   --swift-dir=PATH       Swift root directory (default: ./swift_pirates)
+#   --debug                Enable debug flags for both library and drivers
 #   --build                Build library and drivers
 #   --build-lib            Build library only
 #   --build-drivers        Build drivers only
@@ -37,6 +38,7 @@ PRECOMP=""
 DO_BUILD_LIB=0
 DO_BUILD_DRIVERS=0
 DO_CLEAN=0
+DO_DEBUG=0
 OS=""
 
 # ============================================================
@@ -51,8 +53,9 @@ print_help() {
     echo "  ./setup.sh --build                   # Build library and drivers"
     echo "  ./setup.sh --build-lib               # Build library only"
     echo "  ./setup.sh --build-drivers           # Build drivers only"
+    echo "  ./setup.sh --debug --build           # Debug build (library and drivers)"
     echo "  ./setup.sh --clean --build           # Clean and rebuild everything"
-    echo "  ./setup.sh --fflags='-O2'            # Custom flags for both"
+    echo "  ./setup.sh --fflags='-O2 -frecursive' # Custom flags for both"
     echo "  ./setup.sh --fflags-drivers='-O2 -g' # Custom driver flags only"
 }
 
@@ -78,6 +81,9 @@ for arg in "$@"; do
             ;;
         --swift-dir=*)
             SWIFT_DIR="${arg#*=}"
+            ;;
+        --debug)
+            DO_DEBUG=1
             ;;
         --build)
             DO_BUILD_LIB=1
@@ -192,11 +198,12 @@ detect_compiler_version() {
 # ============================================================
 # Set compiler flags
 # The -c flag compiles without linking (library only).
+# Debug flags enable runtime checks, tracebacks, and FPE trapping.
 #
 # Priority:
 #   --fflags-lib / --fflags-drivers override --fflags for their target.
 #   --fflags sets a common base for both.
-#   If none specified, defaults are chosen per compiler.
+#   If none specified, defaults are chosen per compiler and mode.
 # ============================================================
 set_fflags() {
     # Determine base flags (used when specific flags are not provided)
@@ -204,21 +211,39 @@ set_fflags() {
     if [ -n "$FFLAGS" ]; then
         BASE_FFLAGS="$FFLAGS"
     else
-        case "$FORTRAN" in
-            gfortran*)
-                BASE_FFLAGS="-O3"
-                ;;
-            ifort*)
-                BASE_FFLAGS="-O3"
-                ;;
-            ifx*)
-                BASE_FFLAGS="-O3"
-                ;;
-            *)
-                warn "Unknown compiler '$FORTRAN' — using generic flags"
-                BASE_FFLAGS="-O3"
-                ;;
-        esac
+        if [ "$DO_DEBUG" -eq 1 ]; then
+            case "$FORTRAN" in
+                gfortran*)
+                    BASE_FFLAGS="-O0 -g -frecursive -fbacktrace -ffpe-trap=zero,overflow,invalid -fcheck=all -Wall -Wextra -pedantic -finit-real=snan -finit-integer=-9999"
+                    ;;
+                ifort*)
+                    BASE_FFLAGS="-O0 -g -recursive -traceback -fpe0 -check all -warn all -init=snan"
+                    ;;
+                ifx*)
+                    BASE_FFLAGS="-O0 -g -recursive -traceback -fpe0 -check all -warn all -init=snan"
+                    ;;
+                *)
+                    warn "Unknown compiler '$FORTRAN' — using generic debug flags"
+                    BASE_FFLAGS="-O0 -g"
+                    ;;
+            esac
+        else
+            case "$FORTRAN" in
+                gfortran*)
+                    BASE_FFLAGS="-O3"
+                    ;;
+                ifort*)
+                    BASE_FFLAGS="-O3"
+                    ;;
+                ifx*)
+                    BASE_FFLAGS="-O3"
+                    ;;
+                *)
+                    warn "Unknown compiler '$FORTRAN' — using generic flags"
+                    BASE_FFLAGS="-O3"
+                    ;;
+            esac
+        fi
     fi
 
     # Set library flags: user-specific override, or base + "-c"
@@ -388,6 +413,8 @@ do_clean() {
                 esac
             done
         fi
+        # Remove macOS debug symbol bundles
+        find "$SWIFT_DIR" -name "*.dSYM" -type d -exec rm -rf {} + 2>/dev/null
         info "Clean complete"
     fi
 }
@@ -463,6 +490,11 @@ print_summary() {
     echo "  FFLAGS_DRIVERS:  $FFLAGS_DRIVERS"
     echo "  PRECOMP:         $PRECOMP"
     echo "  CPPFLAGS:        $CPPFLAGS"
+    if [ "$DO_DEBUG" -eq 1 ]; then
+        echo "  MODE:            debug"
+    else
+        echo "  MODE:            production"
+    fi
     echo "========================================"
     echo ""
     if [ "$DO_BUILD_LIB" -eq 0 ] && [ "$DO_BUILD_DRIVERS" -eq 0 ]; then
