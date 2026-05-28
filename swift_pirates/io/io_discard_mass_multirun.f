@@ -1,5 +1,5 @@
 c*************************************************************************
-c                            IO_DISCARD_MASS_HB
+c                            IO_DISCARD_MASS_MULTIRUN
 c*************************************************************************
 c Write out information about a discarded massive body.
 c
@@ -22,10 +22,10 @@ c                                          (character*80)
 c Remarks:
 c Authors:  Hal Levison
 c Date:    12/30/96
-c Last revision: 05/03/04 H. Beust (Directory info)
+c Last revision: 05/27/26 T. A. Stuber, from now on tracked on GitHub
 
-      subroutine io_discard_mass_hb(init,time,id,m1,r1,x1,y1,z1,vx1,vy1,
-     &     vz1,iu,iwhy,diro,fopenstat)
+      subroutine io_discard_mass_multirun(init,time,id,m1,r1,x1,y1,z1,
+     &     vx1,vy1,vz1,iu,iwhy,diro,fopenstat)
 
       include '../swift.inc'
       include 'io.inc'
@@ -82,5 +82,5 @@ c...     try to open as new
 
       close(unit = iu)
       return
-      end                       ! io_discard_mass_hb.f
+      end                       ! io_discard_mass_multirun.f
 c--------------------------------------------------------------------------

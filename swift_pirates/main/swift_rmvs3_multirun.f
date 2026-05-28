@@ -50,7 +50,7 @@ c...    print version number
 c Get data for the run and the test particles
 	write(*,*) 'Enter name of parameter data file : '
 	read(*,999) inparfile
-	call io_init_param_hb(inparfile,t0,tstop,dt,dtout,dtdump,
+	call io_init_param_multirun(inparfile,t0,tstop,dt,dtout,dtdump,
      &              iflgchk,rmin,rmax,rmaxu,qmin,lclose,outfile,
      &              diro,dirs,gname,fopenstat)
 	outfile_full=trim(diro)//'/'//outfile
@@ -158,7 +158,7 @@ c If it is time, do a dump
      &                 zh,vxh,vyh,vzh,lclose,iflgchk,rplsq,j2rp2,j4rp4)
 	     call io_dump_tp(trim(diro)//'/dump_tp.dat',ntp,xht,yht,zht,
      &                      vxht,vyht,vzht,istat,rstat)
-	     call io_dump_param_hb(trim(diro)//'/dump_param.dat',
+	     call io_dump_param_multirun(trim(diro)//'/dump_param.dat',
      &          t,tstop,dt,dtout,dtdump,iflgchk,rmin,rmax,rmaxu,qmin,
      &          lclose,dirs,gname,outfile)
 
@@ -185,9 +185,9 @@ c Do a final dump for possible resumption later
      &            vxh,vyh,vzh,lclose,iflgchk,rplsq,j2rp2,j4rp4)
 	call io_dump_tp(trim(diro)//'/dump_tp.dat',ntp,xht,yht,zht,
      &              vxht,vyht,vzht,istat,rstat)
-	call io_dump_param_hb(trim(diro)//'/dump_param.dat',t,tstop,dt,
-     &         dtout,dtdump,iflgchk,rmin,rmax,rmaxu,qmin,lclose,dirs,
-     &         gname,outfile)
+	call io_dump_param_multirun(trim(diro)//'/dump_param.dat',
+     &         t,tstop,dt,dtout,dtdump,iflgchk,rmin,rmax,rmaxu,qmin,
+     &         lclose,dirs,gname,outfile)
 
         call util_exit(0)
         end    ! swift_rmvs3.f

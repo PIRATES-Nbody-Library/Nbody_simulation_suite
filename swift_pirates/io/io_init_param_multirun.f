@@ -1,7 +1,7 @@
 c************************************************************************
-c                          IO_INIT_PARAM_HB.F
+c                          IO_INIT_PARAM_MULTIRUN.F
 c************************************************************************
-c INIT_PARAM_HB reads in the parameters for the integration.
+c INIT_PARAM_MULTIRUN reads in the parameters for the integration.
 c
 c      Input:
 c            infile   ==> File name to read from (character*80)
@@ -47,10 +47,10 @@ c
 c Remarks:
 c Authors:  Martin Duncan
 c Date:    3/2/93
-c Last revision:  05/03/04 H Beust (directory information)
+c Last revision: 05/27/26 T. A. Stuber, from now on tracked on GitHub
 
-        subroutine io_init_param_hb(infile,t0,tstop,dt,dtout,dtdump,
-     &         iflgchk,rmin,rmax,rmaxu,qmin,lclose,outfile,diro,
+        subroutine io_init_param_multirun(infile,t0,tstop,dt,dtout,
+     &         dtdump,iflgchk,rmin,rmax,rmaxu,qmin,lclose,outfile,diro,
      &         dirs,gname,fopenstat)
 
 	include '../swift.inc'
@@ -140,7 +140,7 @@ c...  Executable code
 	close(unit = 7)
 
 	return
-	end     ! io_init_param_hb
+	end     ! io_init_param_multirun
 c____________________________________________________________________________
 c
 c
