@@ -1,5 +1,5 @@
 c************************************************************************
-c                          IO_DUMP_PARAM.F
+c                          IO_DUMP_PARAM_MULTIRUN.F
 c************************************************************************
 c IO_DUMP_PARAM dumps out the parameters for the integration.
 c
@@ -31,10 +31,11 @@ c
 c Remarks:
 c Authors:  Martin Duncan
 c Date:    3/2/93
-c Last revision:  5/10/94 HFL
+c Last revision: 05/27/26 T. A. Stuber, from now on tracked on GitHub
 
-	subroutine io_dump_param_hb(dparfile,t,tstop,dt,dtout,dtdump,
-     &        iflgchk,rmin,rmax,rmaxu,qmin,lclose,dirs,gname,outfile)
+	subroutine io_dump_param_multirun(dparfile,t,tstop,dt,dtout,
+     &        dtdump,iflgchk,rmin,rmax,rmaxu,qmin,lclose,dirs,gname,
+     &        outfile)
 
 	include '../swift.inc'
 	include 'io.inc'
