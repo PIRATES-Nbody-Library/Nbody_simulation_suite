@@ -44,5 +44,5 @@ This repository is in early development.
 ## References
 
 The original SWIFT by [Levison and Duncan 1994](https://www.sciencedirect.com/science/article/pii/S0019103584710396)
-and can be found [here](https://www2.boulder.swri.edu/~hal/swift.html)
+can be found [here](https://www2.boulder.swri.edu/~hal/swift.html)
 or [here](https://ascl.net/1303.001).
