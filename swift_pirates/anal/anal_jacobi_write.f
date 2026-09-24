@@ -26,7 +26,7 @@ c            ipl            ==>  Planet to take jacobi with respect to
 c            iu             ==>  unit to write to
 c            fopenstat      ==>  The status flag for the open
 c                                statements of the output files.
-c                                          (character*80)
+c                                          (character*256)
 c
 c Remarks: If the particle is not active a value of -100 is written out
 c Authors:  Hal Levison
@@ -47,7 +47,7 @@ c...  Inputs:
       real*8 vxh(nbod),vyh(nbod),vzh(nbod)
       real*8 xht(ntp),yht(ntp),zht(ntp)
       real*8 vxht(ntp),vyht(ntp),vzht(ntp)
-      character*80 fopenstat
+      character*256 fopenstat
 
 c...  Internals
       integer i1st,i,icnt,nw

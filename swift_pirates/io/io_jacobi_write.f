@@ -13,7 +13,7 @@ c            nw             ==>  number of bodies (int scalar)
 c            iu             ==>  unit to write to
 c            fopenstat      ==>  The status flag for the open
 c                                statements of the output files.
-c                                          (character*80)
+c                                          (character*256)
 c
 c Remarks: If the particle is not active a value of -100 is written out
 c Authors:  Hal Levison

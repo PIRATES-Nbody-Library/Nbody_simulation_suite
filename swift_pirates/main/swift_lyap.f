@@ -37,7 +37,7 @@ c Last revision: 12/27/96
 	real*8 rmin,rmax,rmaxu,qmin,rplsq(NPLMAX)
         logical*2 lclose
 
-	character*80 outfile,inparfile,inplfile,intpfile,fopenstat
+	character*256 outfile,inparfile,inplfile,intpfile,fopenstat
 
 
 c-----

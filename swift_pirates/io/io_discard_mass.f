@@ -18,7 +18,7 @@ c                 iu            ==> IO unit (int scalar)
 c                 iwhy          ==> reason for discard (int scalar)
 c                 fopenstat     ==>  The status flag for the open
 c                                      statements of the output files.
-c                                          (character*80)
+c                                          (character*256)
 c Remarks:
 c Authors:  Hal Levison
 c Date:    12/30/96

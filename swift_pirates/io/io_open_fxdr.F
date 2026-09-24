@@ -6,7 +6,7 @@ c*************************************************************************
 c open files using the fxdr routines
 c
 c             Input:
-c                 fname           ==>  file name (character*80)
+c                 fname           ==>  file name (character*256)
 c                 fopenstat       ==>  The status flag for the open
 c                                      statements of the output files.
 c                                          (character*1)

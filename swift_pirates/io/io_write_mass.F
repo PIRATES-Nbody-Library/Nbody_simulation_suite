@@ -14,7 +14,7 @@ c                 oname           ==> output file name (character string)
 c                 iu              ==> unit number to write to
 c                 fopenstat       ==>  The status flag for the open
 c                                      statements of the output files.
-c                                          (character*80)
+c                                          (character*256)
 c
 c
 c Remarks: Based on io_write_frame
@@ -30,14 +30,14 @@ c Last revision:
 c...  Inputs:
       integer nbod,iu
       real*8 mass(nbod),time
-      character*80 oname,fopenstat
+      character*256 oname,fopenstat
 
 c...  Internals
       real*4 mass4(NTPMAX)
       real*4 ttmp
       integer ierr,i,ldir,lfile,initxdr,ixdrclose,ixdrreal,ixdrint
       integer ixdrrmat
-      character*80 dirname,filename
+      character*256 dirname,filename
 
       integer i1st    ! =0 first time through; =1 after
       data i1st/0/

@@ -4,7 +4,7 @@ c************************************************************************
 c INIT_PARAM reads in the parameters for the integration.
 c
 c      Input:
-c            infile   ==> File name to read from (character*80)
+c            infile   ==> File name to read from (character*256)
 c
 c      Output:
 c            t0       ==> Initial time (real scalar)
@@ -32,13 +32,13 @@ c       lclose        ==> .true. --> discard particle if it gets
 c                                    too close to a planet. Read in that
 c                                    distance in io_init_pl
 c                                      (logical*2 scalar)
-c       outfile       ==>  Name of binary output file (character*80)
+c       outfile       ==>  Name of binary output file (character*256)
 c       fopenstat     ==>  The status flag for the open statements of the
 c                          output files.  Must be one of the following:
 c                                 new      (die if the file exists)
 c                                 append   (add to what is there)
 c                                 unknown  (just write over what is there)
-c                                 (character*80)
+c                                 (character*256)
 c
 c
 c Remarks:
@@ -61,7 +61,7 @@ c...  Outputs:
 	real*8 dtout,dtdump
 	real*8 rmin,rmax,rmaxu,qmin
         logical*2 lclose
-	character*80 outfile,fopenstat
+	character*256 outfile,fopenstat
 
 c...  Internals
         logical*1 lflg(0:IO_NBITS-1)

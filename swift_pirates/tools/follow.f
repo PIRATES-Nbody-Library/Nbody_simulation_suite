@@ -24,7 +24,7 @@ c converts binary file to ascii file
         real*8 a,e,inc,capom,omega,capm,j2rp2,j4rp4
         real*8 apo,obar
 
-	character*80 outfile,inparfile,inplfile,intpfile,fopenstat
+	character*256 outfile,inparfile,inplfile,intpfile,fopenstat
 
 c Get data for the run and the test particles
 	write(*,*) 'Enter name of parameter data file : '

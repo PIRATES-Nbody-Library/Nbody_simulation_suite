@@ -20,7 +20,7 @@ c   at random.
 
       real*4 ran2
 
-      character*80 intpfile
+      character*256 intpfile
 
  1    write(*,*) ' Units Menu: '
       write(*,*) '       0 ==> Solar masses, and AU '

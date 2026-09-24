@@ -40,7 +40,7 @@ c Last revision: 12/27/96
       integer mergelst(2,NTPMAX),mergecnt
       integer*2 iecnt(NTPMAX)
 
-      character*80 outfile,inparfile,inplfile,fopenstat
+      character*256 outfile,inparfile,inplfile,fopenstat
 
 c-----
 c...  Executable code

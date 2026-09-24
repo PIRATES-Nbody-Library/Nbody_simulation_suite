@@ -4,7 +4,7 @@ c**********************************************************************
 c Read in test particle data
 c
 c             Input:
-c                 infile        ==> File name to read from (character*80)
+c                 infile        ==> File name to read from (character*256)
 c
 c             Output:
 c                 ntp           ==>  number of massive bodies (int scalar)

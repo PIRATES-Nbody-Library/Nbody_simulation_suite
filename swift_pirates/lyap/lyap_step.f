@@ -68,7 +68,7 @@ c...  Internals
       real*8 vxsh(NTPMAX),vysh(NTPMAX),vzsh(NTPMAX)
       real*8 dist0(NTPMAX),lrsum(NTPMAX),logpr(NTPMAX)
       real*8 tin,tnorm,dtnorm
-      character*80 inshfile
+      character*256 inshfile
 
       data i1stin/0/
 

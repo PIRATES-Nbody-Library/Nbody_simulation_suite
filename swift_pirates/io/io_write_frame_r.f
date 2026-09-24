@@ -25,7 +25,7 @@ c                 oname           ==> output file name (character string)
 c                 iu              ==> unit number to write to
 c                 fopenstat       ==>  The status flag for the open
 c                                      statements of the output files.
-c                                          (character*80)
+c                                          (character*256)
 c
 c
 c Remarks: Based on io_write_frame
@@ -48,7 +48,7 @@ c...  Inputs:
       real*8 vxh(nbod),vyh(nbod),vzh(nbod)
       real*8 xht(ntp),yht(ntp),zht(ntp)
       real*8 vxht(ntp),vyht(ntp),vzht(ntp)
-      character*80 oname,fopenstat
+      character*256 oname,fopenstat
 
 c...  Internals
       integer i,id

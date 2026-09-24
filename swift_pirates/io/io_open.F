@@ -7,11 +7,11 @@ c open files
 c
 c             Input:
 c                 iu              ==>  unit number (integer scalar)
-c                 fname           ==>  file name (character*80)
+c                 fname           ==>  file name (character*256)
 c                 fopenstat       ==>  The status flag for the open
 c                                      statements of the output files.
-c                                          (character*80)
-c                 format          ==>  format string (character*80)
+c                                          (character*256)
+c                 format          ==>  format string (character*256)
 c             Output:
 c                 ierr            ==>  output from iostat
 c

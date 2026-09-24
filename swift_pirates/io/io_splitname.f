@@ -4,12 +4,12 @@ c*************************************************************************
 c splits the directory from the filename in a string
 c
 c             Input:
-c                 oname        ==> string with the full path (character*80)
+c                 oname        ==> string with the full path (character*256)
 c
 c             Output:
-c                 dirname     ==> string with the path (character*80)
+c                 dirname     ==> string with the path (character*256)
 c                 ldir        ==> length of dirname (integer scalar)
-c                 filename     ==> string with the file name (character*80)
+c                 filename     ==> string with the file name (character*256)
 c                 lfile        ==> length of filename (integer scalar)
 c
 c Remarks:
@@ -23,11 +23,11 @@ c Last revision:
       include 'io.inc'
 
 c...  Inputs:
-      character*80 oname
+      character*256 oname
 
 c...  Outputs:
       integer ldir,lfile
-      character*80 dirname,filename
+      character*256 dirname,filename
 
 c...  Internals
       integer i,il,is

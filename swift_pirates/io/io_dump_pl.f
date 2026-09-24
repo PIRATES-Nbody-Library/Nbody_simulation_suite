@@ -5,7 +5,7 @@ c Dumps the data for the Sun and planets
 
 c
 c             Input:
-c                 dplfile       ==>  Name of file to write to (character*80)
+c                 dplfile       ==>  Name of file to write to (character*256)
 c                 nbod          ==>  number of massive bodies (int scalar)
 c                 mass          ==>  mass of bodies (real array)
 c                 xh,yh,zh      ==>  initial position in Helio coord

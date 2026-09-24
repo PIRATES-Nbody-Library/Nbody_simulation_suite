@@ -7,7 +7,7 @@ c initialized values for their posns, vels, initial phase space distances and
 c the quantities lrsum(*).
 c
 c             Input:
-c                 infile        ==> File name to read from (character*80)
+c                 infile        ==> File name to read from (character*256)
 c                 ntp           ==>  number of massive bodies (int scalar)
 c              xht,yht,zht      ==>  initial position of TP in Helio coord
 c                                    (real arrays)

@@ -24,7 +24,7 @@ c                 oname           ==> output file name (character string)
 c                 iu              ==> unit number to write to
 c                 fopenstat       ==>  The status flag for the open
 c                                      statements of the output files.
-c                                          (character*80)
+c                                          (character*256)
 c
 c             Output
 c                 iu              ==> unit number to write to.

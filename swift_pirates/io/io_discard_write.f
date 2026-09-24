@@ -32,7 +32,7 @@ c                 rname           ==> output file name (character string)
 c
 c                 fopenstat       ==>  The status flag for the open
 c                                      statements of the output files.
-c                                          (character*80)
+c                                          (character*256)
 c                 nleft           ==>  number of active test bodies(int scalar)
 c
 c Remarks:

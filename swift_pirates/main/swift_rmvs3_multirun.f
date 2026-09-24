@@ -37,8 +37,8 @@ c                         now on tracked on GitHub
 	real*8 rmin,rmax,rmaxu,qmin,rplsq(NPLMAX)
         logical*2 lclose
 
-	character*80 outfile,inparfile,inplfile,intpfile,fopenstat
-	character*80 diro,dirs,gname,outfile_full
+	character*256 outfile,inparfile,inplfile,intpfile,fopenstat
+	character*256 diro,dirs,gname,outfile_full
 
 
 c-----

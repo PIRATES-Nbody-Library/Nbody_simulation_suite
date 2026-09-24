@@ -18,7 +18,7 @@ c                 iu            ==> IO unit (int scalar)
 c                 iwhy          ==> reason for discard (int scalar)
 c                 fopenstat     ==>  The status flag for the open
 c                                      statements of the output files.
-c                                          (character*80)
+c                                          (character*256)
 c Remarks:
 c Authors:  Hal Levison
 c Date:    12/30/96
@@ -37,7 +37,7 @@ c...  Inputs:
       real*8 x1,y1,z1
       real*8 vx1,vy1,vz1
       character*(*) fopenstat
-      character*80 diro
+      character*256 diro
 
 c...  Internals
       integer ierr

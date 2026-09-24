@@ -4,7 +4,7 @@ c**********************************************************************
 c Dump test particle data
 c
 c             Input:
-c                 dtpfile       ==>  Name of file to write to (character*80)
+c                 dtpfile       ==>  Name of file to write to (character*256)
 c                 ntp           ==>  number of massive bodies (int scalar)
 c                 mass          ==>  mass of bodies (real array)
 c              xht,yht,zht      ==>  initial position in Helio coord

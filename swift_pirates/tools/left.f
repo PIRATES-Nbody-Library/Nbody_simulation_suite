@@ -19,7 +19,7 @@
         integer ialpha,nwhy(-4:NPLMAX)
         logical*2 lclose
 
-	character*80 outfile,fopenstat
+	character*256 outfile,fopenstat
 
 c Get parameters
 	call io_init_param('dump_param.dat',t0,tstop,dt,dtout,

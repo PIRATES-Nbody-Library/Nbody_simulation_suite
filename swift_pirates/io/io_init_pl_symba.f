@@ -5,7 +5,7 @@ c IO_INIT_PL_SYMBA reads in the data for the Sun and planets for
 c symba routines
 c
 c             Input:
-c                 infile        ==> File name to read from (character*80)
+c                 infile        ==> File name to read from (character*256)
 c                 lclose        ==> .true. --> discard particle if it gets
 c                                    too close to a planet. Read in that
 c                                    distance in io_init_pl_symba

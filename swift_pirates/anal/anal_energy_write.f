@@ -16,7 +16,7 @@ c                               (real arrays)
 c            iu            ==>  unit to write to (int scalar)
 c            fopenstat     ==>  The status flag for the open
 c                                statements of the output files.
-c                                      (character*80)
+c                                      (character*256)
 c            eoff          ==> An energy offset that is added to the energy
 c                                      (real*8 scalar)
 c
@@ -35,7 +35,7 @@ c...  Inputs:
       real*8 mass(nbod),t,j2rp2,j4rp4,eoff
       real*8 xh(nbod),yh(nbod),zh(nbod)
       real*8 vxh(nbod),vyh(nbod),vzh(nbod)
-      character*80 fopenstat
+      character*256 fopenstat
 
 c...  Internals
       integer i1st

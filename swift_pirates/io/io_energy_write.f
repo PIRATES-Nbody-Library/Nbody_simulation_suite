@@ -12,7 +12,7 @@ c                               (real array)
 c            iu             ==>  unit to write to
 c            fopenstat      ==>  The status flag for the open
 c                                statements of the output files.
-c                                          (character*80)
+c                                          (character*256)
 c
 c Remarks:
 c Authors:  Hal Levison
