@@ -77,7 +77,7 @@ c...  if first time through open file
                call io_open_fxdr(oname, 'r', .true., iu, ierr)
                if(iu.ge.0) then
                   write(*,*) ' SWIFT ERROR: in io_write_frame: '
-                  write(*,*) '     binary output file exists:'
+                  write(*,*) '     binary output file exists: '//oname
                   call util_exit(1)
                endif
             endif
@@ -85,7 +85,7 @@ c...  if first time through open file
          endif
          if(ierr.lt.0) then
            write(*,*) ' SWIFT ERROR: in io_write_frame: '
-           write(*,*) '     Could not open binary output file:'
+           write(*,*) '     Could not open binary output file: '//oname
            call util_exit(1)
          endif
          i1st = 1
@@ -94,7 +94,7 @@ c...  if first time through open file
          if(ierr.lt.0) then
            write(*,*) ' SWIFT ERROR: in io_write_frame: '
            write(*,*) '     Could not open binary output file'
-           write(*,*) '      with append:'
+           write(*,*) '      with append: '//oname
            call util_exit(1)
          endif
       endif
@@ -123,7 +123,7 @@ c...  write out test particles
       ierr = ixdrclose(iu)
       if(ierr.lt.0) then
          write(*,*) ' SWIFT ERROR: in io_write_frame: '
-         write(*,*) '     Could not close binary output file:'
+         write(*,*) '     Could not close binary output file: '//oname
          call util_exit(1)
       endif
 

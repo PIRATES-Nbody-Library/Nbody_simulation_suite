@@ -67,7 +67,7 @@ c...  if first time through open file
          call io_open(iu,oname,fopenstat,'UNFORMATTED',ierr)
          if(ierr.ne.0) then
            write(*,*) ' SWIFT ERROR: in io_write_frame: '
-           write(*,*) '     Could not open binary output file:'
+           write(*,*) '     Could not open binary output file: '//oname
            call util_exit(1)
          endif
          i1st = 1
