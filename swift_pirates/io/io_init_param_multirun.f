@@ -50,8 +50,8 @@ c Date:    3/2/93
 c Last revision: 05/27/26 T. A. Stuber, from now on tracked on GitHub
 
         subroutine io_init_param_multirun(infile,t0,tstop,dt,dtout,
-     &         dtdump,iflgchk,rmin,rmax,rmaxu,qmin,lclose,outfile,diro,
-     &         dirs,gname,fopenstat)
+     &         dtdump,iflgchk,rmin,rmax,rmaxu,qmin,lclose,diro,dirs,
+     &         gname,outfile,fopenstat)
 
 	include '../swift.inc'
 	include 'io.inc'

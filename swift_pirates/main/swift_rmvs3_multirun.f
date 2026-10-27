@@ -51,8 +51,8 @@ c Get data for the run and the test particles
 	write(*,*) 'Enter name of parameter data file : '
 	read(*,999) inparfile
 	call io_init_param_multirun(inparfile,t0,tstop,dt,dtout,dtdump,
-     &              iflgchk,rmin,rmax,rmaxu,qmin,lclose,outfile,
-     &              diro,dirs,gname,fopenstat)
+     &              iflgchk,rmin,rmax,rmaxu,qmin,lclose,diro,dirs,gname,
+     &              outfile,fopenstat)
 	outfile_full=trim(diro)//'/'//outfile
 c Prompt and read name of planet data file
 	write(*,*) ' '
