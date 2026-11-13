@@ -46,7 +46,11 @@ c...  Executable code
       endif
 
       nbod = nbod2
+c     Correct INT*2 unsigned wrap-around for NTP > 32767:
+      if(nbod.lt.0) nbod = nbod + 65536
       nleft = nleft2
+c     Correct INT*2 unsigned wrap-around for NTP > 32767:
+      if(nleft.lt.0) nleft = nleft + 65536
       time = ttmp
 
       return
